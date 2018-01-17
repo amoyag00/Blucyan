@@ -11,13 +11,13 @@ import Logic.*;
 //TO DO implements IConversor
 public class UserDAO extends DBConnection {
 
-    public void delete(User user) throws Exception {
+    public void delete(String name) throws Exception {
         Connection cn;
         try{
             this.openConnection();
             cn = this.getConnection();
             PreparedStatement st = cn.prepareStatement("DELETE FROM Users WHERE nickname = ?");
-            st.setString(1, user.getUserName());
+            st.setString(1, name);
             st.executeUpdate();
         }catch (Exception e){
             throw new Exception("Method Delete user " + e.getMessage());
@@ -110,7 +110,7 @@ public class UserDAO extends DBConnection {
             u.put(user);
             u.exists("Notch");
             
-            u.delete(user);
+            u.delete(user.getUserName());
             
             u=new UserDAO();
             ArrayList<User> result = (ArrayList<User>) u.search("r");
