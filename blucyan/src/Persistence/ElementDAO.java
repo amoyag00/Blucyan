@@ -4,8 +4,12 @@ import Logic.Element;
 import Logic.ElementProxy;
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -76,12 +80,27 @@ public class ElementDAO extends DBConnection{
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("INSERT INTO Elements (name,type_element,cover,release_date) VALUES (?,?,?,?)");
+        st = cn.prepareStatement("INSERT INTO Elements (name,type_element,release_date) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
         st.setString(1, element.getName());
         st.setString(2, element.getType());
+        
         //TODO introducir la imagen de la portada
-        st.setString(4, element.getReleaseDate());
+        
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        java.util.Date date = format.parse(element.getReleaseDate());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        st.setDate(3, sqlDate);
         st.executeUpdate();
+        
+        rs = st.getGeneratedKeys();
+        rs.first();
+        int id = rs.getInt(1);
+        
+        for(int i=0;i<element.getGenre().length;i++){
+            st = cn.prepareStatement("INSERT INTO Genres VALUES (?,?)");
+            st.setInt(1, id);
+            st.setString(2, element.getGenre()[i]);
+        }
         
         this.closeConnection();
     }
@@ -94,7 +113,7 @@ public class ElementDAO extends DBConnection{
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT count(element_id FROM Elements WHERE element_id = ?");
+        st = cn.prepareStatement("SELECT count(element_id) FROM Elements WHERE element_id = ?");
         st.setString(1, id);
         rs = st.executeQuery();
         rs.first();
@@ -138,5 +157,23 @@ public class ElementDAO extends DBConnection{
          System.out.println(e.getId());
          System.out.println(e.getType());
          System.out.println(e.getReleaseDate());
+         
+         e = new Element();
+         String[] s = {"adventure","action"};
+         e.setGenre(s);
+         e.setName("Avengers");
+         e.setReleaseDate("30-05-2015");
+         e.setType("comic");
+         el.put(e);
+         
+         ArrayList<ElementProxy> p = (ArrayList<ElementProxy>) el.search("a");
+         
+         for(int i =0;i<p.size();i++){
+             System.out.println(p.get(i).getName());
+         }
+         
+         System.out.println(el.exists("1"));
+         
+        
     }
 }
