@@ -11,12 +11,37 @@ import Logic.*;
 //TO DO implements IConversor
 public class UserDAO extends DBConnection {
 
+    public User get(String name) throws Exception {
+        Connection cn;
+        User user;
+        ResultSet rs;
+        PreparedStatement st;
+        
+        this.openConnection();
+        cn = this.getConnection();
+        st = cn.prepareStatement("SELECT * FROM Users WHERE nickname = ?");
+        st.setString(1, name);
+        rs = st.executeQuery();
+        rs.first();
+        
+        user = new User();
+        user.setUserName(rs.getString("nickname"));
+        user.setPass(rs.getString("pass"));
+        user.setIsAdmin(rs.getBoolean("isAdmin"));
+        user.setIsPrivate(rs.getBoolean("private"));
+        
+        this.closeConnection();
+        
+        return user;
+    }
+    
     public void delete(String name) throws Exception {
         Connection cn;
+        PreparedStatement st;
         try{
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("DELETE FROM Users WHERE nickname = ?");
+            st = cn.prepareStatement("DELETE FROM Users WHERE nickname = ?");
             st.setString(1, name);
             st.executeUpdate();
         }catch (Exception e){
@@ -35,9 +60,11 @@ public class UserDAO extends DBConnection {
     public void put(User user) throws Exception{
         try {
             Connection cn;
+             PreparedStatement st;
+            
             this.openConnection();
             cn=this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO Users VALUES (?,?,?,?)");
+            st = cn.prepareStatement("INSERT INTO Users VALUES (?,?,?,?)");
             st.setString(1, user.getUserName());
             st.setString(2, user.getPass());
             st.setBoolean(3, user.getIsAdmin());
@@ -59,11 +86,12 @@ public class UserDAO extends DBConnection {
     public boolean exists(String id) throws Exception{
         Connection cn;
         ResultSet rs;
+        PreparedStatement st;
         boolean exist = false;
         
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("SELECT count(nickname) FROM Users WHERE nickname = ?");
+        st = cn.prepareStatement("SELECT count(nickname) FROM Users WHERE nickname = ?");
         st.setString(1, id);
         rs = st.executeQuery();
         rs.first();
@@ -78,11 +106,12 @@ public class UserDAO extends DBConnection {
     public List<User> search(String name) throws Exception {
         Connection cn;
         ResultSet rs;
+        PreparedStatement st;
         List<User> searched = new ArrayList<User>();
         
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("SELECT nickname FROM Users WHERE nickname LIKE '%"+name+"%'");
+        st = cn.prepareStatement("SELECT nickname FROM Users WHERE nickname LIKE '%"+name+"%'");
         rs = st.executeQuery();
         
             while(rs.next()){
@@ -98,6 +127,7 @@ public class UserDAO extends DBConnection {
     public static void main(String[] args) throws Exception{
         UserDAO u=new UserDAO();
         User user = new User();
+        User us;
         
         user.setUserName("Notch");
         user.setIsAdmin(false);
@@ -111,6 +141,8 @@ public class UserDAO extends DBConnection {
             u.exists("Notch");
             
             u.delete(user.getUserName());
+            us = u.get("Terminator");
+            System.out.println(us.getUserName());
             
             u=new UserDAO();
             ArrayList<User> result = (ArrayList<User>) u.search("r");

@@ -15,7 +15,7 @@ public interface IConversor {
 	 * @param id
 	 * @param classType
 	 */
-	public void delete(String id, Class classType);
+	public void delete(String id);
 
 	/**
 	 * 
