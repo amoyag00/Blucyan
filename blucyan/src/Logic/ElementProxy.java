@@ -1,5 +1,6 @@
 package Logic;
 
+import Persistence.Facade;
 import javax.swing.ImageIcon;
 
 public class ElementProxy {
@@ -36,7 +37,7 @@ public class ElementProxy {
     
 	public Element getRealInstance() {
             if (this.realElement== null){
-                realElement= Facade.getInstance().get(id,Element.class){
+                realElement= (Element)Facade.getInstance().get(id,Element.class);
                 
             }
                 return this.realElement;
@@ -44,4 +45,4 @@ public class ElementProxy {
 }
 
 	
-}
+

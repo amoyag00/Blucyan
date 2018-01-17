@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 public class Facade {
     
         Map<Class,IConversor> mapaDAO = new HashMap<Class,IConversor>();
+        private static Facade instance;
+	IConversor conversors;
         
         public Facade(){
             UserDAO userDAO = new UserDAO();
@@ -82,10 +84,12 @@ public class Facade {
 	}
 
 	public static Facade getInstance() {
+            if(instance==null){
+                instance= new Facade();
+            }
 		return instance;
 	}
-	private static Facade instance;
-	IConversor conversors;
+	
 
       
     /*public static void main(String[] args){

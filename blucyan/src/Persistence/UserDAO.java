@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Logic.*;
 //TO DO implements IConversor
-public class UserDAO extends DBConnection {
+public class UserDAO extends DBConnection implements IConversor<User,UserProxy> {
 
     public User get(String name) throws Exception {
         Connection cn;
@@ -103,11 +103,11 @@ public class UserDAO extends DBConnection {
         return exist;
     }
     
-    public List<User> search(String name) throws Exception {
+    public List<UserProxy> search(String name) throws Exception {
         Connection cn;
         ResultSet rs;
         PreparedStatement st;
-        List<User> searched = new ArrayList<User>();
+        List<UserProxy> searched = new ArrayList<UserProxy>();
         
         this.openConnection();
         cn = this.getConnection();
@@ -115,7 +115,7 @@ public class UserDAO extends DBConnection {
         rs = st.executeQuery();
         
             while(rs.next()){
-                User user = new User();
+                UserProxy user = new UserProxy();
                 user.setUserName(rs.getString("nickname"));
                 searched.add(user);
             }
@@ -145,7 +145,7 @@ public class UserDAO extends DBConnection {
             System.out.println(us.getUserName());
             
             u=new UserDAO();
-            ArrayList<User> result = (ArrayList<User>) u.search("r");
+            ArrayList<UserProxy> result = (ArrayList<UserProxy>) u.search("r");
             for(int i=0;i<result.size();i++){
                System.out.println(result.get(i).getUserName());
             }

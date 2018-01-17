@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 
-public class ElementDAO extends DBConnection{
+public class ElementDAO extends DBConnection implements IConversor<Element, ElementProxy>{
     
     public Element get(String id) throws Exception {
        Connection cn;

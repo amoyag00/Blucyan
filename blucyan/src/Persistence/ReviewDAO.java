@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ReviewDAO /*implements IConversor*/ extends DBConnection{
+public class ReviewDAO extends DBConnection implements IConversor<Review,Review>{
     
+    @Override
     public void delete(String id) throws Exception {
         try{
             this.openConnection();
