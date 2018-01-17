@@ -30,3 +30,6 @@ INSERT INTO ShowLists
 VALUES (24, 123, 25, 'finished', 13);
 INSERT INTO VideogameLists
 VALUES (25, 345, 34, 'played');
+
+#SELECT count(nickname) FROM Users WHERE nickname='Altair';
+#SELECT nickname FROM Users  WHERE nickname LIKE '%ta%'; 

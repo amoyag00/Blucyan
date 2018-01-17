@@ -1,36 +1,38 @@
 package Persistence;
 
+import java.util.List;
+
 public interface IConversor {
 
 	/**
 	 * 
 	 * @param id
 	 */
-	Object get(String id);
+	public Object get(String id);
 
 	/**
 	 * 
 	 * @param id
 	 * @param classType
 	 */
-	void delete(String id, Class classType);
+	public void delete(String id, Class classType);
 
 	/**
 	 * 
 	 * @param obj
 	 */
-	void put(Object obj);
+	public void put(Object obj)throws Exception;
 
 	/**
 	 * 
 	 * @param id
 	 */
-	boolean exists(String id);
+	public boolean exists(String id);
 
 	/**
 	 * 
 	 * @param name
 	 */
-	List<Object> search(String name);
+	public List<Object> search(String name);
 
 }

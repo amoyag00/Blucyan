@@ -9,33 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Logic.*;
 //TO DO implements IConversor
-public class UserDAO extends DBConnection{
+public class UserDAO extends DBConnection {
 
-    public List<User> list() throws Exception{
-        
-        ArrayList<User> userList = new <User>ArrayList();
-        try{
-            this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT * from Users");
-            ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                User user = new User();
-                user.setUserName(rs.getString("nickname"));
-                user.setPass(rs.getString("pass"));
-               user.setIsAdmin(rs.getBoolean("isAdmin"));
-                user.setIsAdmin(rs.getBoolean("private"));
-                userList.add(user);
-            }
-            this.closeConnection();
-        }catch (Exception e){
-            throw new Exception("Listar usuarios " + e.getMessage());
-        }
-        return(userList);
-    }
     public void delete(User user) throws Exception {
+        Connection cn;
         try{
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM usuarios WHERE IdUsuario=?");
+            cn = this.getConnection();
+            PreparedStatement st = cn.prepareStatement("DELETE FROM Users WHERE nickname = ?");
             st.setString(1, user.getUserName());
             st.executeUpdate();
         }catch (Exception e){
@@ -51,15 +32,16 @@ public class UserDAO extends DBConnection{
         }
     }
     
-    public void registrar(User user) throws Exception{
+    public void put(User user) throws Exception{
         try {
             Connection cn;
             this.openConnection();
             cn=this.getConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("INSERT INTO usuarios (user, password, tipo) VALUES (?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO Users VALUES (?,?,?,?)");
             st.setString(1, user.getUserName());
             st.setString(2, user.getPass());
             st.setBoolean(3, user.getIsAdmin());
+            st.setBoolean(4, user.getIsPrivate());
             st.executeUpdate();
         }catch(Exception e){
             throw new Exception("Inserting user " + e.getMessage());
@@ -74,18 +56,66 @@ public class UserDAO extends DBConnection{
         }
     }
     
-    public static void main(String[] args){
-        UserDAO u=new UserDAO();
-        try {
-            ArrayList<User> uList=(ArrayList<User>) u.list();
-            for(int i=0;i<uList.size();i++){
-                System.out.println(uList.get(i).getUserName());
-                System.out.println(uList.get(i).getPass());
-                System.out.println(uList.get(i).getIsAdmin());
-                System.out.println(uList.get(i).getIsPrivate());
+    public boolean exists(String id) throws Exception{
+        Connection cn;
+        ResultSet rs;
+        boolean exist = false;
+        
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("SELECT count(nickname) FROM Users WHERE nickname = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        rs.first();
+        exist = rs.getBoolean(1);
+        
+        System.out.println(exist);
+        this.closeConnection();
+        
+        return exist;
+    }
+    
+    public List<User> search(String name) throws Exception {
+        Connection cn;
+        ResultSet rs;
+        List<User> searched = new ArrayList<User>();
+        
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("SELECT nickname FROM Users WHERE nickname LIKE '%"+name+"%'");
+        rs = st.executeQuery();
+        
+            while(rs.next()){
+                User user = new User();
+                user.setUserName(rs.getString("nickname"));
+                searched.add(user);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+        this.closeConnection();
+        return searched;
+    }
+    
+    public static void main(String[] args) throws Exception{
+        UserDAO u=new UserDAO();
+        User user = new User();
+        
+        user.setUserName("Notch");
+        user.setIsAdmin(false);
+        user.setIsPrivate(false);
+        user.setPass("minecraft");
+            
+            u=new UserDAO();
+            u.exists("Al");
+            
+            u.put(user);
+            u.exists("Notch");
+            
+            u.delete(user);
+            
+            u=new UserDAO();
+            ArrayList<User> result = (ArrayList<User>) u.search("r");
+            for(int i=0;i<result.size();i++){
+               System.out.println(result.get(i).getUserName());
+            }
     }
 }
