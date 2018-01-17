@@ -1,5 +1,8 @@
 package Persistence;
 
+import Logic.Element;
+import Logic.ElementList;
+import Logic.Review;
 import Logic.User;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,14 +17,14 @@ public class Facade {
         
         public Facade(){
             UserDAO userDAO = new UserDAO();
-           // ElementDAO elementDAO = new ElementDAO();
-            //ElementListDAO elementListDAO = new ElementListDAO();
-           // ReviewDAO reviewDAO = new ReviewDAO();
+            ElementDAO elementDAO = new ElementDAO();
+            ElementListDAO elementListDAO = new ElementListDAO();
+            ReviewDAO reviewDAO = new ReviewDAO();
             
-            mapaDAO.put(UserDAO.class, userDAO);
-           // mapaDAO.put(ElementDAO.class, elementDAO);
-           // mapaDAO.put(ElementListDAO.class, elementListDAO);
-           // mapaDAO.put(ReviewDAO.class, reviewDAO);
+           mapaDAO.put(User.class, (IConversor) userDAO);
+           mapaDAO.put(Element.class, (IConversor) elementDAO);
+           mapaDAO.put(ElementList.class,(IConversor) elementListDAO);
+           mapaDAO.put(Review.class,(IConversor) reviewDAO);
         
         }
 
@@ -49,7 +52,11 @@ public class Facade {
 	 * @param classType
 	 */
 	public void put(Object obj, Class classType) {
-            mapaDAO.get(classType).put(obj);
+            try {
+                mapaDAO.get(classType).put(obj);
+            } catch (Exception ex) {
+                Logger.getLogger(Facade.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	/**
@@ -74,9 +81,9 @@ public class Facade {
 		Backup savior = new Backup();
 	}
 
-	//public static Facade getInstance() {
-	//	return this.instance;
-	//}
+	public static Facade getInstance() {
+		return instance;
+	}
 	private static Facade instance;
 	IConversor conversors;
 

@@ -1,11 +1,23 @@
 package Logic;
 
-public class UserProxy {
+import Persistence.Facade;
+import Persistence.UserDAO;
 
-	public User getRealInstance() {
-		// TODO - implement UserProxy.getRealInstance
-		throw new UnsupportedOperationException();
-	}
+public class UserProxy extends User{
+
+        Facade facade = Facade.getInstance();
+        User realInstance;
+        
+        
+	public User getRealInstance( ){
+            
+            if(realInstance==null){
+                realInstance = (User) facade.search(getUserName(), UserDAO.class);
+            }
+            return realInstance;
+        }
+        
+        
 
 	private User realUser;
 
