@@ -1,6 +1,7 @@
 package Logic;
 
 import Persistence.Facade;
+import java.util.List;
 
 public class UserController {
 
@@ -14,7 +15,7 @@ public class UserController {
 	 * @param pass1
 	 * @param pass2
 	 */
-	public void createAccount(String userName, String pass1, String pass2) {
+	public void createAccount(String userName, String pass1, String pass2) throws Exception {
 	    
                 if(checkPassEquals(pass1,pass2)){
                     
@@ -39,7 +40,7 @@ public class UserController {
 	 * @param userName
 	 * @param pass
 	 */
-	public boolean initiateSession(String userName, String pass) {
+	public boolean initiateSession(String userName, String pass) throws Exception {
             
             if(facade.exists(userName, User.class)){
 		User temp = (User) facade.get(userName,User.class);
@@ -75,7 +76,11 @@ public class UserController {
 	 */
 	public void addElement(String[] params, String elementType) {
 		// TODO - implement UserController.addElement
-		throw new UnsupportedOperationException();
+		IAdapter adap = AdapterFactory.getAdapter(elementType);
+                
+                Entry entry = adap.createEntry(params);
+                
+                facade.put(entry, ElementList.class);
 	}
 
 	/**
@@ -132,19 +137,19 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public List<Object> search(String name) {
+	public List<Object> search(String name) throws Exception {
 		// TODO - implement UserController.operation
-		
+		return facade.search(name, Element.class);
 	}
 
 	/**
 	 * 
 	 * @param id
 	 */
-	public Element showChart(String id) {
+	public Element showChart(String id) throws Exception {
 		// TODO - implement UserController.showChart
-		throw new UnsupportedOperationException();
-	}
+                return (Element) facade.get(id,Element.class);
+        }
 
 	/**
 	 * 
@@ -153,12 +158,15 @@ public class UserController {
 	 */
 	public void addReview(String text, String elementID) {
 		// TODO - implement UserController.addReview
-		throw new UnsupportedOperationException();
+            Review newReview = new Review(actualUser.getUserName(), elementID, text);
+            
+            facade.put(newReview, Review.class);
+            
 	}
 
 	public void backup() {
 		// TODO - implement UserController.backup
-		throw new UnsupportedOperationException();
+                facade.backup();
 	}
 
 }

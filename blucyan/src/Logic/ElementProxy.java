@@ -35,7 +35,7 @@ public class ElementProxy {
 
   
     
-	public Element getRealInstance() {
+	public Element getRealInstance() throws Exception {
             if (this.realElement== null){
                 realElement= (Element)Facade.getInstance().get(id,Element.class);
                 

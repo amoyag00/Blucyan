@@ -35,7 +35,7 @@ public class Facade {
 	 * @param id
 	 * @param classType
 	 */
-	public Object get(String id, Class classType){
+	public Object get(String id, Class classType) throws Exception{
             return mapaDAO.get(classType).get(id);
 	}
 
@@ -44,8 +44,8 @@ public class Facade {
 	 * @param id
 	 * @param classType
 	 */
-	public void delete(String id, Class classType) {
-             mapaDAO.get(classType).delete(id,classType);
+	public void delete(String id, Class classType) throws Exception {
+             mapaDAO.get(classType).delete(id);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Facade {
 	 * @param id
 	 * @param classType
 	 */
-	public boolean exists(String id, Class classType) {
+	public boolean exists(String id, Class classType) throws Exception {
             return mapaDAO.get(classType).exists(id);
 	}
 
@@ -75,7 +75,7 @@ public class Facade {
 	 * @param name
 	 * @param classType
 	 */
-	public List<Object> search(String name, Class classType) {
+	public List<Object> search(String name, Class classType) throws Exception {
 	     return mapaDAO.get(classType).search(name);
 	}
 
