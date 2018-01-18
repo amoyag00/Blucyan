@@ -4,6 +4,7 @@ import Logic.Element;
 import Logic.ElementList;
 import Logic.Review;
 import Logic.User;
+import Logic.VideogameEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +14,9 @@ import java.util.logging.Logger;
 
 public class Facade {
     
-        Map<Class,IConversor> mapaDAO = new HashMap<Class,IConversor>();
+        private Map<Class,IConversor> mapaDAO = new HashMap<Class,IConversor>();
         private static Facade instance;
-	IConversor conversors;
+	private IConversor conversors;
         
         public Facade(){
             UserDAO userDAO = new UserDAO();
@@ -38,6 +39,18 @@ public class Facade {
 	public Object get(String id, Class classType) throws Exception{
             return mapaDAO.get(classType).get(id);
 	}
+        
+        public ElementList[] getLists(String id, Class classType) throws Exception{
+            ElementListDAO elList = (ElementListDAO) mapaDAO.get(classType);
+            
+            return elList.getLists(id);
+        }
+        
+        public ArrayList<VideogameEntry> getList(String id, Class classType){
+            VideogameEntryDAO videogameList= (VideogameEntryDAO) mapaDAO.get(classType);
+            
+            return videogameList.getList(id);
+        }
 
 	/**
 	 * 

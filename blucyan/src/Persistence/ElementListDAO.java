@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ElementListDAO extends DBConnection /*implements IConversor*/ {
+public class ElementListDAO extends DBConnection implements IConversor<ElementList, ElementList[]> {
 
-	    public void delete(String id) throws Exception {
+    public void delete(String id) throws Exception {
         try{
             this.openConnection();
             PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM Lists WHERE list_id=?");
@@ -55,8 +55,8 @@ public class ElementListDAO extends DBConnection /*implements IConversor*/ {
     }
     
     
-     public ElementList get(String id) throws Exception{
-         ElementList eList=new ElementList();
+    public ElementList get(String id) throws Exception{
+       ElementList eList = new ElementList();
        try{
                 this.openConnection();
                 PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM Lists WHERE list_id=?");
@@ -78,7 +78,31 @@ public class ElementListDAO extends DBConnection /*implements IConversor*/ {
                 }
             }
        return eList;
-   }
+    }
+     
+    public ElementList[] getLists(String id) throws Exception {
+        ElementList[] lists = new ElementList[3];
+        Connection cn;
+        PreparedStatement st;
+        ResultSet rs;
+        
+        this.openConnection();
+        cn = this.getConnection();
+        st = cn.prepareStatement("Select * FROM Lists WHERE nickname = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        
+        for(int i = 0;i<lists.length;i++){
+            rs.next();
+            lists[i].setListID(String.valueOf(rs.getInt("list_id")));
+            lists[i].setNickname(rs.getString("nickname"));
+            lists[i].setTypeList(rs.getString("typeList"));
+        }
+        
+        this.closeConnection();
+        
+        return lists;
+    }
     
     public void put(ElementList eList) throws Exception{
         try {
@@ -104,7 +128,7 @@ public class ElementListDAO extends DBConnection /*implements IConversor*/ {
         }
     }
     
-   public List<Review> search(String name) throws UnsupportedOperationException{
+   public List<ElementList[]> search(String name) throws UnsupportedOperationException{
        throw new UnsupportedOperationException("Method not implmented");
     }
    

@@ -12,6 +12,14 @@ public class ElementList {
         return listID;
     }
 
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
+    }
+
     public void setListID(String listID) {
         this.listID = listID;
     }

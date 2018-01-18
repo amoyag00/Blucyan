@@ -1,13 +1,15 @@
 package Logic;
 
+import Persistence.ElementListDAO;
 import Persistence.Facade;
 import java.util.List;
 
 public class UserController {
 
     
-        Facade facade = Facade.getInstance();
-        User actualUser; 
+        private Facade facade = Facade.getInstance();
+        private User actualUser; 
+        private static UserController instance;
         
 	/**
 	 * 
@@ -17,7 +19,7 @@ public class UserController {
 	 */
 	public void createAccount(String userName, String pass1, String pass2) throws Exception {
 	    
-                if(checkPassEquals(pass1,pass2)){
+                if(checkPass(pass1,pass2)){
                     
                     if(verifyRequirements(pass1)){
                         
@@ -42,16 +44,18 @@ public class UserController {
 	 */
 	public boolean initiateSession(String userName, String pass) throws Exception {
             
+            boolean correctPassword = false;
+            
             if(facade.exists(userName, User.class)){
 		User temp = (User) facade.get(userName,User.class);
-                boolean correctPassword = checkPass(pass,temp.getPass());
+                correctPassword = checkPass(pass,temp.getPass());
                 if(correctPassword){
                     actualUser=temp;
                     return correctPassword;
                 }
             }    
             
-            return false;
+            return correctPassword;
 	}
 
 	/**
@@ -61,12 +65,16 @@ public class UserController {
 	 */
 	public boolean checkPass(String pass1, String pass2) {
 		// TODO - implement UserController.checkPass
-		throw new UnsupportedOperationException();
+		return pass1.equals(pass2);
 	}
 
-	public ElementList getLists() {
+	public ElementList[] getLists() throws Exception {
 		// TODO - implement UserController.getLists
-		throw new UnsupportedOperationException();
+		ElementList[] lists = facade.getLists(actualUser.getUserName(), ElementList.class);
+                
+                VideogameEntry videogameList = facade.getList(lists[0].getListID(), VideogameEntry.class)
+                
+                return lists;
 	}
 
 	/**
@@ -94,18 +102,6 @@ public class UserController {
                 
         }
 
-
-	/**
-	 * 
-	 * @param pass1
-	 * @param pass2
-	 */
-	public boolean checkPassEquals(String pass1, String pass2) {
-		
-            return pass1.compareTo(pass2)==0;
-            
-	}
-
 	/**
 	 * 
 	 * @param pass1
@@ -126,7 +122,7 @@ public class UserController {
                 }
                 
                 // Requirements 5 characters + 1 number
-                if(nChars==5 && nNum==1){
+                if(nChars>=5 && nNum>=1){
                     achieved=true;
                 }
                 
@@ -167,6 +163,13 @@ public class UserController {
 	public void backup() {
 		// TODO - implement UserController.backup
                 facade.backup();
+	}
+        
+        public static UserController getInstance() {
+            if(instance==null){
+                instance= new UserController();
+            }
+		return instance;
 	}
 
 }
