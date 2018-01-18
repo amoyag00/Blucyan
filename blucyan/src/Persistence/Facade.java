@@ -1,9 +1,12 @@
 package Persistence;
 
+import Logic.ComicEntry;
 import Logic.Element;
 import Logic.ElementList;
 import Logic.Review;
+import Logic.ShowEntry;
 import Logic.User;
+import Logic.VideogameEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,15 +21,13 @@ public class Facade {
 	IConversor conversors;
         
         public Facade(){
-            UserDAO userDAO = new UserDAO();
-            ElementDAO elementDAO = new ElementDAO();
-            ElementListDAO elementListDAO = new ElementListDAO();
-            ReviewDAO reviewDAO = new ReviewDAO();
-            
-           mapaDAO.put(User.class, (IConversor) userDAO);
-           mapaDAO.put(Element.class, (IConversor) elementDAO);
-           mapaDAO.put(ElementList.class,(IConversor) elementListDAO);
-           mapaDAO.put(Review.class,(IConversor) reviewDAO);
+           mapaDAO.put(User.class, (IConversor) new UserDAO());
+           mapaDAO.put(Element.class, (IConversor) new ElementDAO());
+           mapaDAO.put(ElementList.class,(IConversor) new ElementListDAO());
+           mapaDAO.put(Review.class,(IConversor) new ReviewDAO());
+           mapaDAO.put(VideogameEntry.class,(IConversor) new VideogameEntryDAO());
+           mapaDAO.put(ShowEntry.class,(IConversor) new ShowEntryDAO());
+           mapaDAO.put(ComicEntry.class,(IConversor) new ComicEntryDAO());
         
         }
 
@@ -72,10 +73,11 @@ public class Facade {
 
 	/**
 	 * 
+     * @param <T>
 	 * @param name
 	 * @param classType
 	 */
-	public List<Object> search(String name, Class classType) throws Exception {
+	public <T> List<T> search(String name, Class<T> classType) throws Exception {
 	     return mapaDAO.get(classType).search(name);
 	}
 
