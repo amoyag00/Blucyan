@@ -23,6 +23,12 @@ public interface IConversor<T,D> {
 	 */
 	public void put(T obj)throws Exception;
 
+        /**
+	 * 
+	 * @param name
+	 */
+	//public void modify(T element)throws Exception;
+        
 	/**
 	 * 
 	 * @param id

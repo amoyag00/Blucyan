@@ -3,10 +3,12 @@ package Persistence;
 import Logic.Element;
 import Logic.ElementProxy;
 import java.awt.Image;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -147,32 +149,77 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return searched;
     }
     
+    public void modify(Element element) throws Exception{
+    
+        Connection cn;
+
+        PreparedStatement st;
+        
+        this.openConnection();
+        cn = this.getConnection();
+       
+        st = cn.prepareStatement("UPDATE Elements SET name=?, type_element=?, release_date=? WHERE element_id = ?"); 
+        
+        st.setString(1, element.getName());
+        st.setString(2, element.getType());
+
+        //TODO introducir la imagen de la portada
+        
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        java.util.Date date = format.parse(element.getReleaseDate());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        st.setDate(3, sqlDate);
+        st.setString(4, element.getId());
+
+        st.executeUpdate();
+        
+        st = cn.prepareStatement("DELETE FROM Genres WHERE element_id=?");
+        st.setString(1, element.getId());
+        st.executeUpdate();
+        
+        for(int i=0;i<element.getGenre().length;i++){
+            
+            st = cn.prepareStatement("INSERT INTO Genres VALUES (?,?);");
+            st.setString(1, element.getId());
+            st.setString(2, element.getGenre()[i]);
+
+            st.executeUpdate();
+        }
+
+        this.closeConnection();
+        
+    }
+    
     public static void main(String[] args) throws Exception {
          ElementDAO el = new ElementDAO();
          Element e;
          
-         e = el.get("1");
+         /*e = el.get("1");
          
          System.out.println(e.getName());
          System.out.println(e.getId());
          System.out.println(e.getType());
          System.out.println(e.getReleaseDate());
          
-         e = new Element();
-         String[] s = {"adventure","action"};
-         e.setGenre(s);
-         e.setName("Avengers");
-         e.setReleaseDate("30-05-2015");
-         e.setType("comic");
-         el.put(e);
          
+        
          ArrayList<ElementProxy> p = (ArrayList<ElementProxy>) el.search("a");
          
          for(int i =0;i<p.size();i++){
              System.out.println(p.get(i).getName());
          }
+          
+         System.out.println(el.exists("1"));*/
+         e = new Element();
+         e.setId("1");
+         String[] s = {"Mecha","Psychological", "Depresion"};
+         e.setGenre(s);
+         e.setName("Evangelion");
+         e.setReleaseDate("04-08-1995");
+         e.setType("Show");
+       
          
-         System.out.println(el.exists("1"));
+         el.modify(e);
          
         
     }
