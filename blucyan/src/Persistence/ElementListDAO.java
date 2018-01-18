@@ -88,7 +88,7 @@ public class ElementListDAO extends DBConnection /*implements IConversor*/ {
             PreparedStatement st = this.getConnection().prepareStatement("INSERT INTO Lists (typeList,nickname) VALUES (?,?)");   
             st.setString(1, eList.getTypeList());
             st.setString(2, eList.getNickname());
-            
+            //?
             
             st.executeUpdate();
         }catch(Exception e){

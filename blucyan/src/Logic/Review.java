@@ -8,6 +8,8 @@ public class Review {
 	private String text;
         
         
+     public Review(){}    
+        
     public Review(String userName, String elementID, String text){
     
         this.userName = userName;

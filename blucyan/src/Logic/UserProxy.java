@@ -10,7 +10,7 @@ public class UserProxy extends User{
         
         private String name;
         
-	public User getRealInstance( ){
+	public User getRealInstance( ) throws Exception{
             
             if(realInstance==null){
                 realInstance = (User) facade.search(getUserName(), UserDAO.class);

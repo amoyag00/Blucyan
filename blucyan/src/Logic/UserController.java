@@ -15,7 +15,7 @@ public class UserController {
 	 * @param pass1
 	 * @param pass2
 	 */
-	public void createAccount(String userName, String pass1, String pass2) {
+	public void createAccount(String userName, String pass1, String pass2) throws Exception {
 	    
                 if(checkPassEquals(pass1,pass2)){
                     
@@ -40,7 +40,7 @@ public class UserController {
 	 * @param userName
 	 * @param pass
 	 */
-	public boolean initiateSession(String userName, String pass) {
+	public boolean initiateSession(String userName, String pass) throws Exception {
             
             if(facade.exists(userName, User.class)){
 		User temp = (User) facade.get(userName,User.class);
@@ -76,7 +76,7 @@ public class UserController {
 	 */
 	public void addElement(String[] params, String elementType) {
 		// TODO - implement UserController.addElement
-		IAdapter adap = AdapterFactory.getAdaptader(elementType);
+		IAdapter adap = AdapterFactory.getAdapter(elementType);
                 
                 Entry entry = adap.createEntry(params);
                 
@@ -137,7 +137,7 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public List<Object> search(String name) {
+	public List<Object> search(String name) throws Exception {
 		// TODO - implement UserController.operation
 		return facade.search(name, Element.class);
 	}
@@ -146,7 +146,7 @@ public class UserController {
 	 * 
 	 * @param id
 	 */
-	public Element showChart(String id) {
+	public Element showChart(String id) throws Exception {
 		// TODO - implement UserController.showChart
                 return (Element) facade.get(id,Element.class);
         }
