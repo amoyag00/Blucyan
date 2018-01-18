@@ -6,6 +6,8 @@
 package GUI;
 
 import Logic.Help;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -33,8 +35,16 @@ public class JPanelHelpSearch extends javax.swing.JPanel {
     private void initComponents() {
 
         helpText = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
 
         helpText.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        backButton.setText("< Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                backButtonMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -44,18 +54,30 @@ public class JPanelHelpSearch extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backButton)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addComponent(backButton)
+                .addGap(9, 9, 9)
                 .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
+        // TODO add your handling code here:
+       JPanel mainPanel = (JPanel) this.getParent();
+       CardLayout card = (CardLayout) mainPanel.getLayout();
+       card.show(mainPanel, "index"); 
+    }//GEN-LAST:event_backButtonMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel helpText;
     // End of variables declaration//GEN-END:variables
 }
