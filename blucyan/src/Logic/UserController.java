@@ -2,6 +2,7 @@ package Logic;
 
 import Persistence.ElementListDAO;
 import Persistence.Facade;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
@@ -72,7 +73,7 @@ public class UserController {
 		// TODO - implement UserController.getLists
 		ElementList[] lists = facade.getLists(actualUser.getUserName(), ElementList.class);
                 
-                VideogameEntry videogameList = facade.getList(lists[0].getListID(), VideogameEntry.class)
+                ArrayList<VideogameEntry> videogameList = facade.getList(lists[0].getListID(), VideogameEntry.class);
                 
                 return lists;
 	}
