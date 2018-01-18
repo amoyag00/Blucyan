@@ -73,9 +73,9 @@ public class ElementCards extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2)
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
