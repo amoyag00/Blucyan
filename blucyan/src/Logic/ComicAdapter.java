@@ -1,4 +1,4 @@
 package Logic;
 
-public class ComicAdapter extends ComicEntry implements IAdapter {
+public class ComicAdapter implements IAdapter extends ComicEntry  {
 }

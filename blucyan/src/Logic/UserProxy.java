@@ -5,6 +5,22 @@ import Persistence.UserDAO;
 
 public class UserProxy extends User{
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getRealUser() {
+        return realUser;
+    }
+
+    public void setRealUser(User realUser) {
+        this.realUser = realUser;
+    }
+
         Facade facade = Facade.getInstance();
         User realInstance;
         

@@ -2,13 +2,44 @@ package Logic;
 
 public class AdapterFactory {
 
+        private ComicAdapter comicAdp;
+        private ShowAdapter showAdp;
+        private VideogameAdapter videogameAdp;
+        
 	/**
 	 * 
 	 * @param type
 	 */
-	public IAdapter getAdapter(String type) {
-		// TODO - implement AdapterFactory.getAdapter
-		throw new UnsupportedOperationException();
+	public IAdapter getAdapter(String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+            
+            if(type.compareToIgnoreCase("comic")==0){
+                
+		if (comicAdp == null){
+                String nombreClase = System.getProperty(ComicAdapter.class.getName());
+                comicAdp = (ComicAdapter) (IAdapter) Class.forName (nombreClase).newInstance();
+                }
+                
+                return comicAdp;
+                
+            }else if(type.compareToIgnoreCase("show")==0){    
+                  
+                if (comicAdp == null){
+                String nombreClase = System.getProperty(ShowAdapter.class.getName());
+                showAdp = (ShowAdapter) (IAdapter) Class.forName (nombreClase).newInstance();
+                }
+                
+                return showAdp;
+                
+            }else if(type.compareToIgnoreCase("videogame")==0){
+                
+                if (comicAdp == null){
+                String nombreClase = System.getProperty(VideogameAdapter.class.getName());
+                videogameAdp = (VideogameAdapter) (IAdapter) Class.forName (nombreClase).newInstance();
+                }
+                
+                return videogameAdp;
+            }
+            return null;
 	}
 
 	public static AdapterFactory getInstance() {
