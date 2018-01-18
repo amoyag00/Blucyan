@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.Help;
 
 import Logic.Help;
 import java.awt.CardLayout;
@@ -13,15 +13,15 @@ import javax.swing.JPanel;
  *
  * @author cloud
  */
-public class JPanelHelpElementCard extends javax.swing.JPanel {
+public class JPanelHelpSearch extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanelHelpElementCard
+     * Creates new form JPanelHelpSearch
      */
-    public JPanelHelpElementCard() {
+    public JPanelHelpSearch() {
         initComponents();
         Help h = Help.getInstance();
-        String text = h.getHelp("ElementCard");
+        String text = h.getHelp("Search");
         helpText.setText(text);
     }
 
@@ -51,9 +51,9 @@ public class JPanelHelpElementCard extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -62,9 +62,9 @@ public class JPanelHelpElementCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addGap(12, 12, 12)
-                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

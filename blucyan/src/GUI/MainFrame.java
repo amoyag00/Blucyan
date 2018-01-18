@@ -1,26 +1,31 @@
-package GUI;
-
-import java.awt.CardLayout;
-import javax.swing.JPanel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package GUI;
+
+import javax.swing.JPanel;
 
 /**
  *
  * @author alex
  */
-public class HelpFrame extends javax.swing.JFrame {
-
+public class MainFrame extends javax.swing.JFrame {
+    
+   
     /**
-     * Creates new form Help
+     * Creates new form MainFrame
      */
-    public HelpFrame() {
+    public MainFrame() {
         initComponents();
-        index = new JPanelHelpIndex();
+        
+    
+        JPanelHome home =new JPanelHome(this);
+        
+        mainPanel.add(home, "Home");
+        mainPanel.add(new JPanelSearchResults(),"Search");
+        /*index = new JPanelHelpIndex();
         home = new JPanelHomeHelp();
         search = new JPanelHelpSearch();
         elementCard = new JPanelHelpElementCard();
@@ -28,7 +33,7 @@ public class HelpFrame extends javax.swing.JFrame {
         mainPanel.add(index, "index");
         mainPanel.add(home, "home");
         mainPanel.add(search, "search");
-        mainPanel.add(elementCard, "elementCard");
+        mainPanel.add(elementCard, "elementCard");*/
     }
 
     /**
@@ -51,16 +56,14 @@ public class HelpFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,29 +86,24 @@ public class HelpFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HelpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HelpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HelpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HelpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HelpFrame().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }
 
-    private JPanelHelpIndex index;
-    private JPanelHomeHelp home;
-    private JPanelHelpSearch search;
-    private JPanelHelpElementCard elementCard;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
