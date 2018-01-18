@@ -8,6 +8,7 @@ public class UserProxy extends User{
         Facade facade = Facade.getInstance();
         User realInstance;
         
+        private String name;
         
 	public User getRealInstance( ){
             

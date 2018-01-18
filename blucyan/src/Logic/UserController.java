@@ -1,6 +1,7 @@
 package Logic;
 
 import Persistence.Facade;
+import java.util.List;
 
 public class UserController {
 
@@ -75,7 +76,11 @@ public class UserController {
 	 */
 	public void addElement(String[] params, String elementType) {
 		// TODO - implement UserController.addElement
-		throw new UnsupportedOperationException();
+		IAdapter adap = AdapterFactory.getAdaptader(elementType);
+                
+                Entry entry = adap.createEntry(params);
+                
+                facade.put(entry, ElementList.class);
 	}
 
 	/**
@@ -134,7 +139,7 @@ public class UserController {
 	 */
 	public List<Object> search(String name) {
 		// TODO - implement UserController.operation
-		
+		return facade.search(name, Element.class);
 	}
 
 	/**
@@ -143,8 +148,8 @@ public class UserController {
 	 */
 	public Element showChart(String id) {
 		// TODO - implement UserController.showChart
-		throw new UnsupportedOperationException();
-	}
+                return (Element) facade.get(id,Element.class);
+        }
 
 	/**
 	 * 
@@ -153,12 +158,15 @@ public class UserController {
 	 */
 	public void addReview(String text, String elementID) {
 		// TODO - implement UserController.addReview
-		throw new UnsupportedOperationException();
+            Review newReview = new Review(actualUser.getUserName(), elementID, text);
+            
+            facade.put(newReview, Review.class);
+            
 	}
 
 	public void backup() {
 		// TODO - implement UserController.backup
-		throw new UnsupportedOperationException();
+                facade.backup();
 	}
 
 }

@@ -7,6 +7,15 @@ public class Review {
 	private String elementID;
 	private String text;
         
+        
+    public Review(String userName, String elementID, String text){
+    
+        this.userName = userName;
+        this.elementID = elementID;
+        this.text = text;
+        
+    }
+        
     public String getReviewID(){
         return this.reviewID;
         
