@@ -21,10 +21,12 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,9 +42,9 @@ public class JPanelHome extends javax.swing.JPanel {
     /**
      * Creates new form JPanelHome
      */
-    public JPanelHome(MainFrame mainFrame) {
+    public JPanelHome(MainFrame mainFrame,JPanel searchPanel) {
         initComponents();
-      
+      this.searchPanel=searchPanel;
         ElementList[] lists=null;
         try {
             lists = UserController.getInstance().getLists();
@@ -198,7 +200,9 @@ public class JPanelHome extends javax.swing.JPanel {
         // TODO add your handling code here:
         JPanel mainPanel = (JPanel) this.getParent();
        CardLayout card = (CardLayout) mainPanel.getLayout();
+       searchPanel.searchFrom(this.searchField.getText(),(String)this.comboBox.getSelectedItem());
        card.show(mainPanel, "Search");
+       
         //List<ElementProxy> searchResults=UserController.getInstance().search(this.searchField.getText());
         
         
@@ -243,22 +247,38 @@ public class JPanelHome extends javax.swing.JPanel {
      // c.weighty=0.5;
       //c.weightx=0.5;
   
-      c.insets= new Insets(0, 300, 5, 5);
+      c.insets= new Insets(0, 200, 5, 5);
       List<VideogameEntry> list=videogameList.getEntryList();
       int size=list.size();
       int i;
       for( i=0;i<size;i++){ 
+          ArrayList<String> params=new ArrayList<String>();
           VideogameEntry entry=list.get(i);
          
           c.gridy=i+1;
           c.gridx=0;
+          String param=entry.getName();
           CustomTextField t =new CustomTextField(entry.getName());
+          params.add(param);
           t.setEditable(false);
           panel.add(t,c);
           c.gridx=1;
-          panel.add(new CustomTextField(String.valueOf(entry.getValoration())),c);
+          param=String.valueOf(entry.getValoration());
+          params.add(param);
+          panel.add(new CustomTextField(param),c);
           c.gridx=2;
-          panel.add(new CustomTextField(entry.getStatus()),c);      
+          param=entry.getStatus();
+          panel.add(new CustomTextField(param),c); 
+          c.gridx=3;
+          CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new String[params.size()]));
+          applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                update(evt);
+            }
+    });
+    
+          panel.add(applyButton,c);
       }
       JPanel filler=new JPanel();
       c.gridy++;
@@ -270,7 +290,12 @@ public class JPanelHome extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_videogameButtonMouseReleased
-
+     private void update(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        ArrayList<String> params=new ArrayList<String>();
+        
+        //UserController.getInstance().modify(,);
+     }
     private void comicButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicButtonMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_comicButtonMouseReleased
@@ -300,7 +325,7 @@ public class JPanelHome extends javax.swing.JPanel {
         //c.weighty=1;
         //c.weightx=1;
         c.gridy=0;
-        c.insets= new Insets(0, 300, 5, 5);
+        c.insets= new Insets(0, 200, 5, 5);
        for(int i=0;i<labelHeaders.length;i++){
            labelHeaders[i]= new JLabel(headers[i]);
            labelHeaders[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
@@ -325,6 +350,7 @@ public class JPanelHome extends javax.swing.JPanel {
             }
         }
     }
+    JPanel searchPanel;
     final String headersVideogame []={"Name", "Valoration", "Status"};
     final String headersShow []={"Name", "Valoration", "Status", "Watched"};
     final String headersComic []={"Name", "Valoration", "Status", "Read"};

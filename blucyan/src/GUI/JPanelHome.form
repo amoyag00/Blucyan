@@ -59,7 +59,7 @@
                   <Component id="comicButton" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="showButton" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="panel" pref="494" max="32767" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
