@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/VideogameEntryDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/DBConnection.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/UserDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ComicEntryDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/Facade.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelSearchResults.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelVideogameCard.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/HelpFrame.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelShowCard.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelComicCard.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/JPanelHelpElementCard.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/DBConnection.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHomeAdmin.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/MainFrame.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Login.java</file>
         </group>
     </open-files>
 </project-private>

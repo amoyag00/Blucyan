@@ -14,6 +14,14 @@ public class UserController {
         private Facade facade = Facade.getInstance();
         private User actualUser; 
         private static UserController instance;
+
+        public User getActualUser() {
+            return actualUser;
+        }
+
+        public void setActualUser(User actualUser) {
+            this.actualUser = actualUser;
+        }
         
 	/**
 	 * 

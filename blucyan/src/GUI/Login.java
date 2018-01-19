@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
             }else{
                identified=UserController.getInstance().initiateSession(this.userNameField.getText(),String.valueOf(this.passField.getPassword()));
                 if(identified){
-                    MainFrame mF = new MainFrame();
+                    MainFrame mF = new MainFrame(UserController.getInstance().getActualUser().getIsAdmin());
                     mF.setVisible(true);
                     this.dispose();
                 }else{
