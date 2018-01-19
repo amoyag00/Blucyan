@@ -231,6 +231,10 @@ public class UserController {
                 facade.backup();
 	}
         
+        public void putElement(Element el) {
+            facade.put(el, Element.class);
+        }
+        
         public static UserController getInstance() {
             if(instance==null){
                 instance= new UserController();

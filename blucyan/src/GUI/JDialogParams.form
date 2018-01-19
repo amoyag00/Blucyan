@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="comicCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="chaptersLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="chaptersText" min="-2" pref="86" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="authorsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="authorsText" min="-2" pref="351" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="nameLabel" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="nameText" min="-2" pref="190" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                              <Component id="dateLabel" min="-2" pref="109" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="dateText" min="-2" pref="203" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="ilustratorsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ilustratorsText" min="-2" pref="86" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="videogameCheck" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="developerLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="coverButton" min="-2" pref="229" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="developerCheck" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="showCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="episodesLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="EpisodesText" min="-2" pref="86" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="seasonsLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="seasonsText" min="-2" pref="86" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="actorsLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="actorsText" min="-2" pref="428" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="durationLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="durationText" min="-2" pref="86" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="directorLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="directorText" min="-2" pref="179" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="platformLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="platformText" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="producersLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="producersText" min="-2" pref="428" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateText" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="comicCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chaptersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chaptersText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="authorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="authorsText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ilustratorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ilustratorsText" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="showCheck" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="episodesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="seasonsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="durationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EpisodesText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="seasonsText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="durationText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="directorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="directorText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="actorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="producersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="actorsText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="producersText" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="videogameCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="developerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="platformLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="developerCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="platformText" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Component id="coverButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" pref="36" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="titleLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="36" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="PARAMETERS"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nameLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dateLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Release date: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="coverButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cover"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="comicCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comic"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="videogameCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Videogame"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="showCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nameText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="dateText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="chaptersLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Num. chapters: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="chaptersText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ilustratorsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ilustrators: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="authorsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Authors: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="authorsText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ilustratorsText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="episodesLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Num episodes: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="seasonsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Num seasons: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="durationLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Episode duration: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="producersLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Producers: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="directorLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Director: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="actorsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Actors: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="EpisodesText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="seasonsText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="durationText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="actorsText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="directorText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="producersText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="developerLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Developer: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="platformLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Platform: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="developerCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="platformText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField3"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
