@@ -32,10 +32,10 @@ public class DBConnection{
             
 //…….. AQUÍ VAN TODOS LOS GETTERS & SETTERS DE LOS PARÁMETROS DE LA CLASE
     public DBConnection(){
-        this.dataBaseURL = "jdbc:mysql://localhost:3306/Blucyan?autoReconnect=true&useSSL=true";
+        this.dataBaseURL = "jdbc:mysql://localhost:3306/blucyan?autoReconnect=true&useSSL=true";
         this.driverName = "com.mysql.jdbc.Driver";
         this.user = "root";
-        this.pass = "123455";
+        this.pass = "12345";
     }
     public void openConnection() throws Exception{
         if ((dataBaseURL=="") || (user=="") || (pass=="") || (driverName=="")){

@@ -8,13 +8,14 @@ public class ComicAdapter extends ComicEntry implements IAdapter   {
     public Entry createEntry(String[] params){
 
         ComicEntry comicEntry = new ComicEntry();
-        
-        comicEntry.setComicID(params[0]);
-        comicEntry.setValoration(parseInt(params[1]));
-        comicEntry.setNumReadChapters(parseInt(params[2]));
-        comicEntry.setStatus(params[3]);
-        comicEntry.setName(params[4]);
-        comicEntry.setListID(params[5]);
+
+        comicEntry.setListID(params[0]);
+        comicEntry.setComicID(params[1]);
+        comicEntry.setName(params[2]);
+        comicEntry.setValoration(parseInt(params[3]));
+        comicEntry.setNumReadChapters(parseInt(params[4]));
+        comicEntry.setStatus(params[5]);
+
 
         return comicEntry;
     }

@@ -122,6 +122,15 @@ public class UserController {
                 facade.delete(name, classType);
         }
 
+        public void modify(String[] params, String elementType){
+        
+           Element element = new Element();
+                  
+            
+           facade.modify(element, elementType);
+            
+        }
+        
 	/**
 	 * 
 	 * @param pass1
@@ -153,9 +162,23 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public List search(String name) throws Exception {
+	public List<Object> search(String name, String elementType) throws Exception {
 		// TODO - implement UserController.operation
-		return facade.search(name, Element.class);
+                
+                Class elementClass=null;
+                
+                switch(elementType){
+                
+                    case "Videogames":            
+                    case "Shows":               
+                    case "Comics": elementClass=Element.class;
+                                break;
+                    case "Users": elementClass=User.class;
+                                break;
+                
+                }
+                
+		return facade.search(name, elementClass);
 	}
 
 	/**
