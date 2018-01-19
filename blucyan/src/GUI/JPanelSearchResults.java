@@ -5,11 +5,29 @@
  */
 package GUI;
 
+import Logic.Element;
+import Logic.ElementProxy;
 import Logic.UserController;
+import Logic.UserProxy;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.lang.String;
+import java.text.AttributedCharacterIterator;
 
 /**
  *
@@ -35,9 +53,9 @@ public class JPanelSearchResults extends javax.swing.JPanel {
 
         searchField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
-        bigPanel = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
+        bigPanel = new javax.swing.JPanel();
 
         searchField.setText("Search");
 
@@ -48,17 +66,6 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout bigPanelLayout = new javax.swing.GroupLayout(bigPanel);
-        bigPanel.setLayout(bigPanelLayout);
-        bigPanelLayout.setHorizontalGroup(
-            bigPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1013, Short.MAX_VALUE)
-        );
-        bigPanelLayout.setVerticalGroup(
-            bigPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
-        );
-
         backButton.setText("Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -68,12 +75,14 @@ public class JPanelSearchResults extends javax.swing.JPanel {
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
 
+        bigPanel.setLayout(new java.awt.GridBagLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(156, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108)
                 .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -81,11 +90,12 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchButton)
-                .addContainerGap(295, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,10 +107,15 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                         .addComponent(searchButton)
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(593, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        bigPanel.getAccessibleContext().setAccessibleParent(this);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
@@ -114,8 +129,67 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             UserController controller = UserController.getInstance();
+            GridBagConstraints gbc = new GridBagConstraints();
             
-            controller.search(searchField.getText(),(String) comboBox.getSelectedItem());
+
+            bigPanel.removeAll();
+            bigPanel.repaint();
+            bigPanel.revalidate();
+            
+            if("User".compareTo((String) comboBox.getSelectedItem())==0){
+                List<UserProxy> results = controller.searchUser(searchField.getText());
+                
+                
+                
+                
+            }else{
+                List<ElementProxy> results = controller.searchElement(searchField.getText());
+                
+                int row=0;
+                int column=0;
+                ImageIcon img;
+                for(int i=0;i<((int)results.size());i++){
+                    
+                    gbc.gridy=row;
+                    gbc.gridx=column;
+                    gbc.fill=GridBagConstraints.BOTH;
+                    gbc.anchor=GridBagConstraints.CENTER;
+                    gbc.weightx=5;
+                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Gosu.png") {};
+                    JLabel cover = new JLabel(); 
+                    //cover.setSize(720, 576); 
+                    cover.setIcon(image);
+                    cover.doLayout();
+                   
+                   
+                   /* JPanel imagePanel = new JPanel();
+                    imagePanel.setSize(10, 10);
+                    
+                    imagePanel.add(cover);*/
+                    bigPanel.add(cover,gbc);
+                    
+                    gbc.gridy=row+1;
+                    
+                    img = new ImageIcon();
+                    JLabel nameLabel = new JLabel(results.get(i).getName());
+                    bigPanel.add(nameLabel,gbc);
+                    
+                }
+                
+                bigPanel.repaint();
+                bigPanel.revalidate();
+
+            }
+
+            /*
+            List<Element> results = 
+            
+            
+            
+            
+            */
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -122,12 +122,12 @@ public class UserController {
                 facade.delete(name, classType);
         }
 
-        public void modify(String[] params, String elementType){
+        public void modify(String[] params, String elementType) throws ClassNotFoundException{
         
            Element element = new Element();
                   
             
-           facade.modify(element, elementType);
+           facade.modify(element, Class.forName(elementType));
             
         }
         
@@ -162,21 +162,19 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public List<Object> search(String name, String elementType) throws Exception {
+	public List<ElementProxy> searchElement(String name) throws Exception {
+		// TODO - implement UserController.operation
+
+                Class elementClass=Element.class;
+                 
+                
+		return facade.search(name, elementClass);
+	}
+        
+        public List<UserProxy> searchUser(String name) throws Exception {
 		// TODO - implement UserController.operation
                 
-                Class elementClass=null;
-                
-                switch(elementType){
-                
-                    case "Videogames":            
-                    case "Shows":               
-                    case "Comics": elementClass=Element.class;
-                                break;
-                    case "Users": elementClass=User.class;
-                                break;
-                
-                }
+                Class elementClass=User.class;
                 
 		return facade.search(name, elementClass);
 	}
