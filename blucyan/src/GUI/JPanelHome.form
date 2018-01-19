@@ -108,6 +108,7 @@
         <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="videogameButtonMouseReleased"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="videogameButtonMouseExited"/>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="videogameButtonMouseEntered"/>
       </Events>
@@ -122,6 +123,7 @@
         <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicButtonMouseReleased"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicButtonMouseExited"/>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicButtonMouseEntered"/>
       </Events>
@@ -136,6 +138,7 @@
         <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showButtonMouseReleased"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showButtonMouseExited"/>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showButtonMouseEntered"/>
       </Events>

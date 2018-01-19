@@ -5,8 +5,13 @@
  */
 package GUI;
 
+import Logic.ComicEntry;
+import Logic.ElementList;
 import Logic.ElementProxy;
+import Logic.Entry;
+import Logic.ShowEntry;
 import Logic.UserController;
+import Logic.VideogameEntry;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -16,25 +21,36 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import static java.util.Collections.list;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
  * @author alex
  */
 public class JPanelHome extends javax.swing.JPanel {
-
+    private final int videogameEntryParams =4;
     /**
      * Creates new form JPanelHome
      */
     public JPanelHome(MainFrame mainFrame) {
         initComponents();
         c = new GridBagConstraints();
-        
-        createRows();
+        ElementList[] lists=null;
+        try {
+            lists = UserController.getInstance().getLists();
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //setLists(lists);
+        createHeaders();
         mainFrame.pack();
         mainFrame.revalidate();
     }
@@ -77,6 +93,9 @@ public class JPanelHome extends javax.swing.JPanel {
         videogameButton.setBorderPainted(false);
         videogameButton.setContentAreaFilled(false);
         videogameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                videogameButtonMouseReleased(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 videogameButtonMouseExited(evt);
             }
@@ -90,6 +109,9 @@ public class JPanelHome extends javax.swing.JPanel {
         comicButton.setBorderPainted(false);
         comicButton.setContentAreaFilled(false);
         comicButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                comicButtonMouseReleased(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 comicButtonMouseExited(evt);
             }
@@ -103,6 +125,9 @@ public class JPanelHome extends javax.swing.JPanel {
         showButton.setBorderPainted(false);
         showButton.setContentAreaFilled(false);
         showButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                showButtonMouseReleased(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 showButtonMouseExited(evt);
             }
@@ -177,12 +202,12 @@ public class JPanelHome extends javax.swing.JPanel {
     }//GEN-LAST:event_searchButtonMouseReleased
 
     private void videogameButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_videogameButtonMouseExited
-        // TODO add your handling code here:
+
         this.videogameButton.setForeground(Color.BLACK);
     }//GEN-LAST:event_videogameButtonMouseExited
 
     private void comicButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicButtonMouseEntered
-        // TODO add your handling code here:
+
         this.comicButton.setForeground(Color.WHITE);
     }//GEN-LAST:event_comicButtonMouseEntered
 
@@ -205,7 +230,37 @@ public class JPanelHome extends javax.swing.JPanel {
         this.searchField.setText("");
     }//GEN-LAST:event_searchFieldMouseClicked
 
-    private void createRows(){
+    private void videogameButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_videogameButtonMouseReleased
+      c.anchor=GridBagConstraints.NORTHWEST;
+      c.weighty=1;
+      c.weightx=1;
+      c.gridy=0;
+      c.insets= new Insets(5, 100, 5, 5);
+      List<VideogameEntry> list=videogameList.getEntryList();
+      int size=list.size();
+      for(int i=0;i<size;i++){
+          VideogameEntry entry=list.get(i);
+          c.gridy=0;
+          c.gridx=i;
+          panel.add(new CustomTextField(entry.getName()),c);
+          c.gridy=1;
+          panel.add(new CustomTextField(String.valueOf(entry.getValoration())),c);
+          c.gridy=2;
+          panel.add(new CustomTextField(entry.getStatus()),c);      
+      }
+        
+        
+    }//GEN-LAST:event_videogameButtonMouseReleased
+
+    private void comicButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicButtonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comicButtonMouseReleased
+
+    private void showButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showButtonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showButtonMouseReleased
+
+    private void createHeaders(){
         JLabel headers[]=new JLabel[4];
         String headerNames []={"Name", "Valoration", "Status", "Watched"};
         c.anchor=GridBagConstraints.NORTHWEST;
@@ -219,11 +274,27 @@ public class JPanelHome extends javax.swing.JPanel {
            c.gridx=i;
            panel.add(headers[i],c);
         }
-        
-        
-        
+       c.gridy=1;
+    
+       
+     
+           
     }
     
+    private void setLists(ElementList[] lists){
+        for(int i=0;i<lists.length;i++){
+            if(lists[i].getTypeList().equalsIgnoreCase("Videogame")){
+                videogameList= lists[i];
+            }else if(lists[i].getTypeList().equalsIgnoreCase("Show")){
+                showList= lists[i];
+            }else if(lists[i].getTypeList().equalsIgnoreCase("Comic")){
+                comicList= lists[i];
+            }
+        }
+    }
+    ElementList<VideogameEntry> videogameList;
+    ElementList<ComicEntry> comicList;
+    ElementList<ShowEntry> showList;
     private GridBagConstraints c;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox;
