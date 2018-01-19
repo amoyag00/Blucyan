@@ -23,5 +23,5 @@ public class CustomTextField extends JTextField {
     public void setBorder(Border border) {
         // No!
     }
-    
+  
 }

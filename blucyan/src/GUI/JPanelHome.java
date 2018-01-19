@@ -263,10 +263,12 @@ public class JPanelHome extends javax.swing.JPanel {
           applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                 ArrayList<String> params=new ArrayList<String>();
-        
-                System.out.println(params.toString());
-                //UserController.getInstance().modify(,);
+               
+                try {
+                    UserController.getInstance().modify(applyButton.getParams(),"Videogame");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
     });
     

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.util.ArrayList;
 import javax.swing.JButton;
 
 /**
@@ -20,8 +21,12 @@ public class CustomButton extends JButton{
         this.params=params;
     
     }       
-    public CustomTextField[] getParams(){
-        return this.params;
+    public String[] getParams(){
+        ArrayList<String> params=new ArrayList<String>();
+        for(int i=0;i<this.params.length;i++){
+            params.add(this.params[i].getText());
+        }
+        return params.toArray(new String[params.size()]);
     }
     
     
