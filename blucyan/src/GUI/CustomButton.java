@@ -13,14 +13,14 @@ import javax.swing.JButton;
  */
 public class CustomButton extends JButton{
     private int row;
-    String params[];
-    public CustomButton(String name,int row, String params[]){
+    CustomTextField params[];
+    public CustomButton(String name,int row, CustomTextField params[]){
         super(name);
         this.row=row;
         this.params=params;
     
     }       
-    public String[] getParams(){
+    public CustomTextField[] getParams(){
         return this.params;
     }
     

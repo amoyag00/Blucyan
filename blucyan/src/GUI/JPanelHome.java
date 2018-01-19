@@ -71,25 +71,18 @@ public class JPanelHome extends javax.swing.JPanel {
 
         comboBox = new javax.swing.JComboBox<>();
         searchField = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
         videogameButton = new javax.swing.JButton();
         comicButton = new javax.swing.JButton();
         showButton = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fun", "Users" }));
 
         searchField.setText("Search");
         searchField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchFieldMouseClicked(evt);
-            }
-        });
-
-        searchButton.setText("Search");
-        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                searchButtonMouseReleased(evt);
             }
         });
 
@@ -146,6 +139,13 @@ public class JPanelHome extends javax.swing.JPanel {
         panelLayout.rowHeights = new int[] {0};
         panel.setLayout(panelLayout);
 
+        jButton1.setText("Search");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,8 +165,9 @@ public class JPanelHome extends javax.swing.JPanel {
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(49, Short.MAX_VALUE)
                         .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1293, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -179,7 +180,7 @@ public class JPanelHome extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton))
+                    .addComponent(jButton1))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(videogameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,15 +196,6 @@ public class JPanelHome extends javax.swing.JPanel {
 
         this.videogameButton.setForeground(Color.WHITE);
     }//GEN-LAST:event_videogameButtonMouseEntered
-
-    private void searchButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseReleased
-        // TODO add your handling code here:
-        JPanel mainPanel = (JPanel) this.getParent();
-       CardLayout card = (CardLayout) mainPanel.getLayout();
-       searchPanel.searchFromHome(this.searchField.getText(),(String)this.comboBox.getSelectedItem());
-       card.show(mainPanel, "Search");
-    
-    }//GEN-LAST:event_searchButtonMouseReleased
 
     private void videogameButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_videogameButtonMouseExited
 
@@ -249,29 +241,32 @@ public class JPanelHome extends javax.swing.JPanel {
       int size=list.size();
       int i;
       for( i=0;i<size;i++){ 
-          ArrayList<String> params=new ArrayList<String>();
+          ArrayList<CustomTextField> params=new ArrayList<CustomTextField>();
           VideogameEntry entry=list.get(i);
          
           c.gridy=i+1;
           c.gridx=0;
           String param=entry.getName();
           CustomTextField t =new CustomTextField(entry.getName());
-          params.add(param);
+          params.add(t);
           t.setEditable(false);
           panel.add(t,c);
           c.gridx=1;
-          param=String.valueOf(entry.getValoration());
-          params.add(param);
-          panel.add(new CustomTextField(param),c);
+          CustomTextField t1=new CustomTextField(String.valueOf(entry.getValoration()));
+          params.add(t1);
+          panel.add(t1,c);
           c.gridx=2;
-          param=entry.getStatus();
-          panel.add(new CustomTextField(param),c); 
+          CustomTextField t2=new CustomTextField(entry.getStatus());
+          panel.add(t2,c); 
           c.gridx=3;
-          CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new String[params.size()]));
+          CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new CustomTextField[params.size()]));
           applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                update(evt);
+                 ArrayList<String> params=new ArrayList<String>();
+        
+                System.out.println(params.toString());
+                //UserController.getInstance().modify(,);
             }
     });
     
@@ -287,12 +282,7 @@ public class JPanelHome extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_videogameButtonMouseReleased
-     private void update(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
-        ArrayList<String> params=new ArrayList<String>();
-        
-        //UserController.getInstance().modify(,);
-     }
+   
     private void comicButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicButtonMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_comicButtonMouseReleased
@@ -300,6 +290,14 @@ public class JPanelHome extends javax.swing.JPanel {
     private void showButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showButtonMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_showButtonMouseReleased
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // TODO add your handling code here:
+         JPanel mainPanel = (JPanel) this.getParent();
+       CardLayout card = (CardLayout) mainPanel.getLayout();
+       searchPanel.searchFromHome(this.searchField.getText(),(String)this.comboBox.getSelectedItem());
+       card.show(mainPanel, "Search");
+    }//GEN-LAST:event_jButton1MouseReleased
 
     private void createHeaders(String type){
         GridBagConstraints c=new GridBagConstraints();
@@ -358,8 +356,8 @@ public class JPanelHome extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton comicButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel panel;
-    private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     private javax.swing.JButton showButton;
     private javax.swing.JButton videogameButton;
