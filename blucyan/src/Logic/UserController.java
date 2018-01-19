@@ -89,9 +89,10 @@ public class UserController {
 	 * @param params
 	 * @param elementType
 	 */
-	public void addElement(String[] params, String elementType) {
+	public void addElement(String[] params, String elementType) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		// TODO - implement UserController.addElement
-		IAdapter adap = AdapterFactory.getAdapter(elementType);
+                AdapterFactory adapter = AdapterFactory.getInstance();
+		IAdapter adap = adapter.getAdapter(elementType);
                 
                 Entry entry = adap.createEntry(params);
                 
@@ -102,11 +103,11 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public void delete(String name) {
+	public void delete(String name, Class classType) throws Exception {
         
                 //TODO - implement UserController.delete
                 //facade.delete(name, classType??); How? Maybe an Object with a cast to User or Review depending the classType; or we could change the argument parameter and pass a reference to de realObject then we can take de classTyppe whenever we want
-                
+                facade.delete(name, classType);
         }
 
 	/**
@@ -140,7 +141,7 @@ public class UserController {
 	 * 
 	 * @param name
 	 */
-	public List<Object> search(String name) throws Exception {
+	public List search(String name) throws Exception {
 		// TODO - implement UserController.operation
 		return facade.search(name, Element.class);
 	}
