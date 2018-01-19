@@ -11,6 +11,7 @@ import Logic.UserController;
 import Logic.UserProxy;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.util.List;
@@ -125,8 +127,21 @@ public class JPanelSearchResults extends javax.swing.JPanel {
        card.show(mainPanel, "Home");
     }//GEN-LAST:event_backButtonMouseReleased
 
+    public void searchFromHome(String text, String type){
+        searchField.setText(text);
+        comboBox.setSelectedItem(type);   
+        
+        
+      search();
+        
+    }
+    
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        try {
+        search();
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void search(){
+     try {
             // TODO add your handling code here:
             UserController controller = UserController.getInstance();
             GridBagConstraints gbc = new GridBagConstraints();
@@ -155,7 +170,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
                     gbc.weightx=5;
-                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Gosu.png") {};
+                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Antivirus.gif") {};
                     JLabel cover = new JLabel(); 
                     //cover.setSize(720, 576); 
                     cover.setIcon(image);
@@ -174,7 +189,13 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     JLabel nameLabel = new JLabel(results.get(i).getName());
                     bigPanel.add(nameLabel,gbc);
                     
-                    column++;
+                    if(column<2){
+                        column++;
+                    }else{
+                        column=0;
+                        row+=2;
+                    }
+                    
                     
                 }
                 
@@ -195,8 +216,8 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_searchButtonActionPerformed
-
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

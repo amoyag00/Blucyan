@@ -199,7 +199,6 @@ public class JPanelHome extends javax.swing.JPanel {
         JPanel mainPanel = (JPanel) this.getParent();
        CardLayout card = (CardLayout) mainPanel.getLayout();
        card.show(mainPanel, "Search");
-        //List<ElementProxy> searchResults=UserController.getInstance().search(this.searchField.getText());
         
         
     }//GEN-LAST:event_searchButtonMouseReleased
