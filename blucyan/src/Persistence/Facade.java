@@ -106,7 +106,7 @@ public class Facade {
 	}
 
 	public void backup() {
-		Backup savior = new Backup();
+		Backup.backup();
 	}
 
 	public static Facade getInstance() {

@@ -2,7 +2,7 @@ package Logic;
 
 public class Entry {
 
-    protected float valoration;
+    protected int valoration;
     protected String name;
     protected String status;
 
@@ -10,7 +10,7 @@ public class Entry {
         return valoration;
     }
 
-    public void setValoration(float valoration) {
+    public void setValoration(int valoration) {
         this.valoration = valoration;
     }
 

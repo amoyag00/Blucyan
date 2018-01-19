@@ -1,7 +1,10 @@
 package Logic;
 
+import Persistence.ComicEntryDAO;
 import Persistence.ElementListDAO;
 import Persistence.Facade;
+import Persistence.ShowEntryDAO;
+import Persistence.VideogameEntryDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +99,16 @@ public class UserController {
                 
                 Entry entry = adap.createEntry(params);
                 
-                facade.put(entry, ElementList.class);
+                if(elementType.equalsIgnoreCase("videogame")){
+                     facade.put(entry, VideogameEntryDAO.class);
+                }
+                else if(elementType.equalsIgnoreCase("comic")){
+                     facade.put(entry, ComicEntryDAO.class);
+                }
+                else if(elementType.equalsIgnoreCase("show")){
+                     facade.put(entry, ShowEntryDAO.class);
+                }
+                   
 	}
 
 	/**
