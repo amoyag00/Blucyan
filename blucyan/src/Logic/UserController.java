@@ -122,12 +122,12 @@ public class UserController {
                 facade.delete(name, classType);
         }
 
-        public void modify(String[] params, String elementType){
+        public void modify(String[] params, String elementType) throws ClassNotFoundException{
         
            Element element = new Element();
                   
             
-           facade.modify(element, elementType);
+           facade.modify(element, Class.forName(elementType));
             
         }
         
