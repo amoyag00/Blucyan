@@ -108,6 +108,8 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             videogames.add(entry);
         }
         
+        this.closeConnection();
+        
         return videogames;
     }
 

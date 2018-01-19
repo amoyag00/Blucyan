@@ -73,7 +73,9 @@ public class UserController {
 		// TODO - implement UserController.getLists
 		ElementList[] lists = facade.getLists(actualUser.getUserName(), ElementList.class);
                 
-                ArrayList<VideogameEntry> videogameList = facade.getList(lists[0].getListID(), VideogameEntry.class);
+                ArrayList<VideogameEntry> videogameList = facade.getVideogameList(lists[2].getListID(), VideogameEntry.class);
+                ArrayList<ComicEntry> comicList = facade.getComicList(lists[1].getListID(), ComicEntry.class);
+                ArrayList<ShowEntry> showList = facade.getShowList(lists[0].getListID(), ShowEntry.class);
                 
                 return lists;
 	}

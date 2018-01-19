@@ -51,6 +51,18 @@ public class Facade {
             
             return videogameList.getList(id);
         }
+        
+        public ArrayList<ComicEntry> getComicList(String id, Class classType) throws Exception{
+            ComicEntryDAO comicList= (ComicEntryDAO) mapaDAO.get(classType);
+            
+            return comicList.getList(id);
+        }
+        
+        public ArrayList<ShowEntry> getShowList(String id, Class classType) throws Exception{
+            ShowEntryDAO videogameList= (ShowEntryDAO) mapaDAO.get(classType);
+            
+            return showList.getList(id);
+        }
 
 	/**
 	 * 
