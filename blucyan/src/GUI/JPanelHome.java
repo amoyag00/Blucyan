@@ -36,21 +36,24 @@ import javax.swing.border.Border;
  * @author alex
  */
 public class JPanelHome extends javax.swing.JPanel {
-    private final int videogameEntryParams =4;
+   
     /**
      * Creates new form JPanelHome
      */
     public JPanelHome(MainFrame mainFrame) {
         initComponents();
-        c = new GridBagConstraints();
+      
         ElementList[] lists=null;
         try {
             lists = UserController.getInstance().getLists();
         } catch (Exception ex) {
             Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //setLists(lists);
-        createHeaders();
+        
+        
+        setLists(lists);
+        mainFrame.getPanel().repaint();
+        mainFrame.getPanel().revalidate();
         mainFrame.pack();
         mainFrame.revalidate();
     }
@@ -231,23 +234,39 @@ public class JPanelHome extends javax.swing.JPanel {
     }//GEN-LAST:event_searchFieldMouseClicked
 
     private void videogameButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_videogameButtonMouseReleased
+      panel.removeAll();
+      panel.repaint();
+      panel.revalidate();
+      createHeaders("Videogame");
+      GridBagConstraints c=new GridBagConstraints();
       c.anchor=GridBagConstraints.NORTHWEST;
-      c.weighty=1;
-      c.weightx=1;
-      c.gridy=0;
-      c.insets= new Insets(5, 100, 5, 5);
+     // c.weighty=0.5;
+      //c.weightx=0.5;
+  
+      c.insets= new Insets(0, 300, 5, 5);
       List<VideogameEntry> list=videogameList.getEntryList();
       int size=list.size();
-      for(int i=0;i<size;i++){
+      int i;
+      for( i=0;i<size;i++){ 
           VideogameEntry entry=list.get(i);
-          c.gridy=0;
-          c.gridx=i;
-          panel.add(new CustomTextField(entry.getName()),c);
-          c.gridy=1;
+         
+          c.gridy=i+1;
+          c.gridx=0;
+          CustomTextField t =new CustomTextField(entry.getName());
+          t.setEditable(false);
+          panel.add(t,c);
+          c.gridx=1;
           panel.add(new CustomTextField(String.valueOf(entry.getValoration())),c);
-          c.gridy=2;
+          c.gridx=2;
           panel.add(new CustomTextField(entry.getStatus()),c);      
       }
+      JPanel filler=new JPanel();
+      c.gridy++;
+      c.weightx=1;
+      c.weighty=1;
+      panel.add(filler,c);
+      panel.repaint();
+      panel.revalidate();
         
         
     }//GEN-LAST:event_videogameButtonMouseReleased
@@ -260,19 +279,33 @@ public class JPanelHome extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_showButtonMouseReleased
 
-    private void createHeaders(){
-        JLabel headers[]=new JLabel[4];
-        String headerNames []={"Name", "Valoration", "Status", "Watched"};
+    private void createHeaders(String type){
+        GridBagConstraints c=new GridBagConstraints();
+        JLabel labelHeaders[];
+        String headers[]=null;
+        switch(type){
+            case "Videogame":
+                headers=headersVideogame;
+                break;
+            case "Show":
+               headers=headersShow;
+               break;
+            case "Comic":
+                headers=headersComic;
+                break;
+            
+        }
+        labelHeaders=new JLabel[headers.length];
         c.anchor=GridBagConstraints.NORTHWEST;
-        c.weighty=1;
-        c.weightx=1;
+        //c.weighty=1;
+        //c.weightx=1;
         c.gridy=0;
-        c.insets= new Insets(5, 100, 5, 5);
-       for(int i=0;i<headers.length;i++){
-           headers[i]= new JLabel(headerNames[i]);
-           headers[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
+        c.insets= new Insets(0, 300, 5, 5);
+       for(int i=0;i<labelHeaders.length;i++){
+           labelHeaders[i]= new JLabel(headers[i]);
+           labelHeaders[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
            c.gridx=i;
-           panel.add(headers[i],c);
+           panel.add(labelHeaders[i],c);
         }
        c.gridy=1;
     
@@ -292,10 +325,13 @@ public class JPanelHome extends javax.swing.JPanel {
             }
         }
     }
+    final String headersVideogame []={"Name", "Valoration", "Status"};
+    final String headersShow []={"Name", "Valoration", "Status", "Watched"};
+    final String headersComic []={"Name", "Valoration", "Status", "Read"};
     ElementList<VideogameEntry> videogameList;
     ElementList<ComicEntry> comicList;
     ElementList<ShowEntry> showList;
-    private GridBagConstraints c;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton comicButton;

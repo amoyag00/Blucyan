@@ -102,6 +102,27 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         
         return exist;
     }
+    public boolean match(String username,String password) throws Exception{
+        Connection cn;
+        ResultSet rs;
+        PreparedStatement st;
+        boolean match= false;
+        
+        this.openConnection();
+        cn = this.getConnection();
+        st = cn.prepareStatement("SELECT count(nickname) FROM Users WHERE nickname = ? AND pass =?");
+        st.setString(1, username);
+        st.setString(2, password);
+        rs = st.executeQuery();
+        rs.first();
+        match = rs.getBoolean(1);
+        System.out.println(match);
+        
+        
+        this.closeConnection();
+        
+        return match;
+    }
     
     public List<UserProxy> search(String name) throws Exception {
         Connection cn;

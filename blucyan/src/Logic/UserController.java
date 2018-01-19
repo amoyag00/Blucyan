@@ -74,18 +74,35 @@ public class UserController {
 
 	public ElementList[] getLists() throws Exception {
 		// TODO - implement UserController.getLists
+                //Videogame->0     Comic ->1     Show->2
 		ElementList[] lists = facade.getLists(actualUser.getUserName(), ElementList.class);
                 
-                ArrayList<VideogameEntry> videogameList = facade.getVideogameList(lists[2].getListID(), VideogameEntry.class);
+                ArrayList<VideogameEntry> videogameList = facade.getVideogameList(lists[0].getListID(), VideogameEntry.class);
                 ArrayList<ComicEntry> comicList = facade.getComicList(lists[1].getListID(), ComicEntry.class);
-                ArrayList<ShowEntry> showList = facade.getShowList(lists[0].getListID(), ShowEntry.class);
+                ArrayList<ShowEntry> showList = facade.getShowList(lists[2].getListID(), ShowEntry.class);
                 
-                lists[0].setEntryList(showList);
+                lists[0].setEntryList(videogameList);
                 lists[1].setEntryList(comicList);
                 lists[2].setEntryList(videogameList);
                 
-                return lists;
+                return sort(lists);
 	}
+        
+        private ElementList[] sort(ElementList[] unsortedLists){
+            ElementList[] sortedLists=new ElementList[unsortedLists.length];
+            for(int i=0;i<unsortedLists.length;i++){
+                if(unsortedLists[i].getTypeList().equalsIgnoreCase("Videogame")){
+                    sortedLists[0]=unsortedLists[i];
+                }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Comic")){
+                       sortedLists[1]=unsortedLists[i];
+                }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Show")){
+                       sortedLists[2]=unsortedLists[i];
+                }
+             
+            }
+            return sortedLists;
+        }
+        
 
 	/**
 	 * 

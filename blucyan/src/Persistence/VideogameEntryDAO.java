@@ -93,7 +93,9 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT * FROM VideogameLists WHERE videogameList_id = ?");
+        st = cn.prepareStatement("SELECT Elements.name,VideogameLists.videogame_id, VideogameLists.valoration, VideogameLists.status_in_list\n" +
+"FROM VideogameLists\n" +
+"INNER JOIN Elements ON  Elements.element_id = ?;");
         st.setString(1, id);
         rs = st.executeQuery();
         
@@ -101,6 +103,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             VideogameEntry entry = new VideogameEntry();
             
             entry.setListID(id);
+            entry.setName(rs.getString("name"));
             entry.setStatus(rs.getString("status_in_list"));
             entry.setValoration(rs.getInt("valoration"));
             entry.setVideogameID(String.valueOf(rs.getInt("videogame_id")));
@@ -112,7 +115,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         return videogames;
     }
-
+     
     public void put(VideogameEntry vE) throws Exception {
         try {
             Connection cn;
@@ -141,7 +144,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         this.openConnection();
         cn = this.getConnection();
         PreparedStatement st = cn.prepareStatement("UPDATE VideogameLists SET valoration=?, status_in_list=? WHERE videogame_id = ? AND videogameList_id=?");
-        st.setByte(1, (byte) vE.getValoration());;
+        st.setByte(1, (byte) vE.getValoration());
         st.setString(2, vE.getStatus());
         st.setString(3, vE.getVideogameID());
         st.setString(4, vE.getListID());
