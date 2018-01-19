@@ -35,7 +35,7 @@ public class DBConnection{
         this.dataBaseURL = "jdbc:mysql://localhost:3306/blucyan?autoReconnect=true&useSSL=true";
         this.driverName = "com.mysql.jdbc.Driver";
         this.user = "root";
-        this.pass = "12345";
+        this.pass = "123";
     }
     public void openConnection() throws Exception{
         if ((dataBaseURL=="") || (user=="") || (pass=="") || (driverName=="")){
