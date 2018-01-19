@@ -174,6 +174,8 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     JLabel nameLabel = new JLabel(results.get(i).getName());
                     bigPanel.add(nameLabel,gbc);
                     
+                    column++;
+                    
                 }
                 
                 bigPanel.repaint();
