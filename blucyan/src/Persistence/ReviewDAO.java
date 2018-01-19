@@ -108,6 +108,20 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
        throw new UnsupportedOperationException("Method not implmented");
     }
     
+   public void modify(Review rev) throws Exception {
+       
+        Connection cn;
+        this.openConnection();
+        cn = this.getConnection();
+       
+        PreparedStatement st = this.getConnection().prepareStatement("UPDATE Reviews SET review_text=? WHERE review_id = ?" );
+        st.setString(1, rev.getText());
+        st.setString(2, rev.getReviewID());
+        st.executeUpdate();
+        
+        st.executeUpdate();
+        this.closeConnection();
+    }
     
     /*public static void main(String[] args){
         ReviewDAO u=new ReviewDAO();

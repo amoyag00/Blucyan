@@ -124,9 +124,26 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         return searched;
     }
     
+    public void modify(User user) throws Exception{
+    
+        Connection cn;
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("UPDATE User SET pass=?, private=? WHERE nickname = ?");
+        st.setString(1, user.getPass());;
+        st.setBoolean(2, user.getIsPrivate());
+        st.setString(3, user.getUserName());
+        
+        st.executeUpdate();
+        this.closeConnection();
+    
+    
+    }
+    
     public static void main(String[] args) throws Exception{
         UserDAO u=new UserDAO();
-        User user = new User();
+        System.out.println(u.exists("Notch"));
+       /* User user = new User();
         User us;
         
         user.setUserName("Notch");
@@ -138,7 +155,7 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
             u.exists("Al");
             
             u.put(user);
-            u.exists("Notch");
+            
             
             u.delete(user.getUserName());
             us = u.get("Terminator");
@@ -148,6 +165,6 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
             ArrayList<UserProxy> result = (ArrayList<UserProxy>) u.search("r");
             for(int i=0;i<result.size();i++){
                System.out.println(result.get(i).getUserName());
-            }
+            }*/
     }
 }

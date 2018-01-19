@@ -90,17 +90,17 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
        return cE;
    }
     
-    public void put(ComicEntry sE) throws Exception{
+    public void put(ComicEntry cE) throws Exception{
         try {
             Connection cn;
             this.openConnection();
             cn=this.getConnection();
             PreparedStatement st = cn.prepareStatement("INSERT INTO ComicLists VALUES (?,?,?,?,?)");   
-            st.setString(1, sE.getListID());
-            st.setString(2, sE.getComicID());
-            st.setByte(3, (byte) sE.getValoration());
-            st.setString(4, sE.getStatus());
-            st.setInt(5, sE.getNumReadChapters());
+            st.setString(1, cE.getListID());
+            st.setString(2, cE.getComicID());
+            st.setByte(3, (byte) cE.getValoration());
+            st.setString(4, cE.getStatus());
+            st.setInt(5, cE.getNumReadChapters());
             
             st.executeUpdate();
         }catch(Exception e){
@@ -112,6 +112,21 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
     
    public List<ComicEntry> search(String name) throws Exception{
        throw new UnsupportedOperationException("Method not implemented");
+    }
+   
+    public void modify(ComicEntry cE) throws Exception {
+        Connection cn;
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("UPDATE ComicLists SET valoration=?, number_read_chapters=?, status_in_list=? WHERE comic_id = ? AND comicList_id=?");
+        st.setByte(1, (byte) cE.getValoration());
+        st.setInt(2, cE.getNumReadChapters());
+        st.setString(3, cE.getStatus());
+        st.setString(4, cE.getComicID());
+        st.setString(5, cE.getListID());
+        
+        st.executeUpdate();
+        this.closeConnection();
     }
    
    public static void main (String args[]){

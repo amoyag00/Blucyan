@@ -27,7 +27,7 @@ public interface IConversor<T,D> {
 	 * 
 	 * @param name
 	 */
-	//public void modify(T element)throws Exception;
+	public void modify(T element)throws Exception;
         
 	/**
 	 * 

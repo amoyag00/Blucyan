@@ -46,7 +46,7 @@ public class Facade {
             return elList.getLists(id);
         }
         
-        public ArrayList<VideogameEntry> getList(String id, Class classType){
+        public ArrayList<VideogameEntry> getList(String id, Class classType) throws Exception{
             VideogameEntryDAO videogameList= (VideogameEntryDAO) mapaDAO.get(classType);
             
             return videogameList.getList(id);

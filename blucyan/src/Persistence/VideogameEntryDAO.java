@@ -134,6 +134,20 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         throw new UnsupportedOperationException("Method not implemented");
     }
 
+    public void modify(VideogameEntry vE) throws Exception {
+        Connection cn;
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("UPDATE VideogameLists SET valoration=?, status_in_list=? WHERE videogame_id = ? AND videogameList_id=?");
+        st.setByte(1, (byte) vE.getValoration());;
+        st.setString(2, vE.getStatus());
+        st.setString(3, vE.getVideogameID());
+        st.setString(4, vE.getListID());
+        
+        st.executeUpdate();
+        this.closeConnection();
+    }
+    
     public static void main(String args[]) {
         VideogameEntry vE;
 

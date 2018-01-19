@@ -116,6 +116,21 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry,S
        throw new UnsupportedOperationException("Method not implemented");
     }
    
+   public void modify(ShowEntry sE) throws Exception {
+        Connection cn;
+        this.openConnection();
+        cn = this.getConnection();
+        PreparedStatement st = cn.prepareStatement("UPDATE ShowLists SET valoration=?, number_watched_episodes=?, status_in_list=? WHERE show_id = ? AND showList_id=?");
+        st.setByte(1, (byte) sE.getValoration());
+        st.setInt(2, sE.getNumWatchedEpisodes());
+        st.setString(3, sE.getStatus());
+        st.setString(4, sE.getShowID());
+        st.setString(5, sE.getListID());
+        
+        st.executeUpdate();
+        this.closeConnection();
+    }
+   
    public static void main (String args[]){
        ShowEntry vE =new ShowEntry();
        
