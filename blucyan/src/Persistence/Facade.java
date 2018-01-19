@@ -86,6 +86,20 @@ public class Facade {
             }
 	}
 
+        /**
+	 * 
+	 * @param obj
+	 * @param classType
+	 */
+	public void modify(Object obj, Class classType) {
+            try {
+                mapaDAO.get(classType).modify(obj);
+            } catch (Exception ex) {
+                Logger.getLogger(Facade.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}
+        
+        
 	/**
 	 * 
 	 * @param id
@@ -102,6 +116,7 @@ public class Facade {
 	 * @param classType
 	 */
 	public <T> List<T> search(String name, Class<T> classType) throws Exception {
+            if(name==null) System.out.println("Mal");
 	     return mapaDAO.get(classType).search(name);
 	}
 
