@@ -46,7 +46,7 @@ public class Facade {
             return elList.getLists(id);
         }
         
-        public ArrayList<VideogameEntry> getList(String id, Class classType) throws Exception{
+        public ArrayList<VideogameEntry> getVideogameList(String id, Class classType) throws Exception{
             VideogameEntryDAO videogameList= (VideogameEntryDAO) mapaDAO.get(classType);
             
             return videogameList.getList(id);
@@ -59,7 +59,7 @@ public class Facade {
         }
         
         public ArrayList<ShowEntry> getShowList(String id, Class classType) throws Exception{
-            ShowEntryDAO videogameList= (ShowEntryDAO) mapaDAO.get(classType);
+            ShowEntryDAO showList= (ShowEntryDAO) mapaDAO.get(classType);
             
             return showList.getList(id);
         }

@@ -2,21 +2,21 @@ package Logic;
 
 import java.util.List;
 
-public class ElementList {
+public class ElementList <T>{
     private String listID;
     private String typeList;
     private String nickname;
-    List<Entry> entryList;
+    List<T> entryList;
 
     public String getListID() {
         return listID;
     }
 
-    public List<Entry> getEntryList() {
+    public List<T> getEntryList() {
         return entryList;
     }
 
-    public void setEntryList(List<Entry> entryList) {
+    public void setEntryList(List<T> entryList) {
         this.entryList = entryList;
     }
 

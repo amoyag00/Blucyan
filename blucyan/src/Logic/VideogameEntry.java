@@ -3,8 +3,6 @@ package Logic;
 public class VideogameEntry extends Entry {
     private String listID;
     private String videogameID;
-    private int valoration;
-    private String status;
 
     public String getListID() {
         return listID;
@@ -21,22 +19,10 @@ public class VideogameEntry extends Entry {
     public void setVideogameID(String videogameID) {
         this.videogameID = videogameID;
     }
-
-    public int getValoration() {
-        return valoration;
-    }
-
-    public void setValoration(int valoration) {
-        this.valoration = valoration;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
     
+    @Override
+    public String toString() {
+        return "VideogameEntry{" + "listID=" + listID + ", videogameID=" + videogameID + "name=" + name + ", valoration=" + valoration + ", status=" + status + '}';
+    }
     
 }

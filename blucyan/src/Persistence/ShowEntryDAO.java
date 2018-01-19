@@ -11,6 +11,7 @@ import Logic.VideogameEntry;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,104 +20,127 @@ import java.util.logging.Logger;
  *
  * @author alex
  */
-public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry,ShowEntry>{
-    	    
+public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, ShowEntry> {
+
     public void delete(String id) throws Exception {
-        try{
+        try {
             this.openConnection();
             PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM ShowLists WHERE showList_id=?");
             st.setString(1, id);
             st.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("Method Delete showEntry " + e.getMessage());
-        }
-        
-        finally{
-            try{
+        } finally {
+            try {
                 this.closeConnection();
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new Exception("Metodo Delete VideogameListEntry " + e.getMessage());
             }
         }
     }
-    
-    public boolean exists(String id) throws Exception{
-        boolean exists=false;
-        try{
+
+    public boolean exists(String id) throws Exception {
+        boolean exists = false;
+        try {
             this.openConnection();
             PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(showList_id) FROM ShowLists WHERE showList_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
-            exists=rs.getBoolean(1);
-        }catch (Exception e){
+            exists = rs.getBoolean(1);
+        } catch (Exception e) {
             throw new Exception("Method Delete ShowList " + e.getMessage());
-        }
-        
-        finally{
-            try{
+        } finally {
+            try {
                 this.closeConnection();
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new Exception("Method delete ShowList " + e.getMessage());
             }
         }
         return exists;
-        
+
+    }
+
+    public ShowEntry get(String id) throws Exception {
+        ShowEntry sE = new ShowEntry();
+        try {
+            this.openConnection();
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ShowLists WHERE showList_id=?");
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            sE.setListID(rs.getString("showList_id"));
+            sE.setShowID(rs.getString("show_id"));
+            sE.setValoration(rs.getInt("valoration"));
+            sE.setStatus(rs.getString("status_in_list"));
+            sE.setNumWatchedEpisodes(rs.getInt("number_watched_episodes"));
+
+        } catch (Exception e) {
+            throw new Exception("Method Delete showEntry " + e.getMessage());
+        } finally {
+            try {
+                this.closeConnection();
+            } catch (Exception e) {
+                throw new Exception("Method delete showEntry " + e.getMessage());
+            }
+        }
+        return sE;
     }
     
-    
-     public ShowEntry get(String id) throws Exception{
-         ShowEntry sE=new ShowEntry();
-       try{
-                this.openConnection();
-                PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ShowLists WHERE showList_id=?");
-                st.setString(1, id);
-                ResultSet rs = st.executeQuery();
-                rs.next();
-                sE.setListID(rs.getString("showList_id"));
-                sE.setShowID(rs.getString("show_id"));
-                sE.setValoration(rs.getInt("valoration"));
-                sE.setStatus(rs.getString("status_in_list"));
-                sE.setNumWatchedEpisodes(rs.getInt("number_watched_episodes"));
-               
+    public ArrayList<ShowEntry> getList(String id) throws Exception {
+        ArrayList<ShowEntry> shows = new ArrayList<ShowEntry>();
+        Connection cn;
+        ResultSet rs;
+        PreparedStatement st;
+        
+        this.openConnection();
+        cn = this.getConnection();
+        st = cn.prepareStatement("SELECT * FROM ShowLists WHERE showList_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        
+        while(rs.next()){
+            ShowEntry entry = new ShowEntry();
+            
+            entry.setListID(id);
+            entry.setNumWatchedEpisodes(rs.getInt("number_watched_episodes"));
+            entry.setShowID(String.valueOf(rs.getInt("show_id")));
+            entry.setStatus(rs.getString("status_in_list"));
+            entry.setValoration(rs.getInt("valoration"));
+            
+            shows.add(entry);
+        }
+        
+        this.closeConnection();
+        
+        return shows;
+    }
 
-            }catch (Exception e){
-                throw new Exception("Method Delete showEntry " + e.getMessage());
-            }finally{
-                try{
-                    this.closeConnection();
-                }catch (Exception e){
-                    throw new Exception("Method delete showEntry " + e.getMessage());
-                }
-            }
-       return sE;
-   }
-    
-    public void put(ShowEntry sE) throws Exception{
+    public void put(ShowEntry sE) throws Exception {
         try {
             Connection cn;
             this.openConnection();
-            cn=this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowLists VALUES (?,?,?,?,?)");   
+            cn = this.getConnection();
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowLists VALUES (?,?,?,?,?)");
             st.setString(1, sE.getListID());
             st.setString(2, sE.getShowID());
             st.setByte(3, (byte) sE.getValoration());
             st.setString(4, sE.getStatus());
             st.setInt(5, sE.getNumWatchedEpisodes());
-            
+
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception("Inserting ShowEntry " + e.getMessage());
         }
-                this.closeConnection();
-         
+        this.closeConnection();
+
     }
-    
-   public List<ShowEntry> search(String name) throws Exception{
-       throw new UnsupportedOperationException("Method not implemented");
+
+    public List<ShowEntry> search(String name) throws Exception {
+        throw new UnsupportedOperationException("Method not implemented");
     }
-   
-   public void modify(ShowEntry sE) throws Exception {
+
+    public void modify(ShowEntry sE) throws Exception {
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
@@ -126,25 +150,21 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry,S
         st.setString(3, sE.getStatus());
         st.setString(4, sE.getShowID());
         st.setString(5, sE.getListID());
-        
+
         st.executeUpdate();
         this.closeConnection();
     }
-   
-   public static void main (String args[]){
-       ShowEntry vE =new ShowEntry();
-       
-       
-      
-                try {
-                    ShowEntryDAO vEDAO=new ShowEntryDAO();
-                   vEDAO.delete("2");
-                    
-                    
-                     
-                } catch (Exception ex) {
-                    Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-       
-   }
+
+    public static void main(String args[]) {
+        ShowEntry vE = new ShowEntry();
+
+        try {
+            ShowEntryDAO vEDAO = new ShowEntryDAO();
+            vEDAO.delete("2");
+
+        } catch (Exception ex) {
+            Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

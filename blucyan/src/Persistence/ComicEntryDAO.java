@@ -110,6 +110,8 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
             comics.add(entry);
         }
 
+    this.closeConnection();
+        
         return comics;
     }
 

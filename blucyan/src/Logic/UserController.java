@@ -77,6 +77,10 @@ public class UserController {
                 ArrayList<ComicEntry> comicList = facade.getComicList(lists[1].getListID(), ComicEntry.class);
                 ArrayList<ShowEntry> showList = facade.getShowList(lists[0].getListID(), ShowEntry.class);
                 
+                lists[0].setEntryList(showList);
+                lists[1].setEntryList(comicList);
+                lists[2].setEntryList(videogameList);
+                
                 return lists;
 	}
 

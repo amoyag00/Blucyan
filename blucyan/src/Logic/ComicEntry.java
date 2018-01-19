@@ -3,8 +3,6 @@ package Logic;
 public class ComicEntry extends Entry {
     private String listID;
     private String comicID;
-    private int valoration;
-    private String status;
     private int numReadChapters;
 
     public String getListID() {
@@ -23,22 +21,6 @@ public class ComicEntry extends Entry {
         this.comicID = showID;
     }
 
-    public int getValoration() {
-        return valoration;
-    }
-
-    public void setValoration(int valoration) {
-        this.valoration = valoration;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public int getNumReadChapters() {
         return numReadChapters;
     }
@@ -49,7 +31,7 @@ public class ComicEntry extends Entry {
 
     @Override
     public String toString() {
-        return "ComicEntry{" + "listID=" + listID + ", comicID=" + comicID + ", valoration=" + valoration + ", status=" + status + ", numReadChapters=" + numReadChapters + '}';
+        return "ComicEntry{" + "listID=" + listID + ", comicID=" + comicID + "name=" + name + ", valoration=" + valoration + ", status=" + status + ", numReadChapters=" + numReadChapters + '}';
     }
     
     

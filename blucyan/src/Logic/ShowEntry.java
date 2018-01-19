@@ -3,8 +3,6 @@ package Logic;
 public class ShowEntry extends Entry {
     private String listID;
     private String showID;
-    private int valoration;
-    private String status;
     private int numWatchedEpisodes;
 
     public String getListID() {
@@ -25,23 +23,7 @@ public class ShowEntry extends Entry {
 
     @Override
     public String toString() {
-        return "ShowEntry{" + "listID=" + listID + ", showID=" + showID + ", valoration=" + valoration + ", status=" + status + ", numWatchedEpisodes=" + numWatchedEpisodes + '}';
-    }
-
-    public int getValoration() {
-        return valoration;
-    }
-
-    public void setValoration(int valoration) {
-        this.valoration = valoration;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        return "ShowEntry{" + "listID=" + listID + ", showID=" + showID + "name=" + name + ", valoration=" + valoration + ", status=" + status + ", numWatchedEpisodes=" + numWatchedEpisodes + '}';
     }
 
     public int getNumWatchedEpisodes() {
