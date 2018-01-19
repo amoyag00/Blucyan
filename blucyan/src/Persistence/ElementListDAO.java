@@ -85,7 +85,9 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
         st = cn.prepareStatement("Select * FROM Lists WHERE nickname = ?");
         st.setString(1, id);
         rs = st.executeQuery();
-
+        for(int i=0;i<lists.length;i++){
+            lists[i]=new ElementList();
+        }
         for (int i = 0; i < lists.length; i++) {
             rs.next();
             lists[i].setListID(String.valueOf(rs.getInt("list_id")));
@@ -95,9 +97,23 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
 
         this.closeConnection();
 
-        return lists;
+        return sort(lists);
+        
     }
-
+private ElementList[] sort(ElementList[] unsortedLists){
+    ElementList[] sortedLists=new ElementList[unsortedLists.length];
+    for(int i=0;i<unsortedLists.length;i++){
+        if(unsortedLists[i].getTypeList().equalsIgnoreCase("Videogame")){
+            sortedLists[0]=unsortedLists[i];
+        }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Comic")){
+            sortedLists[1]=unsortedLists[i];
+        }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Show")){
+            sortedLists[2]=unsortedLists[i];
+        }
+        
+    }
+    return sortedLists;
+}
     public void put(ElementList eList) throws Exception {
         try {
             Connection cn;

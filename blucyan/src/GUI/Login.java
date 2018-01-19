@@ -1,5 +1,10 @@
 package GUI;
 
+import Logic.UserController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -99,10 +104,24 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInButtonMouseReleased
-        // TODO add your handling code here:
-        MainFrame mF = new MainFrame();
-        mF.setVisible(true);
-        this.dispose();
+        try {
+             boolean identified;
+            if(this.userNameField.getText().isEmpty() 
+                    ||String.valueOf(this.passField.getPassword()).isEmpty()){
+                JOptionPane.showMessageDialog(null, "You must introduce a password and a nickname");
+            }else{
+               identified=UserController.getInstance().initiateSession(this.userNameField.getText(),String.valueOf(this.passField.getPassword()));
+                if(identified){
+                    MainFrame mF = new MainFrame();
+                    mF.setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Nickname and password does not match, try again");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_logInButtonMouseReleased
 
     private void signInButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseReleased

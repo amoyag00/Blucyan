@@ -35,6 +35,9 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(search, "search");
         mainPanel.add(elementCard, "elementCard");*/
     }
+    public JPanel getPanel(){
+        return this.mainPanel;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

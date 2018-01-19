@@ -47,9 +47,11 @@ public class Facade {
         }
         
         public ArrayList<VideogameEntry> getVideogameList(String id, Class classType) throws Exception{
-            VideogameEntryDAO videogameList= (VideogameEntryDAO) mapaDAO.get(classType);
-            
-            return videogameList.getList(id);
+            VideogameEntryDAO videogameEntryDAO= (VideogameEntryDAO) mapaDAO.get(classType);
+           
+            ArrayList<VideogameEntry> list= videogameEntryDAO.getList(id);
+          
+            return list;
         }
         
         public ArrayList<ComicEntry> getComicList(String id, Class classType) throws Exception{
@@ -119,6 +121,9 @@ public class Facade {
             if(name==null) System.out.println("Mal");
 	     return mapaDAO.get(classType).search(name);
 	}
+        public boolean matches(String username, String password) throws Exception{
+            return ((UserDAO)mapaDAO.get(User.class)).match(username,password);
+        }
 
 	public void backup() {
 		Backup.backup();
@@ -128,7 +133,7 @@ public class Facade {
             if(instance==null){
                 instance= new Facade();
             }
-		return instance;
+            return instance;
 	}
 	
 
