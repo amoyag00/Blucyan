@@ -66,6 +66,9 @@ public class CustomButton extends JButton{
         }
         return entry;
     }
+    public Entry getEntry(){
+        return this.entry;
+    }
     
     
 }

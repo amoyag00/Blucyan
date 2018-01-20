@@ -40,4 +40,8 @@ public class ElementList <T>{
         this.nickname = nickname;
     }
     
+    public void delete(Entry entry){
+        entryList.remove(entry);
+    }
+    
 }

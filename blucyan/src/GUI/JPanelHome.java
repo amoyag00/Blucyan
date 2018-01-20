@@ -230,101 +230,80 @@ public class JPanelHome extends javax.swing.JPanel {
     }//GEN-LAST:event_searchFieldMouseClicked
 
     private void videogameButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_videogameButtonMouseReleased
-      panel.removeAll();
-      panel.repaint();
-      panel.revalidate();
-      Insets ins=new Insets(0, 150, 5, 5);
-      createHeaders("Videogame", ins);
-      GridBagConstraints c=new GridBagConstraints();
-      c.anchor=GridBagConstraints.NORTHWEST;
-     // c.weighty=0.5;
-      //c.weightx=0.5;
-     
-      c.insets= ins;
-     
-      List<VideogameEntry> list=videogameList.getEntryList();
-      int size=list.size();
-      int i;
-      for( i=0;i<size;i++){ 
-          ArrayList<CustomTextField> params=new ArrayList<CustomTextField>();
-          VideogameEntry entry=list.get(i);
-         
-          c.gridy=i+1;
-          c.gridx=0;
-          String param=entry.getName();
-          CustomTextField t =new CustomTextField(entry.getName());
-         
-          t.setEditable(false);
-          panel.add(t,c);
-          c.gridx=1;
-          
-          CustomTextField t1=new CustomTextField(String.valueOf((int)entry.getValoration()));
-          t1.setPreferredSize(new Dimension(30,20));
-          params.add(t1);
-       
-          panel.add(t1,c);
-          c.gridx=2;
-          CustomTextField t2=new CustomTextField(entry.getStatus());
-          panel.add(t2,c); 
-          params.add(t2);
-          c.gridx=3;
-          CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new CustomTextField[params.size()]),entry);
-          applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                int value=(int)Integer.valueOf(t1.getText());
-               if(value<0 || value>100){
-                   JOptionPane.showMessageDialog(null, "Valoration must be a value between 0 and 100");
-               }else{ 
-                   try {
-                        UserController.getInstance().modify(applyButton.getUpdatedVideogameEntry(),"Videogame");
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-               }
-            }
-    });
-    
-          panel.add(applyButton,c);
-          c.gridx=4;
-          CustomButton delete =new CustomButton("X",c.gridy,params.toArray(new CustomTextField[params.size()]),entry);
-          delete.setBackground(Color.RED);
-          delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-               
-                try {
-                    
-                    UserController.getInstance().modify(applyButton.getUpdatedVideogameEntry(),"Videogame");
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-    });
-          panel.add(delete,c);
-      }
-      JPanel filler=new JPanel();
-      c.gridy++;
-      c.weightx=1;
-      c.weighty=1;
-      panel.add(filler,c);
-      panel.repaint();
-      panel.revalidate();
+        printVideogameList();
         
         
     }//GEN-LAST:event_videogameButtonMouseReleased
    
     private void comicButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicButtonMouseReleased
         // TODO add your handling code here:
-         panel.removeAll();
+       printComicList();
+    }//GEN-LAST:event_comicButtonMouseReleased
+
+    private void showButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showButtonMouseReleased
+        // TODO add your handling code here:
+        printShowList();
+        
+    }//GEN-LAST:event_showButtonMouseReleased
+
+    private void searchButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseReleased
+        // TODO add your handling code here:
+         JPanel mainPanel = (JPanel) this.getParent();
+       CardLayout card = (CardLayout) mainPanel.getLayout();
+       searchPanel.searchFromHome(this.searchField.getText(),(String)this.comboBox.getSelectedItem());
+       card.show(mainPanel, "Search");
+    }//GEN-LAST:event_searchButtonMouseReleased
+
+    private void createHeaders(String type, Insets ins){
+        GridBagConstraints c=new GridBagConstraints();
+       c.insets=ins;
+        JLabel labelHeaders[];
+        String headers[]=null;
+        switch(type){
+            case "Videogame":
+                headers=headersVideogame;
+                break;
+            case "Show":
+               headers=headersShow;
+               break;
+            case "Comic":
+                headers=headersComic;
+                break;
+            
+        }
+        labelHeaders=new JLabel[headers.length];
+        c.anchor=GridBagConstraints.NORTHWEST;
+        //c.weighty=1;
+        //c.weightx=1;
+        c.gridy=0;
+        
+       for(int i=0;i<labelHeaders.length;i++){
+           labelHeaders[i]= new JLabel(headers[i]);
+           labelHeaders[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
+           c.gridx=i;
+           panel.add(labelHeaders[i],c);
+        }
+       c.gridy=1;
+    
+       
+     
+           
+    }
+    
+    private void setLists(ElementList[] lists){
+        for(int i=0;i<lists.length;i++){
+            if(lists[i].getTypeList().equalsIgnoreCase("Videogame")){
+                videogameList= lists[i];
+            }else if(lists[i].getTypeList().equalsIgnoreCase("Show")){
+                showList= lists[i];
+            }else if(lists[i].getTypeList().equalsIgnoreCase("Comic")){
+                comicList= lists[i];
+            }
+        }
+    }
+    
+    private void printComicList(){
+          panel.removeAll();
       panel.repaint();
       panel.revalidate();
       Insets ins= new Insets(0, 100, 5, 5);
@@ -394,13 +373,84 @@ public class JPanelHome extends javax.swing.JPanel {
           delete.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
+               
+                    try {
+                         JPanelHome.this.comicList.delete(delete.getEntry());
+                         
+                        UserController.getInstance().delete(applyButton.getEntry().getEntryID(),ComicEntry.class);
+                        printComicList();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               }
+            
+    });
+          panel.add(delete,c);
+      }
+      JPanel filler=new JPanel();
+      c.gridy++;
+      c.weightx=1;
+      c.weighty=1;
+      panel.add(filler,c);
+      panel.repaint();
+      panel.revalidate();
+    }
+    
+    private void printVideogameList(){
+         panel.removeAll();
+      panel.repaint();
+      panel.revalidate();
+      Insets ins=new Insets(0, 150, 5, 5);
+      createHeaders("Videogame", ins);
+      GridBagConstraints c=new GridBagConstraints();
+      c.anchor=GridBagConstraints.NORTHWEST;
+     // c.weighty=0.5;
+      //c.weightx=0.5;
+     
+      c.insets= ins;
+     
+      List<VideogameEntry> list=videogameList.getEntryList();
+      int size=list.size();
+      int i;
+      for( i=0;i<size;i++){ 
+          ArrayList<CustomTextField> params=new ArrayList<CustomTextField>();
+          VideogameEntry entry=list.get(i);
+         
+          c.gridy=i+1;
+          c.gridx=0;
+          String param=entry.getName();
+          CustomTextField t =new CustomTextField(entry.getName());
+         
+          t.setEditable(false);
+          panel.add(t,c);
+          c.gridx=1;
+          
+          CustomTextField t1=new CustomTextField(String.valueOf((int)entry.getValoration()));
+          t1.setPreferredSize(new Dimension(30,20));
+          params.add(t1);
+       
+          panel.add(t1,c);
+          c.gridx=2;
+          CustomTextField t2=new CustomTextField(entry.getStatus());
+          panel.add(t2,c); 
+          params.add(t2);
+          c.gridx=3;
+          CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new CustomTextField[params.size()]),entry);
+          applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 int value=(int)Integer.valueOf(t1.getText());
                if(value<0 || value>100){
                    JOptionPane.showMessageDialog(null, "Valoration must be a value between 0 and 100");
                }else{ 
-                    try {
-
-                        UserController.getInstance().modify(applyButton.getUpdatedComicEntry(),"Comic");
+                   try {
+                        UserController.getInstance().modify(applyButton.getUpdatedVideogameEntry(),"Videogame");
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (InstantiationException ex) {
@@ -409,6 +459,32 @@ public class JPanelHome extends javax.swing.JPanel {
                         Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                     }
                }
+            }
+    });
+    
+          panel.add(applyButton,c);
+          c.gridx=4;
+          CustomButton delete =new CustomButton("X",c.gridy,params.toArray(new CustomTextField[params.size()]),entry);
+          delete.setBackground(Color.RED);
+          delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+               
+                try {
+                    
+                    JPanelHome.this.videogameList.delete(delete.getEntry());
+                         
+                    UserController.getInstance().delete(applyButton.getEntry().getEntryID(),VideogameEntry.class);
+                    printVideogameList();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
     });
           panel.add(delete,c);
@@ -420,11 +496,9 @@ public class JPanelHome extends javax.swing.JPanel {
       panel.add(filler,c);
       panel.repaint();
       panel.revalidate();
-    }//GEN-LAST:event_comicButtonMouseReleased
-
-    private void showButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showButtonMouseReleased
-        // TODO add your handling code here:
-      panel.removeAll();
+    }
+    private void printShowList(){
+         panel.removeAll();
       panel.repaint();
       panel.revalidate();
       Insets ins= new Insets(0, 120, 5, 5);
@@ -496,13 +570,17 @@ public class JPanelHome extends javax.swing.JPanel {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                
                 try {
-                    
-                    UserController.getInstance().modify(applyButton.getUpdatedComicEntry(),"Show");
+                   
+                   JPanelHome.this.showList.delete(delete.getEntry());     
+                   UserController.getInstance().delete(applyButton.getEntry().getEntryID(),ShowEntry.class);
+                    printShowList();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
                     Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
+                    Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
                     Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -516,63 +594,6 @@ public class JPanelHome extends javax.swing.JPanel {
       panel.add(filler,c);
       panel.repaint();
       panel.revalidate();
-        
-    }//GEN-LAST:event_showButtonMouseReleased
-
-    private void searchButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseReleased
-        // TODO add your handling code here:
-         JPanel mainPanel = (JPanel) this.getParent();
-       CardLayout card = (CardLayout) mainPanel.getLayout();
-       searchPanel.searchFromHome(this.searchField.getText(),(String)this.comboBox.getSelectedItem());
-       card.show(mainPanel, "Search");
-    }//GEN-LAST:event_searchButtonMouseReleased
-
-    private void createHeaders(String type, Insets ins){
-        GridBagConstraints c=new GridBagConstraints();
-       c.insets=ins;
-        JLabel labelHeaders[];
-        String headers[]=null;
-        switch(type){
-            case "Videogame":
-                headers=headersVideogame;
-                break;
-            case "Show":
-               headers=headersShow;
-               break;
-            case "Comic":
-                headers=headersComic;
-                break;
-            
-        }
-        labelHeaders=new JLabel[headers.length];
-        c.anchor=GridBagConstraints.NORTHWEST;
-        //c.weighty=1;
-        //c.weightx=1;
-        c.gridy=0;
-        
-       for(int i=0;i<labelHeaders.length;i++){
-           labelHeaders[i]= new JLabel(headers[i]);
-           labelHeaders[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
-           c.gridx=i;
-           panel.add(labelHeaders[i],c);
-        }
-       c.gridy=1;
-    
-       
-     
-           
-    }
-    
-    private void setLists(ElementList[] lists){
-        for(int i=0;i<lists.length;i++){
-            if(lists[i].getTypeList().equalsIgnoreCase("Videogame")){
-                videogameList= lists[i];
-            }else if(lists[i].getTypeList().equalsIgnoreCase("Show")){
-                showList= lists[i];
-            }else if(lists[i].getTypeList().equalsIgnoreCase("Comic")){
-                comicList= lists[i];
-            }
-        }
     }
 
     JPanelSearchResults searchPanel;
