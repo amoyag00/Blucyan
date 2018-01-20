@@ -22,7 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         JPanelSearchResults search = new JPanelSearchResults();
         JPanelHome home;
-        JPanelHomeAdmin admin = new JPanelHomeAdmin();
+        JPanelHomeAdmin admin = new JPanelHomeAdmin(search);
         
         if(range){
             mainPanel.add(admin, "HomeAdmin");

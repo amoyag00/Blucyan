@@ -17,6 +17,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -75,7 +76,12 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows/ Videogames/Comics", "Users" }));
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
 
         bigPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -86,8 +92,8 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(156, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
-                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -140,6 +146,10 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         search();
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxActionPerformed
+
     private void search(){
      try {
             // TODO add your handling code here:
@@ -153,36 +163,16 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             
             if("User".compareTo((String) comboBox.getSelectedItem())==0){
                 List<UserProxy> results = controller.searchUser(searchField.getText());
-                
-                
-                
-                
-            }else{
-                List<ElementProxy> results = controller.searchElement(searchField.getText());
-                
+                                
                 int row=0;
                 int column=0;
                 ImageIcon img;
+                
+                Insets insetsTitles = new Insets(5,100,100,100);
+                
                 for(int i=0;i<((int)results.size());i++){
                     
-                    gbc.gridy=row;
-                    gbc.gridx=column;
-                    gbc.fill=GridBagConstraints.BOTH;
-                    gbc.anchor=GridBagConstraints.CENTER;
-                    gbc.weightx=5;
-                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Antivirus.gif") {};
-                    JLabel cover = new JLabel(); 
-                    //cover.setSize(720, 576); 
-                    cover.setIcon(image);
-                    cover.doLayout();
-                   
-                   
-                   /* JPanel imagePanel = new JPanel();
-                    imagePanel.setSize(10, 10);
-                    
-                    imagePanel.add(cover);*/
-                    bigPanel.add(cover,gbc);
-                    
+                    gbc.insets=insetsTitles;
                     gbc.gridy=row+1;
                     
                     img = new ImageIcon();
@@ -196,9 +186,71 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                         row+=2;
                     }
                     
-                    
-                }
                 
+                }
+                JPanel filler=new JPanel();
+                gbc.weightx=1;
+                gbc.weighty=1;
+                gbc.gridx++;
+                gbc.gridy++;
+                bigPanel.add(filler,gbc);
+                bigPanel.repaint();
+                bigPanel.revalidate();
+                
+                
+                
+            }else{
+                List<ElementProxy> results = controller.searchElement(searchField.getText());
+                
+                int row=0;
+                int column=0;
+                ImageIcon img;
+                
+                Insets insetsImage = new Insets(100, 100, 10, 100);
+                Insets insetsTitles = new Insets(5,100,100,100);
+                
+                for(int i=0;i<((int)results.size());i++){
+                    gbc.insets=insetsImage;
+                    gbc.gridy=row;
+                    gbc.gridx=column;
+                    gbc.fill=GridBagConstraints.BOTH;
+                    gbc.anchor=GridBagConstraints.CENTER;
+                    
+                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Rayman 6.png") {};
+                    JLabel cover = new JLabel(); 
+                    //cover.setSize(720, 576); 
+                    cover.setIcon(image);
+                    cover.doLayout();
+                   
+                   
+                   /* JPanel imagePanel = new JPanel();
+                    imagePanel.setSize(10, 10);
+                    
+                    imagePanel.add(cover);*/
+                    bigPanel.add(cover,gbc);
+                    
+                    gbc.insets=insetsTitles;
+                    gbc.gridy=row+1;
+                    
+                    img = new ImageIcon();
+                    JLabel nameLabel = new JLabel(results.get(i).getName());
+                    bigPanel.add(nameLabel,gbc);
+                    
+                    if(column<2){
+                        column++;
+                    }else{
+                        column=0;
+                        row+=2;
+                    }
+                    
+                
+                }
+                JPanel filler=new JPanel();
+                gbc.weightx=1;
+                gbc.weighty=1;
+                gbc.gridx++;
+                gbc.gridy++;
+                bigPanel.add(filler,gbc);
                 bigPanel.repaint();
                 bigPanel.revalidate();
 

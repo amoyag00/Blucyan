@@ -17,8 +17,9 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
     /**
      * Creates new form JPanelHomeAdmin
      */
-    public JPanelHomeAdmin() {
+    public JPanelHomeAdmin(JPanelSearchResults searchPanel) {
         initComponents();
+        this.searchPanel=searchPanel;
     }
 
     /**
@@ -96,6 +97,8 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
         JPanel mainPanel = (JPanel) this.getParent();
         CardLayout card = (CardLayout) mainPanel.getLayout();
+        searchPanel.searchFromHome(this.browser.getText(),(String)this.state.getSelectedItem());
+
         card.show(mainPanel, "Search");
         //List<ElementProxy> searchResults=UserController.getInstance().search(this.searchField.getText());
 
@@ -114,4 +117,5 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> state;
     // End of variables declaration//GEN-END:variables
+    private JPanelSearchResults searchPanel;
 }
