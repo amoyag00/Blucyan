@@ -12,14 +12,14 @@ public class Videogame extends Element {
 
 
 	private String[] platforms;
-        private String developer[];
+        private String developer;
 
  
-    public String[] getDeveloper() {
+    public String getDeveloper() {
         return developer;
     }
 
-    public void setDevelopers(String[] developer) {
+    public void setDevelopers(String developer) {
         this.developer = developer;
     }
         
