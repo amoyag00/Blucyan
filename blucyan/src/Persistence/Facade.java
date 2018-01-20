@@ -55,15 +55,15 @@ public class Facade {
         }
         
         public ArrayList<ComicEntry> getComicList(String id, Class classType) throws Exception{
-            ComicEntryDAO comicList= (ComicEntryDAO) mapaDAO.get(classType);
+            ComicEntryDAO comicListDAO= (ComicEntryDAO) mapaDAO.get(classType);
             
-            return comicList.getList(id);
+            return comicListDAO.getList(id);
         }
         
         public ArrayList<ShowEntry> getShowList(String id, Class classType) throws Exception{
-            ShowEntryDAO showList= (ShowEntryDAO) mapaDAO.get(classType);
+            ShowEntryDAO showListDAO= (ShowEntryDAO) mapaDAO.get(classType);
             
-            return showList.getList(id);
+            return showListDAO.getList(id);
         }
 
 	/**

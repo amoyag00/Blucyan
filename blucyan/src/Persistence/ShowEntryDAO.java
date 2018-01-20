@@ -96,7 +96,9 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT * FROM ShowEntries WHERE entry_id = ?");
+        st = cn.prepareStatement("SELECT Elements.name,ShowEntries.number_watched_episodes,ShowEntries.showList_id, ShowEntries.entry_id,ShowEntries.show_id, ShowEntries.valoration, ShowEntries.status_in_list\n" +
+"FROM ShowEntries\n" +
+"INNER JOIN Elements ON  Elements.element_id = ShowEntries.show_id WHERE ShowEntries.showList_id= ?");
         st.setString(1, id);
         rs = st.executeQuery();
         

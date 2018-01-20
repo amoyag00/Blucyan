@@ -94,10 +94,11 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT Elements.name,VideogameEntries.entry_id,VideogameEntries.videogame_id, VideogameEntries.valoration, VideogameEntries.status_in_list\n" +
+        st = cn.prepareStatement("SELECT Elements.name,VideogameEntries.videogameList_id, VideogameEntries.entry_id,VideogameEntries.videogame_id, VideogameEntries.valoration, VideogameEntries.status_in_list\n" +
 "FROM VideogameEntries\n" +
-"INNER JOIN Elements ON  Elements.element_id = ?;");
-        st.setString(1, id);
+"INNER JOIN Elements ON  Elements.element_id = VideogameEntries.videogame_id WHERE VideogameEntries.videogameList_id= ?");
+        
+        st.setString(1,id);
         rs = st.executeQuery();
         
         while(rs.next()){
@@ -111,6 +112,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             entry.setVideogameID(String.valueOf(rs.getInt("videogame_id")));
             
             videogames.add(entry);
+            
         }
         
         this.closeConnection();
