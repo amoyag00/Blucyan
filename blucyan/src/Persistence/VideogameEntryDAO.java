@@ -24,7 +24,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM VideogameLists WHERE videogameList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM VideogameEntries WHERE entry_id=?");
             st.setString(1, id);
             st.executeUpdate();
         } catch (Exception e) {
@@ -42,18 +42,18 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         boolean exists = false;
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(videogameList_id) FROM VideogameLists WHERE videogameList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(entry_id) FROM VideogameEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
             exists = rs.getBoolean(1);
         } catch (Exception e) {
-            throw new Exception("Method Delete VideogameList " + e.getMessage());
+            throw new Exception("Method Delete VideogameEntries " + e.getMessage());
         } finally {
             try {
                 this.closeConnection();
             } catch (Exception e) {
-                throw new Exception("Method delete VideogameList " + e.getMessage());
+                throw new Exception("Method delete VideogameEntries " + e.getMessage());
             }
         }
         return exists;
@@ -64,22 +64,23 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         VideogameEntry vE = new VideogameEntry();
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM VideogameLists WHERE videogame_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM VideogameEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
+            vE.setEntryID("entry_id");
             vE.setListID(rs.getString("videogameList_id"));
             vE.setVideogameID(rs.getString("videogame_id"));
             vE.setValoration(rs.getInt("valoration"));
             vE.setStatus(rs.getString("status_in_list"));
 
         } catch (Exception e) {
-            throw new Exception("Method Delete review " + e.getMessage());
+            throw new Exception("Method Delete VideogameEntry " + e.getMessage());
         } finally {
             try {
                 this.closeConnection();
             } catch (Exception e) {
-                throw new Exception("Method delete review " + e.getMessage());
+                throw new Exception("Method delete VideogameEntry " + e.getMessage());
             }
         }
         return vE;
@@ -93,15 +94,15 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT Elements.name,VideogameLists.videogame_id, VideogameLists.valoration, VideogameLists.status_in_list\n" +
-"FROM VideogameLists\n" +
+        st = cn.prepareStatement("SELECT Elements.name,VideogameEntries.entry_id,VideogameEntries.videogame_id, VideogameEntries.valoration, VideogameEntries.status_in_list\n" +
+"FROM VideogameEntries\n" +
 "INNER JOIN Elements ON  Elements.element_id = ?;");
         st.setString(1, id);
         rs = st.executeQuery();
         
         while(rs.next()){
             VideogameEntry entry = new VideogameEntry();
-            
+            entry.setEntryID(String.valueOf(rs.getString("entry_id")));
             entry.setListID(id);
             entry.setName(rs.getString("name"));
             entry.setStatus(rs.getString("status_in_list"));
@@ -122,7 +123,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO VideogameLists VALUES (?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO VideogameEntries VALUES (?,?,?,?)");
             st.setString(1, vE.getListID());
             st.setString(2, vE.getVideogameID());
             st.setByte(3, (byte) vE.getValoration());
@@ -144,11 +145,11 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("UPDATE VideogameLists SET valoration=?, status_in_list=? WHERE videogame_id = ? AND videogameList_id=?");
+        PreparedStatement st = cn.prepareStatement("UPDATE VideogameEntries SET valoration=?, status_in_list=? WHERE entry_id = ? ");
         st.setByte(1, (byte) vE.getValoration());
         st.setString(2, vE.getStatus());
-        st.setString(3, vE.getVideogameID());
-        st.setString(4, vE.getListID());
+        st.setString(3, vE.getEntryID());
+        st.setString(4, vE.getEntryID());
         
         st.executeUpdate();
         this.closeConnection();

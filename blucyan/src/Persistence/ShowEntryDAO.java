@@ -25,7 +25,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM ShowLists WHERE showList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM ShowEntries WHERE entry_id=?");
             st.setString(1, id);
             st.executeUpdate();
         } catch (Exception e) {
@@ -43,18 +43,18 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         boolean exists = false;
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(showList_id) FROM ShowLists WHERE showList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(entry_id) FROM ShowEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
             exists = rs.getBoolean(1);
         } catch (Exception e) {
-            throw new Exception("Method Delete ShowList " + e.getMessage());
+            throw new Exception("Method Delete ShowEntry " + e.getMessage());
         } finally {
             try {
                 this.closeConnection();
             } catch (Exception e) {
-                throw new Exception("Method delete ShowList " + e.getMessage());
+                throw new Exception("Method delete ShowEntry " + e.getMessage());
             }
         }
         return exists;
@@ -65,10 +65,11 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         ShowEntry sE = new ShowEntry();
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ShowLists WHERE showList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ShowEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
+            sE.setEntryID(String.valueOf(rs.getInt("entry_id")));
             sE.setListID(rs.getString("showList_id"));
             sE.setShowID(rs.getString("show_id"));
             sE.setValoration(rs.getInt("valoration"));
@@ -95,13 +96,13 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT * FROM ShowLists WHERE showList_id = ?");
+        st = cn.prepareStatement("SELECT * FROM ShowEntries WHERE entry_id = ?");
         st.setString(1, id);
         rs = st.executeQuery();
         
         while(rs.next()){
             ShowEntry entry = new ShowEntry();
-            
+            entry.setEntryID(String.valueOf(rs.getInt("entry_id")));
             entry.setListID(id);
             entry.setNumWatchedEpisodes(rs.getInt("number_watched_episodes"));
             entry.setShowID(String.valueOf(rs.getInt("show_id")));
@@ -121,7 +122,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowLists VALUES (?,?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowEntries VALUES (?,?,?,?,?)");
             st.setString(1, sE.getListID());
             st.setString(2, sE.getShowID());
             st.setByte(3, (byte) sE.getValoration());
@@ -144,12 +145,11 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("UPDATE ShowLists SET valoration=?, number_watched_episodes=?, status_in_list=? WHERE show_id = ? AND showList_id=?");
+        PreparedStatement st = cn.prepareStatement("UPDATE ShowEntries SET valoration=?, number_watched_episodes=?, status_in_list=? WHERE entry_id");
         st.setByte(1, (byte) sE.getValoration());
         st.setInt(2, sE.getNumWatchedEpisodes());
         st.setString(3, sE.getStatus());
-        st.setString(4, sE.getShowID());
-        st.setString(5, sE.getListID());
+        st.setString(4, sE.getEntryID());
 
         st.executeUpdate();
         this.closeConnection();

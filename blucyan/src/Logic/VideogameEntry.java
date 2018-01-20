@@ -1,8 +1,33 @@
 package Logic;
 
 public class VideogameEntry extends Entry {
+
     private String listID;
     private String videogameID;
+
+   
+
+    
+
+    public void setValoration(int valoration) {
+        this.valoration = valoration;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getListID() {
         return listID;

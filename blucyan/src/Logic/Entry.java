@@ -1,11 +1,19 @@
 package Logic;
 
 public class Entry {
-
+    protected String entryID;
     protected int valoration;
     protected String name;
     protected String status;
 
+    public String getEntryID() {
+        return entryID;
+    }
+
+    public void setEntryID(String entryID) {
+        this.entryID = entryID;
+    }
+    
     public float getValoration() {
         return valoration;
     }

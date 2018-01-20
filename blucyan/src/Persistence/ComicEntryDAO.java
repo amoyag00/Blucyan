@@ -24,7 +24,7 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM ComicLists WHERE comicList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("DELETE FROM ComicEntries WHERE entry_id=?");
             st.setString(1, id);
             st.executeUpdate();
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         boolean exists = false;
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(comicList_id) FROM ComicLists WHERE comicList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(entry_id) FROM ComicEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
@@ -64,10 +64,11 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         ComicEntry cE = new ComicEntry();
         try {
             this.openConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ComicLists WHERE comicList_id=?");
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM ComicEntries WHERE entry_id=?");
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             rs.next();
+            cE.setEntryID(rs.getString("entry_id"));
             cE.setListID(rs.getString("comicList_id"));
             cE.setComicID(rs.getString("comic_id"));
             cE.setValoration(rs.getInt("valoration"));
@@ -94,13 +95,13 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
 
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT * FROM ComicLists WHERE comicList_id = ?");
+        st = cn.prepareStatement("SELECT * FROM ComicEntries WHERE entry_id = ?");
         st.setString(1, id);
         rs = st.executeQuery();
 
         while (rs.next()) {
             ComicEntry entry = new ComicEntry();
-
+            entry.setEntryID(String.valueOf(rs.getInt("entry_id")));
             entry.setListID(id);
             entry.setComicID(String.valueOf(rs.getInt("comic_id")));
             entry.setValoration(rs.getInt("valoration"));
@@ -120,7 +121,8 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ComicLists VALUES (?,?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ComicEntries VALUES (?,?,?,?,?)");
+         
             st.setString(1, cE.getListID());
             st.setString(2, cE.getComicID());
             st.setByte(3, (byte) cE.getValoration());
@@ -143,12 +145,12 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("UPDATE ComicLists SET valoration=?, number_read_chapters=?, status_in_list=? WHERE comic_id = ? AND comicList_id=?");
+        PreparedStatement st = cn.prepareStatement("UPDATE ComicEntries SET valoration=?, number_read_chapters=?, status_in_list=? WHERE entry_id = ?");
         st.setByte(1, (byte) cE.getValoration());
         st.setInt(2, cE.getNumReadChapters());
         st.setString(3, cE.getStatus());
-        st.setString(4, cE.getComicID());
-        st.setString(5, cE.getListID());
+        st.setString(4, cE.getEntryID());
+       
 
         st.executeUpdate();
         this.closeConnection();
