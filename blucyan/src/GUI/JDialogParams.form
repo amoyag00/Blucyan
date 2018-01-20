@@ -220,6 +220,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cover"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="coverButtonMouseReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="comicCheck">
       <Properties>

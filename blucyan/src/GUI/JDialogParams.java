@@ -6,6 +6,7 @@
 package GUI;
 
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 /**
@@ -96,6 +97,11 @@ public class JDialogParams extends javax.swing.JDialog {
         dateLabel.setText("Release date: ");
 
         coverButton.setText("Cover");
+        coverButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                coverButtonMouseReleased(evt);
+            }
+        });
 
         comicCheck.setText("Comic");
         comicCheck.addItemListener(new java.awt.event.ItemListener() {
@@ -361,8 +367,53 @@ public class JDialogParams extends javax.swing.JDialog {
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         // TODO add your handling code here:
-        
+        if(comicCheck.isSelected()){
+            String[] params = new String[7];
+            
+            params[0] = nameText.getText();
+            params[1] = "Comic";
+            //params[2] = ruta imagen
+            params[3] = dateText.getText();
+            params[4] = chaptersText.getText();
+            params[5] = authorsText.getText();
+            params[6] = ilustratorsText.getText();
+        }
+        else if(showCheck.isSelected()){
+            String[] params = new String[10];
+            
+            params[0] = nameText.getText();
+            params[1] = "Show";
+            //params[2] = ruta imagen
+            params[3] = dateText.getText();
+            params[4] = seasonsText.getText();
+            params[5] = episodesText.getText();
+            params[6] = durationText.getText();
+            params[7] = directorText.getText();
+            params[8] = actorsText.getText();
+            params[9] = producersText.getText();
+        }
+        else if(videogameCheck.isSelected()){
+            String[] params = new String[5];
+            
+            params[0] = nameText.getText();
+            params[1] = "Videogame";
+            //params[2] = ruta imagen
+            params[3] = dateText.getText();
+            params[4] = platformText.getText();
+            params[5] = developerText.getText();
+        }
     }//GEN-LAST:event_jButton1MouseReleased
+
+    private void coverButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coverButtonMouseReleased
+        // TODO add your handling code here:
+        String path;
+        String name;
+        
+        selecter = new JFileChooser();
+        selecter.showOpenDialog(this);
+        path = selecter.getSelectedFile().getAbsolutePath();
+        name = path.substring(path.lastIndexOf("/"));
+    }//GEN-LAST:event_coverButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -405,6 +456,7 @@ public class JDialogParams extends javax.swing.JDialog {
             }
         });
     }*/
+    private JFileChooser selecter;
     private ArrayList<JTextField> comicFields;
     private ArrayList<JTextField> showFields;
     private ArrayList<JTextField> videogameFields;
