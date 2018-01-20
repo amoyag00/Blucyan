@@ -21,14 +21,14 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         JPanelSearchResults search = new JPanelSearchResults();
-        JPanelHome home = new JPanelHome(this, search);
+        JPanelHome home;
         JPanelHomeAdmin admin = new JPanelHomeAdmin();
-        
         
         if(range){
             mainPanel.add(admin, "HomeAdmin");
         }
         else {
+            home = new JPanelHome(this, search);
             mainPanel.add(home, "Home");
         }
         //mainPanel.add(home, "Home");

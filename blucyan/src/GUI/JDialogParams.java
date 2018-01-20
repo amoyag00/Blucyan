@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import javax.swing.JTextField;
+
 /**
  *
  * @author cloud
@@ -14,9 +17,30 @@ public class JDialogParams extends javax.swing.JDialog {
     /**
      * Creates new form JDialogParams
      */
-    public JDialogParams(java.awt.Frame parent, boolean modal) {
+    public JDialogParams(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        comicFields = new ArrayList<JTextField>();
+        showFields = new ArrayList<JTextField>();
+        videogameFields = new ArrayList<JTextField>();
+
+        checks.add(comicCheck);
+        checks.add(showCheck);
+        checks.add(videogameCheck);
+
+        comicFields.add(chaptersText);
+        comicFields.add(authorsText);
+        comicFields.add(ilustratorsText);
+
+        showFields.add(episodesText);
+        showFields.add(seasonsText);
+        showFields.add(durationText);
+        showFields.add(directorText);
+        showFields.add(actorsText);
+        showFields.add(producersText);
+
+        videogameFields.add(developerText);
+        videogameFields.add(platformText);
     }
 
     /**
@@ -28,6 +52,7 @@ public class JDialogParams extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        checks = new javax.swing.ButtonGroup();
         titleLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -49,7 +74,7 @@ public class JDialogParams extends javax.swing.JDialog {
         producersLabel = new javax.swing.JLabel();
         directorLabel = new javax.swing.JLabel();
         actorsLabel = new javax.swing.JLabel();
-        EpisodesText = new javax.swing.JTextField();
+        episodesText = new javax.swing.JTextField();
         seasonsText = new javax.swing.JTextField();
         durationText = new javax.swing.JTextField();
         actorsText = new javax.swing.JTextField();
@@ -57,8 +82,9 @@ public class JDialogParams extends javax.swing.JDialog {
         producersText = new javax.swing.JTextField();
         developerLabel = new javax.swing.JLabel();
         platformLabel = new javax.swing.JLabel();
-        developerCheck = new javax.swing.JTextField();
+        developerText = new javax.swing.JTextField();
         platformText = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,26 +98,37 @@ public class JDialogParams extends javax.swing.JDialog {
         coverButton.setText("Cover");
 
         comicCheck.setText("Comic");
+        comicCheck.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comicCheckItemStateChanged(evt);
+            }
+        });
 
         videogameCheck.setText("Videogame");
+        videogameCheck.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                videogameCheckItemStateChanged(evt);
+            }
+        });
 
         showCheck.setText("Show");
-
-        nameText.setText("jTextField1");
-
-        dateText.setText("jTextField1");
+        showCheck.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                showCheckItemStateChanged(evt);
+            }
+        });
 
         chaptersLabel.setText("Num. chapters: ");
 
-        chaptersText.setText("jTextField3");
+        chaptersText.setEnabled(false);
 
         ilustratorsLabel.setText("Ilustrators: ");
 
         authorsLabel.setText("Authors: ");
 
-        authorsText.setText("jTextField4");
+        authorsText.setEnabled(false);
 
-        ilustratorsText.setText("jTextField3");
+        ilustratorsText.setEnabled(false);
 
         episodesLabel.setText("Num episodes: ");
 
@@ -105,25 +142,32 @@ public class JDialogParams extends javax.swing.JDialog {
 
         actorsLabel.setText("Actors: ");
 
-        EpisodesText.setText("jTextField3");
+        episodesText.setEnabled(false);
 
-        seasonsText.setText("jTextField3");
+        seasonsText.setEnabled(false);
 
-        durationText.setText("jTextField3");
+        durationText.setEnabled(false);
 
-        actorsText.setText("jTextField3");
+        actorsText.setEnabled(false);
 
-        directorText.setText("jTextField3");
+        directorText.setEnabled(false);
 
-        producersText.setText("jTextField3");
+        producersText.setEnabled(false);
 
         developerLabel.setText("Developer: ");
 
         platformLabel.setText("Platform: ");
 
-        developerCheck.setText("jTextField3");
+        developerText.setEnabled(false);
 
-        platformText.setText("jTextField3");
+        platformText.setEnabled(false);
+
+        jButton1.setText("Add");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,8 +210,14 @@ public class JDialogParams extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(developerLabel))
                                     .addComponent(coverButton, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(developerCheck))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(developerText))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(89, 89, 89)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(showCheck)
                                 .addGap(36, 36, 36)
@@ -175,7 +225,7 @@ public class JDialogParams extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(episodesLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(EpisodesText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(episodesText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(50, 50, 50)
                                         .addComponent(seasonsLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,7 +284,7 @@ public class JDialogParams extends javax.swing.JDialog {
                         .addComponent(episodesLabel)
                         .addComponent(seasonsLabel)
                         .addComponent(durationLabel)
-                        .addComponent(EpisodesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(episodesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(seasonsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(durationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(directorLabel)
@@ -250,26 +300,80 @@ public class JDialogParams extends javax.swing.JDialog {
                     .addComponent(videogameCheck)
                     .addComponent(developerLabel)
                     .addComponent(platformLabel)
-                    .addComponent(developerCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(developerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(platformText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(coverButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(coverButton)
+                    .addComponent(jButton1))
                 .addGap(18, 36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comicCheckItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comicCheckItemStateChanged
+        // TODO add your handling code here:
+        for (int i = 0; i < showFields.size(); i++) {
+            showFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < videogameFields.size(); i++) {
+            videogameFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < comicFields.size(); i++) {
+            comicFields.get(i).setEnabled(true);
+        }
+    }//GEN-LAST:event_comicCheckItemStateChanged
+
+    private void showCheckItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showCheckItemStateChanged
+        // TODO add your handling code here:
+
+        for (int i = 0; i < comicFields.size(); i++) {
+            comicFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < videogameFields.size(); i++) {
+            videogameFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < showFields.size(); i++) {
+            showFields.get(i).setEnabled(true);
+        }
+    }//GEN-LAST:event_showCheckItemStateChanged
+
+    private void videogameCheckItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_videogameCheckItemStateChanged
+        // TODO add your handling code here:
+
+        for (int i = 0; i < comicFields.size(); i++) {
+            comicFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < showFields.size(); i++) {
+            showFields.get(i).setEnabled(false);
+        }
+
+        for (int i = 0; i < videogameFields.size(); i++) {
+            videogameFields.get(i).setEnabled(true);
+        }
+    }//GEN-LAST:event_videogameCheckItemStateChanged
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1MouseReleased
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
+     */
+ /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -288,7 +392,7 @@ public class JDialogParams extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+ /*    java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JDialogParams dialog = new JDialogParams(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -300,29 +404,33 @@ public class JDialogParams extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
-
+    }*/
+    private ArrayList<JTextField> comicFields;
+    private ArrayList<JTextField> showFields;
+    private ArrayList<JTextField> videogameFields;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EpisodesText;
     private javax.swing.JLabel actorsLabel;
     private javax.swing.JTextField actorsText;
     private javax.swing.JLabel authorsLabel;
     private javax.swing.JTextField authorsText;
     private javax.swing.JLabel chaptersLabel;
     private javax.swing.JTextField chaptersText;
+    private javax.swing.ButtonGroup checks;
     private javax.swing.JCheckBox comicCheck;
     private javax.swing.JButton coverButton;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JTextField dateText;
-    private javax.swing.JTextField developerCheck;
     private javax.swing.JLabel developerLabel;
+    private javax.swing.JTextField developerText;
     private javax.swing.JLabel directorLabel;
     private javax.swing.JTextField directorText;
     private javax.swing.JLabel durationLabel;
     private javax.swing.JTextField durationText;
     private javax.swing.JLabel episodesLabel;
+    private javax.swing.JTextField episodesText;
     private javax.swing.JLabel ilustratorsLabel;
     private javax.swing.JTextField ilustratorsText;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameText;
     private javax.swing.JLabel platformLabel;

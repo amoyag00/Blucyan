@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="checks">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -66,8 +70,17 @@
                                   </Group>
                                   <Component id="coverButton" min="-2" pref="229" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="developerCheck" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="developerText" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="showCheck" min="-2" max="-2" attributes="0"/>
@@ -76,7 +89,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="episodesLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="EpisodesText" min="-2" pref="86" max="-2" attributes="0"/>
+                                      <Component id="episodesText" min="-2" pref="86" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                       <Component id="seasonsLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -152,7 +165,7 @@
                       <Component id="episodesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="seasonsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="durationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="EpisodesText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="episodesText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="seasonsText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="durationText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="directorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -171,11 +184,14 @@
                   <Component id="videogameCheck" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="developerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="platformLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="developerCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="developerText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="platformText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Component id="coverButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="coverButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -209,26 +225,29 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Comic"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comicCheckItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="videogameCheck">
       <Properties>
         <Property name="text" type="java.lang.String" value="Videogame"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="videogameCheckItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="showCheck">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="showCheckItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nameText">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dateText">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="chaptersLabel">
       <Properties>
@@ -237,7 +256,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="chaptersText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="ilustratorsLabel">
@@ -252,12 +271,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="authorsText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="ilustratorsText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="episodesLabel">
@@ -290,34 +309,34 @@
         <Property name="text" type="java.lang.String" value="Actors: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="EpisodesText">
+    <Component class="javax.swing.JTextField" name="episodesText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="seasonsText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="durationText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="actorsText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="directorText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="producersText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="developerLabel">
@@ -330,15 +349,23 @@
         <Property name="text" type="java.lang.String" value="Platform: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="developerCheck">
+    <Component class="javax.swing.JTextField" name="developerText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="platformText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
