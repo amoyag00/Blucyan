@@ -1,7 +1,10 @@
 package Persistence;
 
+import Logic.Comic;
 import Logic.Element;
 import Logic.ElementProxy;
+import Logic.Show;
+import Logic.Videogame;
 import java.awt.Image;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
@@ -22,21 +25,32 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
        Connection cn;
        ResultSet rs;
        PreparedStatement st;
-       Element element;
+       Element element=null;
        ImageIcon elementImg;
        ArrayList<String> genres = new ArrayList<String>();
-       
+
        this.openConnection();
        cn = this.getConnection();
        st = cn.prepareStatement("SELECT * FROM Elements WHERE element_id = ?");
        st.setString(1, id);
        rs = st.executeQuery();
        rs.first();
-       
-       element = new Element();
+       String type=rs.getString("type_element");
+       if(type.equalsIgnoreCase("Videogame")){
+           element= new Videogame();
+           fillVideogame((Videogame) element,id,cn);
+           
+       }else if(type.equalsIgnoreCase("Show")){
+           element=new Show();
+           fillShow((Show)element,id,cn);
+       }else if(type.equalsIgnoreCase("Comic")){
+           element= new Comic();
+           fillComic((Comic)element,id,cn);
+       }
+  
        element.setId(String.valueOf(rs.getInt("element_id")));
        element.setName(rs.getString("name"));
-       element.setType(rs.getString("type_element"));
+       element.setType(type);
        element.setReleaseDate(rs.getString("release_date"));
        
        /*byte[] img = rs.getBytes("cover");
@@ -56,9 +70,107 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
        
        element.setGenre(genres.toArray(new String[genres.size()]));
        
+       
        this.closeConnection();
        
        return element;
+    }
+    
+    private Videogame fillVideogame(Videogame videogame,String id, Connection cn) throws SQLException{
+        ArrayList<String> platforms = new ArrayList<String>();
+        ResultSet rs;
+        PreparedStatement st;
+        st = cn.prepareStatement("SELECT * FROM Videogames WHERE videogame_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        rs.first();
+        videogame.setDeveloper(rs.getString("developer"));
+           
+        st = cn.prepareStatement("SELECT * FROM Platforms WHERE videogame_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+            platforms.add(rs.getString("platform")); 
+        }  
+        videogame.setPlatforms(platforms.toArray(new String[platforms.size()]));
+        return videogame;
+    }
+    
+    private Show fillShow(Show show, String id, Connection cn)throws SQLException{
+        ArrayList<String> actors=new ArrayList<String>();
+        ArrayList<String> producers=new ArrayList<String>();
+        ArrayList<String> director=new ArrayList<String>();
+        
+        ResultSet rs;
+        PreparedStatement st;
+        st = cn.prepareStatement("SELECT * FROM Shows WHERE show_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        rs.first();
+        show.setNumberEpisodes(rs.getInt("number_episodes"));
+        show.setNumberSeasons(rs.getInt("number_seasons"));
+        show.setDuration(rs.getInt("episode_duration"));
+        show.setStatus(rs.getString("status_show"));
+        //Actors
+        st = cn.prepareStatement("SELECT * FROM Actors WHERE show_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+            actors.add(rs.getString("actor")); 
+        }   
+        show.setActors(actors.toArray(new String[actors.size()]));
+        //Directors
+        st = cn.prepareStatement("SELECT * FROM Director WHERE show_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+            director.add(rs.getString("director")); 
+        }   
+        show.setDirectors(director.toArray(new String[director.size()]));
+        //Producers
+        st = cn.prepareStatement("SELECT * FROM Producers WHERE show_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+           producers.add(rs.getString("producer")); 
+        }   
+        show.setProducers(producers.toArray(new String[producers.size()]));
+        return show;
+    }
+    
+    private Comic fillComic(Comic comic, String id, Connection cn)throws SQLException{
+        ArrayList<String> writers = new ArrayList<String>();
+        ArrayList<String> illustrators = new ArrayList<String>();
+        
+        ResultSet rs;
+        PreparedStatement st;
+        st = cn.prepareStatement("SELECT * FROM Comics WHERE comic_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        rs.first();
+        comic.setNumberChapters(rs.getInt("number_chapters"));
+        comic.setStatusShow(rs.getString("status_comic"));
+           
+       //Writers 
+        st = cn.prepareStatement("SELECT * FROM Writers WHERE comic = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+            writers.add(rs.getString("writer")); 
+        }  
+        comic.setWriters(writers.toArray(new String[writers.size()]));
+        
+        //Illustrators
+        st = cn.prepareStatement("SELECT * FROM Illustrators WHERE comic_id = ?");
+        st.setString(1, id);
+        rs = st.executeQuery();
+        while(rs.next()){
+            writers.add(rs.getString("illustrator")); 
+        }  
+        comic.setIllustrators(illustrators.toArray(new String[illustrators.size()]));
+        
+        
+        return comic;
     }
     
     public void delete(String id) throws Exception {
@@ -103,8 +215,26 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
             st.setInt(1, id);
             st.setString(2, element.getGenre()[i]);
         }
+        String type=element.getType();
+        if(type.equalsIgnoreCase("Videogame")){
+           putVideogame();
+       }else if(type.equalsIgnoreCase("Show")){
+           putShow();
+       }else if(type.equalsIgnoreCase("Comic")){
+           putComic();
+       }
         
         this.closeConnection();
+    }
+    
+    public void putVideogame(){
+        
+    }
+    public void putShow(){
+        
+    }
+    public void putComic(){
+        
     }
     
     public boolean exists(String id) throws Exception {

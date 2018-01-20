@@ -10,15 +10,18 @@ public class Videogame extends Element {
         this.platforms = platforms;
     }
 
-    public String[] getDevelopers() {
-        return developers;
-    }
-
-    public void setDevelopers(String[] developers) {
-        this.developers = developers;
-    }
 
 	private String[] platforms;
-        private String[] developers;
+        private String developer;
+
+ 
+    public String getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
+    }
+        
 
 }
