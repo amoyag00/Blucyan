@@ -97,34 +97,40 @@ PRIMARY KEY(show_id, actor),
 FOREIGN KEY (show_id) REFERENCES Shows(show_id)
 );
 
-CREATE TABLE VideogameLists(
+CREATE TABLE VideogameEntries(
+entry_id INT AUTO_INCREMENT,
 videogameList_id INT,
 videogame_id INT,
 valoration TINYINT,
-status_in_list VARCHAR(20),
-PRIMARY KEY(videogameList_id),
+status_in_list VARCHAR(50),
+PRIMARY KEY(entry_id),
+UNIQUE(videogameList_id, videogame_id),
 FOREIGN KEY(videogameList_id) REFERENCES Lists(list_id),
 FOREIGN KEY(videogame_id) REFERENCES Videogames(videogame_id)
 );
 
-CREATE TABLE ComicLists(
+CREATE TABLE ComicEntries(
+entry_id INT AUTO_INCREMENT,
 comicList_id INT,
 comic_id INT,
 valoration TINYINT,
 status_in_list VARCHAR(20),
 number_read_chapters SMALLINT,
-PRIMARY KEY(comicList_id),
+PRIMARY KEY(entry_id),
+UNIQUE(comicList_id, comic_id),
 FOREIGN KEY(comicList_id) REFERENCES Lists(list_id),
 FOREIGN KEY(comic_id) REFERENCES Comics(comic_id)
 );
 
-CREATE TABLE ShowLists(
+CREATE TABLE ShowEntries(
+entry_id INT AUTO_INCREMENT,
 showList_id INT,
 show_id INT,
 valoration TINYINT,
 status_in_list VARCHAR(20),
 number_watched_episodes SMALLINT,
-PRIMARY KEY(showList_id),
+PRIMARY KEY(entry_id),
+UNIQUE(showList_id, show_id),
 FOREIGN KEY(showList_id) REFERENCES Lists(list_id),
 FOREIGN KEY(show_id) REFERENCES Shows(show_id)
 );
