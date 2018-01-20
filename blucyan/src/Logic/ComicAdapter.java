@@ -1,5 +1,6 @@
 package Logic;
 
+import Persistence.Facade;
 import static java.lang.Integer.parseInt;
 
 public class ComicAdapter extends ComicEntry implements IAdapter   {
@@ -20,23 +21,10 @@ public class ComicAdapter extends ComicEntry implements IAdapter   {
         return comicEntry;
     }
     
-    @Override
-    public Entry modEntry(Entry entry, String attribute, String newValue){
+    public void  modEntry(Entry entry){
+        ComicEntry showEntry =  (ComicEntry) entry;
+        Facade.getInstance().modify(entry, ComicEntry.class);
 
-        ComicEntry comicEntry = (ComicEntry) entry;
-        
-        switch(attribute){
-        
-            case "status": comicEntry.setStatus(newValue);
-                            break;
-            case "numReadChapters": comicEntry.setNumReadChapters(parseInt(newValue));
-                            break;
-            case "valoration": comicEntry.setValoration(parseInt(newValue));
-                            break;
-
-        }
-       
-        return comicEntry;
     }
 
     

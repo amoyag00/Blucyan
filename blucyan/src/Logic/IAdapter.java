@@ -6,7 +6,7 @@ public interface IAdapter {
 	 * 
 	 * @param params
 	 */
-	Entry createEntry(String[] params);
+	public Entry createEntry(String[] params);
 
 	/**
 	 * 
@@ -14,6 +14,6 @@ public interface IAdapter {
 	 * @param attribute
 	 * @param newValue
 	 */
-	Entry modEntry(Entry entry, String attribute, String newValue);
+	public void modEntry(Entry entry);
 
 }

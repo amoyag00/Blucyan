@@ -34,7 +34,7 @@ public class AdapterFactory {
 
             if (comicAdp == null) {
                 String nombreClase = System.getProperty(VideogameAdapter.class.getName());
-                videogameAdp = (VideogameAdapter) Class.forName(nombreClase).newInstance();
+                videogameAdp = new VideogameAdapter();
             }
 
             return videogameAdp;

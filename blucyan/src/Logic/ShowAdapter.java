@@ -1,5 +1,6 @@
 package Logic;
 
+import Persistence.Facade;
 import static java.lang.Integer.parseInt;
 
 public class ShowAdapter extends ShowEntry implements IAdapter {
@@ -19,24 +20,15 @@ public class ShowAdapter extends ShowEntry implements IAdapter {
         return showEntry;
     }
     
-    @Override
-    public Entry modEntry(Entry entry, String attribute, String newValue){
-
+   
+    public void  modEntry(Entry entry){
         ShowEntry showEntry =  (ShowEntry) entry;
-        
-        switch(attribute){
-        
-            case "status": showEntry.setStatus(newValue);
-                            break;
-            case "numWatchedEpisodes": showEntry.setNumWatchedEpisodes(parseInt(newValue));
-                            break;
-            case "valoration": showEntry.setValoration(parseInt(newValue));
-                            break;
+        Facade.getInstance().modify(entry, ShowEntry.class);
 
-        }
-
-        
-        return showEntry;
     }
+
+        
+      
+    
     
 }

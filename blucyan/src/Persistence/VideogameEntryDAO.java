@@ -106,6 +106,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             entry.setName(rs.getString("name"));
             entry.setStatus(rs.getString("status_in_list"));
             entry.setValoration(rs.getInt("valoration"));
+           
             entry.setVideogameID(String.valueOf(rs.getInt("videogame_id")));
             
             videogames.add(entry);

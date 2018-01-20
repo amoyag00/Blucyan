@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        tries=0;
     }
 
     /**
@@ -104,7 +105,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInButtonMouseReleased
+        if(tries==3){
+            System.exit(0);
+        }
         try {
+            tries++;
              boolean identified;
             if(this.userNameField.getText().isEmpty() 
                     ||String.valueOf(this.passField.getPassword()).isEmpty()){
@@ -162,7 +167,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    int tries;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -91,7 +91,7 @@ public class UserController {
                 
                 lists[0].setEntryList(videogameList);
                 lists[1].setEntryList(comicList);
-                lists[2].setEntryList(videogameList);
+                lists[2].setEntryList(showList);
                 
                 return sort(lists);
 	}
@@ -147,12 +147,10 @@ public class UserController {
                 facade.delete(name, classType);
         }
 
-        public void modify(String[] params, String elementType) throws ClassNotFoundException{
-        
-           Element element = new Element();
-                  
-            
-           facade.modify(element, Class.forName(elementType));
+        public void modify(Entry entry, String elementType) throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+            IAdapter adapter=AdapterFactory.getInstance().getAdapter(elementType);
+            adapter.modEntry(entry);
+    
             
         }
         

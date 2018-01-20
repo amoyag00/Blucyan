@@ -1,5 +1,6 @@
 package Logic;
 
+import Persistence.Facade;
 import static java.lang.Integer.parseInt;
 
 public class VideogameAdapter extends VideogameEntry implements IAdapter {
@@ -19,20 +20,11 @@ public class VideogameAdapter extends VideogameEntry implements IAdapter {
     }
     
     @Override
-    public Entry modEntry(Entry entry, String attribute, String newValue){
+    public void modEntry(Entry entry){
 
         VideogameEntry videogameEntry =  (VideogameEntry) entry;
+        Facade.getInstance().modify(entry, VideogameEntry.class);
         
-        switch(attribute){
-        
-            case "status": videogameEntry.setStatus(newValue);
-                            break;
-            case "valoration": videogameEntry.setValoration(parseInt(newValue));
-                            break;
-
-        }
-        
-        return videogameEntry;
-    }
+       }
     
 }
