@@ -86,6 +86,8 @@ public class JDialogParams extends javax.swing.JDialog {
         developerText = new javax.swing.JTextField();
         platformText = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        genresLabel = new javax.swing.JLabel();
+        genresText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -175,6 +177,8 @@ public class JDialogParams extends javax.swing.JDialog {
             }
         });
 
+        genresLabel.setText("Genres: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,31 +186,6 @@ public class JDialogParams extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(comicCheck)
-                                .addGap(71, 71, 71)
-                                .addComponent(chaptersLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chaptersText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
-                                .addComponent(authorsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(authorsText, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(109, 109, 109)
-                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(63, 63, 63)
-                        .addComponent(ilustratorsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ilustratorsText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -222,8 +201,7 @@ public class JDialogParams extends javax.swing.JDialog {
                                         .addComponent(developerText))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(89, 89, 89)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(showCheck)
                                 .addGap(36, 36, 36)
@@ -260,7 +238,37 @@ public class JDialogParams extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(producersLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(producersText, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(producersText, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(comicCheck)
+                                .addGap(71, 71, 71)
+                                .addComponent(chaptersLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chaptersText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61)
+                                .addComponent(authorsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(authorsText, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(ilustratorsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ilustratorsText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(genresLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(genresText, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -273,7 +281,9 @@ public class JDialogParams extends javax.swing.JDialog {
                     .addComponent(nameLabel)
                     .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateLabel)
-                    .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genresLabel)
+                    .addComponent(genresText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comicCheck)
@@ -368,22 +378,23 @@ public class JDialogParams extends javax.swing.JDialog {
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         // TODO add your handling code here:
         if(comicCheck.isSelected()){
-            String[] params = new String[7];
+            String[] params = new String[8];
             
             params[0] = nameText.getText();
             params[1] = "Comic";
-            //params[2] = ruta imagen
+            params[2] = name;
             params[3] = dateText.getText();
             params[4] = chaptersText.getText();
             params[5] = authorsText.getText();
             params[6] = ilustratorsText.getText();
+            params[7] = genresText.getText();
         }
         else if(showCheck.isSelected()){
-            String[] params = new String[10];
+            String[] params = new String[11];
             
             params[0] = nameText.getText();
             params[1] = "Show";
-            //params[2] = ruta imagen
+            params[2] = name;
             params[3] = dateText.getText();
             params[4] = seasonsText.getText();
             params[5] = episodesText.getText();
@@ -391,28 +402,30 @@ public class JDialogParams extends javax.swing.JDialog {
             params[7] = directorText.getText();
             params[8] = actorsText.getText();
             params[9] = producersText.getText();
+            params[10] = genresText.getText();
         }
         else if(videogameCheck.isSelected()){
-            String[] params = new String[5];
+            String[] params = new String[7];
             
             params[0] = nameText.getText();
             params[1] = "Videogame";
-            //params[2] = ruta imagen
+            params[2] = name;
             params[3] = dateText.getText();
             params[4] = platformText.getText();
             params[5] = developerText.getText();
+            params[6] = genresText.getText();
         }
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void coverButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coverButtonMouseReleased
         // TODO add your handling code here:
         String path;
-        String name;
         
         selecter = new JFileChooser();
         selecter.showOpenDialog(this);
         path = selecter.getSelectedFile().getAbsolutePath();
         name = path.substring(path.lastIndexOf("/"));
+        name = name.replace("/", "");
     }//GEN-LAST:event_coverButtonMouseReleased
 
     /**
@@ -456,6 +469,7 @@ public class JDialogParams extends javax.swing.JDialog {
             }
         });
     }*/
+    private String name;
     private JFileChooser selecter;
     private ArrayList<JTextField> comicFields;
     private ArrayList<JTextField> showFields;
@@ -480,6 +494,8 @@ public class JDialogParams extends javax.swing.JDialog {
     private javax.swing.JTextField durationText;
     private javax.swing.JLabel episodesLabel;
     private javax.swing.JTextField episodesText;
+    private javax.swing.JLabel genresLabel;
+    private javax.swing.JTextField genresText;
     private javax.swing.JLabel ilustratorsLabel;
     private javax.swing.JTextField ilustratorsText;
     private javax.swing.JButton jButton1;

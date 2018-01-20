@@ -9,13 +9,13 @@ public class Element {
 	private String[] genre;
 	private String releaseDate;
 	private String id;
-        private ImageIcon cover;
+        private String cover;
 
-    public ImageIcon getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(ImageIcon cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 
