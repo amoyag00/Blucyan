@@ -84,7 +84,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         st.setString(1, id);
         rs = st.executeQuery();
         rs.first();
-        videogame.setDeveloper(rs.getString("developer"));
+        videogame.setDevelopers(rs.getString("developer"));
            
         st = cn.prepareStatement("SELECT * FROM Platforms WHERE videogame_id = ?");
         st.setString(1, id);
