@@ -106,6 +106,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
             ShowEntry entry = new ShowEntry();
             entry.setEntryID(String.valueOf(rs.getInt("entry_id")));
             entry.setListID(id);
+            entry.setName(rs.getString("name"));
             entry.setNumWatchedEpisodes(rs.getInt("number_watched_episodes"));
             entry.setShowID(String.valueOf(rs.getInt("show_id")));
             entry.setStatus(rs.getString("status_in_list"));
@@ -147,7 +148,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
-        PreparedStatement st = cn.prepareStatement("UPDATE ShowEntries SET valoration=?, number_watched_episodes=?, status_in_list=? WHERE entry_id");
+        PreparedStatement st = cn.prepareStatement("UPDATE ShowEntries SET valoration=?, number_watched_episodes=?, status_in_list=? WHERE entry_id=?");
         st.setByte(1, (byte) sE.getValoration());
         st.setInt(2, sE.getNumWatchedEpisodes());
         st.setString(3, sE.getStatus());

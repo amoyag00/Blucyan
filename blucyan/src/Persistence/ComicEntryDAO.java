@@ -95,7 +95,9 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
 
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT * FROM ComicEntries WHERE entry_id = ?");
+        st = cn.prepareStatement(("SELECT Elements.name,ComicEntries.number_read_chapters,ComicEntries.comicList_id, ComicEntries.entry_id,ComicEntries.comic_id, ComicEntries.valoration, ComicEntries.status_in_list\n" +
+"FROM ComicEntries\n" +
+"INNER JOIN Elements ON  Elements.element_id = ComicEntries.comic_id WHERE ComicEntries.comicList_id= ?"));
         st.setString(1, id);
         rs = st.executeQuery();
 
@@ -103,6 +105,7 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
             ComicEntry entry = new ComicEntry();
             entry.setEntryID(String.valueOf(rs.getInt("entry_id")));
             entry.setListID(id);
+            entry.setName(rs.getString("name"));
             entry.setComicID(String.valueOf(rs.getInt("comic_id")));
             entry.setValoration(rs.getInt("valoration"));
             entry.setNumReadChapters(rs.getInt("number_read_chapters"));

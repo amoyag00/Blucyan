@@ -46,6 +46,7 @@ public class JPanelHome extends javax.swing.JPanel {
      */
     public JPanelHome(MainFrame mainFrame,JPanelSearchResults searchPanel) {
         initComponents();
+
       this.searchPanel=searchPanel;
         ElementList[] lists=null;
         try {
@@ -232,13 +233,15 @@ public class JPanelHome extends javax.swing.JPanel {
       panel.removeAll();
       panel.repaint();
       panel.revalidate();
-      createHeaders("Videogame");
+      Insets ins=new Insets(0, 150, 5, 5);
+      createHeaders("Videogame", ins);
       GridBagConstraints c=new GridBagConstraints();
       c.anchor=GridBagConstraints.NORTHWEST;
      // c.weighty=0.5;
       //c.weightx=0.5;
-  
-      c.insets= new Insets(0, 150, 5, 5);
+     
+      c.insets= ins;
+     
       List<VideogameEntry> list=videogameList.getEntryList();
       int size=list.size();
       int i;
@@ -324,13 +327,15 @@ public class JPanelHome extends javax.swing.JPanel {
          panel.removeAll();
       panel.repaint();
       panel.revalidate();
-      createHeaders("Comic");
+      Insets ins= new Insets(0, 100, 5, 5);
+      createHeaders("Comic",ins);
       GridBagConstraints c=new GridBagConstraints();
       c.anchor=GridBagConstraints.NORTHWEST;
      // c.weighty=0.5;
       //c.weightx=0.5;
-  
-      c.insets= new Insets(0, 150, 5, 5);
+      
+      c.insets=ins;
+      
       List<ComicEntry> list=comicList.getEntryList();
       int size=list.size();
       int i;
@@ -422,14 +427,18 @@ public class JPanelHome extends javax.swing.JPanel {
       panel.removeAll();
       panel.repaint();
       panel.revalidate();
-      createHeaders("Show");
+      Insets ins= new Insets(0, 120, 5, 5);
+      createHeaders("Show",ins);
       GridBagConstraints c=new GridBagConstraints();
       c.anchor=GridBagConstraints.NORTHWEST;
      // c.weighty=0.5;
       //c.weightx=0.5;
   
-      c.insets= new Insets(0, 150, 5, 5);
+       
+      c.insets=ins;
+    
       List<ShowEntry> list=showList.getEntryList();
+     
       int size=list.size();
       int i;
       for( i=0;i<size;i++){ 
@@ -439,6 +448,7 @@ public class JPanelHome extends javax.swing.JPanel {
           c.gridy=i+1;
           c.gridx=0;
           String param=entry.getName();
+ 
           CustomTextField t =new CustomTextField(entry.getName());
          
           t.setEditable(false);
@@ -447,6 +457,7 @@ public class JPanelHome extends javax.swing.JPanel {
           
           CustomTextField t1=new CustomTextField(String.valueOf((int)entry.getValoration()));
           t1.setPreferredSize(new Dimension(30,20));
+          
           params.add(t1);
        
           panel.add(t1,c);
@@ -465,7 +476,7 @@ public class JPanelHome extends javax.swing.JPanel {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                
                 try {
-                    UserController.getInstance().modify(applyButton.getUpdatedComicEntry(),"Show");
+                    UserController.getInstance().modify(applyButton.getUpdatedShowEntry(),"Show");
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(JPanelHome.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
@@ -516,8 +527,9 @@ public class JPanelHome extends javax.swing.JPanel {
        card.show(mainPanel, "Search");
     }//GEN-LAST:event_searchButtonMouseReleased
 
-    private void createHeaders(String type){
+    private void createHeaders(String type, Insets ins){
         GridBagConstraints c=new GridBagConstraints();
+       c.insets=ins;
         JLabel labelHeaders[];
         String headers[]=null;
         switch(type){
@@ -537,7 +549,7 @@ public class JPanelHome extends javax.swing.JPanel {
         //c.weighty=1;
         //c.weightx=1;
         c.gridy=0;
-        c.insets= new Insets(0, 150, 5, 5);
+        
        for(int i=0;i<labelHeaders.length;i++){
            labelHeaders[i]= new JLabel(headers[i]);
            labelHeaders[i].setFont(new Font("Ubuntu",Font.PLAIN,19));
@@ -562,6 +574,7 @@ public class JPanelHome extends javax.swing.JPanel {
             }
         }
     }
+
     JPanelSearchResults searchPanel;
     final String headersVideogame []={"Name", "Valoration", "Status"};
     final String headersShow []={"Name", "Valoration", "Status", "Watched"};

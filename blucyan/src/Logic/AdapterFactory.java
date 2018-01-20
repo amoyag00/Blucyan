@@ -16,7 +16,7 @@ public class AdapterFactory {
 
             if (comicAdp == null) {
                 String nombreClase = System.getProperty(ComicAdapter.class.getName());
-                comicAdp =  (ComicAdapter) Class.forName(nombreClase).newInstance();
+                comicAdp =  new ComicAdapter();
             }
 
             return comicAdp;
@@ -25,7 +25,7 @@ public class AdapterFactory {
 
             if (comicAdp == null) {
                 String nombreClase = System.getProperty(ShowAdapter.class.getName());
-                showAdp = (ShowAdapter) Class.forName(nombreClase).newInstance();
+                showAdp = new ShowAdapter();
             }
 
             return showAdp;
