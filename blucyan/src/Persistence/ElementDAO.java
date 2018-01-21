@@ -291,18 +291,19 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.openConnection();
         
         cn = this.getConnection();
-         st = cn.prepareStatement("INSERT INTO comics VALUES (?,?,?)");
-         st.setString(1, element.getId());
+         st = cn.prepareStatement("INSERT INTO Comics VALUES (?,?,?)");
+         st.setInt(1, Integer.valueOf(element.getId()));
          st.setInt(2, element.getNumberChapters());
          st.setString(3, element.getStatusComic());
+         st.executeUpdate();
         for(int i=0; i<element.getIllustrators().length;i++){
-            st = cn.prepareStatement("INSERT INTO illustrators VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Illustrators VALUES (?,?)");
             st.setString(1,element.getId());
             st.setString(2, element.getIllustrators()[i]);
             st.executeUpdate();
         }
         for(int i=0; i<element.getWriters().length;i++){
-            st = cn.prepareStatement("INSERT INTO writers VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Writers VALUES (?,?)");
             st.setString(1,element.getId());
             st.setString(2, element.getWriters()[i]);
             st.executeUpdate();
@@ -339,12 +340,13 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("SELECT name, cover FROM Elements WHERE name LIKE '%"+name+"%'");
+        st = cn.prepareStatement("SELECT name, cover, type_element FROM Elements WHERE name LIKE '%"+name+"%'");
         rs = st.executeQuery();
         
         while(rs.next()){
                 ElementProxy elem = new ElementProxy();
                 elem.setName(rs.getString("name"));
+                elem.setType(rs.getString("type_element"));
                 //TODO añadir imagen portada
                 searched.add(elem);
             }

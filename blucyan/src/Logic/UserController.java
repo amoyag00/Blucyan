@@ -153,6 +153,7 @@ public class UserController {
             comicElement.setWriters(params[5].split(","));
             comicElement.setIllustrators(params[6].split(","));
             comicElement.setGenre(params[7].split(","));
+            comicElement.setStatusComic(params[8]);
             
             facade.put(comicElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("show")) {
@@ -169,6 +170,7 @@ public class UserController {
             showElement.setActors(params[8].split(","));
             showElement.setProducers(params[9].split(","));
             showElement.setGenre(params[10].split(","));
+            showElement.setStatus(params[11]);
             
             facade.put(showElement, Element.class);
         }

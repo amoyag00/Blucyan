@@ -8,6 +8,15 @@ public class ElementProxy {
         private String name;
         private String id;
         private Element realElement;
+        private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getCover() {
         return cover;
