@@ -6,6 +6,7 @@
 package GUI;
 
 import Logic.Element;
+import Logic.ElementList;
 import Logic.ElementProxy;
 import Logic.UserController;
 import Logic.UserProxy;
@@ -194,15 +195,22 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridy=row+1;
                     
                     //img = new ImageIcon();
-                 
-                    JLabel nameLabel = new JLabel(results.get(i).getName());
+                    String name=results.get(i).getName();
+                    if(!results.get(i).getIsPrivate()){
+                    JLabel nameLabel = new JLabel(name);
                     nameLabel.setFont(new Font("Ubuntu",Font.PLAIN,15));
                     nameLabel.addMouseListener(new MouseAdapter()  {  
-                         public void mouseClicked(MouseEvent e)  {  
-                               JPanelOtherHome other=new JPanelOtherHome();
+                         public void mouseClicked(MouseEvent e)  {
+                             try {
+                                 ElementList [] lists=UserController.getInstance().getOtherLists(name);
+                                 other.setLists(lists);
+                                 ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Other");
+                             } catch (Exception ex) {
+                                 Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
+                             }
                          }});
                     bigPanel.add(nameLabel,gbc);
-                    
+                    }
                     /*if(column<magicNumber){
                         column++;
                     }else{
@@ -329,6 +337,11 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         }
     
     }
+    
+    public void setOther(JPanelOtherHome other){
+        this.other=other;
+    }
+    private JPanelOtherHome other;
     private JPanel mainPanel;
     private JPanelHome homePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables

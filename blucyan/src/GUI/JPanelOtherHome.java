@@ -44,10 +44,14 @@ public class JPanelOtherHome extends javax.swing.JPanel {
     /**
      * Creates new form JPanelHome
      */
-    public JPanelOtherHome(MainFrame mainFrame,JPanelSearchResults searchPanel) {
+    public JPanelOtherHome(MainFrame mainFrame,JPanelSearchResults searchPanel, JPanelHome homePanel,JPanel mainPanel) {
         initComponents();
-
+        this.homePanel=homePanel;
       this.searchPanel=searchPanel;
+      this.mainPanel = mainPanel;
+      
+      jButton1.setText("Back");
+      jButton2.setText("Home");
         ElementList[] lists=null;
         try {
             lists = UserController.getInstance().getLists();
@@ -236,10 +240,12 @@ public class JPanelOtherHome extends javax.swing.JPanel {
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Search");
     }                                      
 
     private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {                                       
         // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
     }                                      
 
     private void createHeaders(String type, Insets ins){
@@ -456,7 +462,9 @@ public class JPanelOtherHome extends javax.swing.JPanel {
       panel.repaint();
       panel.revalidate();
     }
-
+    
+    JPanel mainPanel;
+    JPanelHome homePanel;
     JPanelSearchResults searchPanel;
     final String headersVideogame []={"Name", "Valoration", "Status"};
     final String headersShow []={"Name", "Valoration", "Status", "Watched"};
