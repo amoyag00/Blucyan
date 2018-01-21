@@ -10,6 +10,17 @@ public class Element {
 	private String releaseDate;
 	private String id;
         private String cover;
+        private String descritpion;
+
+    public String getDescritpion() {
+        return descritpion;
+    }
+
+    public void setDescritpion(String descritpion) {
+        this.descritpion = descritpion;
+    }
+        
+        
 
     public String getCover() {
         return cover;

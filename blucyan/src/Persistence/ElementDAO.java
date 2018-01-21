@@ -152,7 +152,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         comic.setStatusComic(rs.getString("status_comic"));
 
         //Writers 
-        st = cn.prepareStatement("SELECT * FROM Writers WHERE comic = ?");
+        st = cn.prepareStatement("SELECT * FROM Writers WHERE comic_id = ?");
         st.setString(1, id);
         rs = st.executeQuery();
         while (rs.next()) {
