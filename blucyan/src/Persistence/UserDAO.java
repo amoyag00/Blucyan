@@ -63,6 +63,7 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
              PreparedStatement st;
             
             this.openConnection();
+            String nickname=user.getUserName();
             cn=this.getConnection();
             st = cn.prepareStatement("INSERT INTO Users VALUES (?,?,?,?)");
             st.setString(1, user.getUserName());
@@ -70,6 +71,21 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
             st.setBoolean(3, user.getIsAdmin());
             st.setBoolean(4, user.getIsPrivate());
             st.executeUpdate();
+            
+             st = cn.prepareStatement("INSERT INTO Lists(typeList,nickname) VALUES (?,?)");
+             st.setString(1,"Comic");
+             st.setString(2, nickname);
+             st.executeUpdate();
+             
+             st = cn.prepareStatement("INSERT INTO Lists(typeList,nickname) VALUES (?,?)");
+             st.setString(1,"Videogame");
+             st.setString(2, nickname);
+             st.executeUpdate();
+             
+             st = cn.prepareStatement("INSERT INTO Lists(typeList,nickname) VALUES (?,?)");
+             st.setString(1,"Show");
+             st.setString(2, nickname);
+             st.executeUpdate();
         }catch(Exception e){
             throw new Exception("Inserting user " + e.getMessage());
         }
