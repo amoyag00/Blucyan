@@ -231,7 +231,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File("/home/alex/Escritorio/sherlock.jpg"/*results.get(i).getCover()*/));
+                    image=ImageIO.read(new File("D:\\Araragi.png"/*results.get(i).getCover()*/));
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);
                     JLabel cover = new JLabel(new ImageIcon(scaledImage));

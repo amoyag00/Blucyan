@@ -6,11 +6,15 @@
 package GUI;
 
 import Logic.Element;
+import Logic.ElementList;
 import Logic.UserController;
+import Logic.Videogame;
 import java.awt.CardLayout;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -23,13 +27,39 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
      * Creates new form JPanelElementCard
      */
     public JPanelVideogameCard(Element ele,JPanel mainPanel,JPanelSearchResults search) {
-        initComponents();
-        element=ele;
+        this.homePanel=homePanel;
+
+        element=(Videogame)ele;
         this.mainPanel=mainPanel;
         this.search=search;
-        
+        fillCard();
+        initComponents();
     }
 
+    private void fillCard(){
+        try {
+            UserController u=UserController.getInstance();
+            try {
+                if(u.isEntryAdded(element.getId(), "Comic")){
+                    this.addButton.setVisible(false);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Videogame game=(Videogame)this.element;
+            this.nameLabel.setText(game.getName());
+            this.platformLabel.setText(platformLabel.getText() +Arrays.toString(game.getPlatforms()));
+            this.developerLabel.setText(developerLabel.getText() + element.getDeveloper());
+            this.releaseDate_label.setText(releaseDate_label.getText()+ game.getReleaseDate()); 
+            
+            this.imageLabel.setText(element.getCover());
+            this.descriptionLabel.setText(element.getDescritpion());
+            this.reviewWrite.setText(UserController.getInstance().getReview(game.getId()).getText());    
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +74,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         homeButton = new javax.swing.JButton();
         imageLabel = new javax.swing.JLabel();
         platformLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        releaseDate_label = new javax.swing.JLabel();
         developerLabel = new javax.swing.JLabel();
         valorationLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
@@ -73,7 +103,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
 
         platformLabel.setText("Platform: ");
 
-        jLabel5.setText("Release date: ");
+        releaseDate_label.setText("Release date: ");
 
         developerLabel.setText("Developer");
 
@@ -86,6 +116,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         addButton.setText("ADD");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addButtonMouseReleased(evt);
+            }
+        });
 
         writeReview.setText("Write review");
 
@@ -127,7 +162,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(releaseDate_label, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +212,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                                 .addGap(27, 27, 27)
                                 .addComponent(developerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(releaseDate_label, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,6 +243,39 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
     }//GEN-LAST:event_backButtonMouseReleased
 
+    private void addButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseReleased
+        try {
+            // TODO add your handling code here:
+            String [] params=null;
+        Videogame game=(Videogame)element;
+        int valoration=Integer.valueOf(this.valorationUser.getText());
+         if(valoration<0 || valoration> 100){
+            JOptionPane.showMessageDialog(null,"Valoration must be between 0 and 100");
+        }else{
+           params = new String[5];
+           
+            params[0]=game.getId();
+            params[1]=game.getName();
+            params[2]=String.valueOf(valoration);
+            addButton.setVisible(false);
+            try {
+                
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
+            
+            UserController.getInstance().addEntry(params,"videogame");
+            ElementList [] lists=UserController.getInstance().getLists();
+                
+            homePanel.setLists(lists);
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelVideogameCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_addButtonMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -217,10 +285,10 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JLabel developerLabel;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel imageLabel;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel platformLabel;
+    private javax.swing.JLabel releaseDate_label;
     private javax.swing.JLabel reviewText;
     private javax.swing.JTextArea reviewWrite;
     private javax.swing.JComboBox<String> state;
@@ -228,7 +296,8 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JTextField valorationUser;
     private javax.swing.JLabel writeReview;
     // End of variables declaration//GEN-END:variables
-    private Element element;
+    private Videogame element;
     private JPanel mainPanel;
     private JPanelSearchResults search;
+    private JPanelHome homePanel;
 }
