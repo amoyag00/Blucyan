@@ -52,7 +52,8 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
        element.setName(rs.getString("name"));
        element.setType(type);
        element.setReleaseDate(rs.getString("release_date"));
-       
+       System.out.print(rs.getString("cover"));
+       element.setCover(rs.getString("cover"));
        /*byte[] img = rs.getBytes("cover");
        ImageIcon image = new ImageIcon(img);
        Image im = image.getImage();
@@ -200,16 +201,13 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         
         //TODO introducir la imagen de la portada
         
-        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
-        java.util.Date date = format.parse(element.getReleaseDate());
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        st.setDate(3, sqlDate);
+        st.setString(3, element.getReleaseDate());
         st.executeUpdate();
         
         rs = st.getGeneratedKeys();
         rs.first();
         int id = rs.getInt(1);
-        
+        element.setId(String.valueOf(id));
         for(int i=0;i<element.getGenre().length;i++){
             st = cn.prepareStatement("INSERT INTO Genres VALUES (?,?)");
             st.setInt(1, id);

@@ -4,16 +4,16 @@ import Persistence.Facade;
 import javax.swing.ImageIcon;
 
 public class ElementProxy {
-        private ImageIcon cover;
+        private String cover;
         private String name;
         private String id;
         private Element realElement;
 
-    public ImageIcon getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(ImageIcon cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 
