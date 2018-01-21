@@ -5,10 +5,11 @@
         <group>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JDialogParams.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Element.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Videogame.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/Facade.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Show.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Comic.java</file>
         </group>
     </open-files>
 </project-private>
