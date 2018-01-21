@@ -179,30 +179,36 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             bigPanel.repaint();
             bigPanel.revalidate();
             
-            if("User".compareTo((String) comboBox.getSelectedItem())==0){
+            if("Users".compareTo((String) comboBox.getSelectedItem())==0){
                 List<UserProxy> results = controller.searchUser(searchField.getText());
-                                
+                              
                 int row=0;
                 int column=0;
                 ImageIcon img;
                 
-                Insets insetsTitles = new Insets(5,100,100,100);
+                //Insets insetsTitles = new Insets(5,100,100,100);
                 
                 for(int i=0;i<((int)results.size());i++){
                     
-                    gbc.insets=insetsTitles;
+                    //gbc.insets=insetsTitles;
                     gbc.gridy=row+1;
                     
-                    img = new ImageIcon();
+                    //img = new ImageIcon();
+                 
                     JLabel nameLabel = new JLabel(results.get(i).getName());
+                    nameLabel.setFont(new Font("Ubuntu",Font.PLAIN,15));
+                    nameLabel.addMouseListener(new MouseAdapter()  {  
+                         public void mouseClicked(MouseEvent e)  {  
+                               JPanelOtherHome other=new JPanelOtherHome();
+                         }});
                     bigPanel.add(nameLabel,gbc);
                     
-                    if(column<magicNumber){
+                    /*if(column<magicNumber){
                         column++;
                     }else{
                         column=0;
-                        row+=2;
-                    }
+                        row+=1;
+                    }*/
                     
                 
                 }
@@ -234,7 +240,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File("D:\\Araragi.png"/*results.get(i).getCover()*/));
+                    image=ImageIO.read(new File("/home/alex/Escritorio/sherlock.jpg"/*results.get(i).getCover()*/));
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);
                     JLabel cover = new JLabel(new ImageIcon(scaledImage));
