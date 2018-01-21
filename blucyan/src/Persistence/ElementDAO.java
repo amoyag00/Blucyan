@@ -253,7 +253,11 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.openConnection();
         
         cn = this.getConnection();
-        
+        st = cn.prepareStatement("INSERT INTO shows VALUES ");
+            st.setInt(1,element.getNumberEpisodes());
+            st.setInt(1,element.getNumberSeasons());
+            st.setInt(1,element.getDuration());
+            st.setString(1,element.getStatus());
         for(int i=0; i<element.getActors().length;i++){
             st = cn.prepareStatement("INSERT INTO actors VALUES (?,?)");
             st.setString(1,element.getId());
@@ -275,11 +279,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
                     st.executeUpdate();
 
         }
-        st = cn.prepareStatement("INSERT INTO shows VALUES ");
-            st.setInt(1,element.getNumberEpisodes());
-            st.setInt(1,element.getNumberSeasons());
-            st.setInt(1,element.getDuration());
-            st.setString(1,element.getStatus());
+        
 
          this.closeConnection();
     }
@@ -291,7 +291,10 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.openConnection();
         
         cn = this.getConnection();
-        
+         st = cn.prepareStatement("INSERT INTO comics VALUES (?,?,?)");
+         st.setString(1, element.getId());
+         st.setInt(2, element.getNumberChapters());
+         st.setString(3, element.getStatusComic());
         for(int i=0; i<element.getIllustrators().length;i++){
             st = cn.prepareStatement("INSERT INTO illustrators VALUES (?,?)");
             st.setString(1,element.getId());
@@ -304,10 +307,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
             st.setString(2, element.getWriters()[i]);
             st.executeUpdate();
         }
-         st = cn.prepareStatement("INSERT INTO comics VALUES (?,?,?)");
-         st.setString(1, element.getId());
-         st.setInt(2, element.getNumberChapters());
-         st.setString(3, element.getStatusComic());
+        
         
          this.closeConnection();
     }
