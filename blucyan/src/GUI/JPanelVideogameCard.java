@@ -7,6 +7,7 @@ package GUI;
 
 import Logic.Element;
 import Logic.UserController;
+import java.awt.CardLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -57,6 +58,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         deleteButtom = new javax.swing.JButton();
 
         backButton.setText("< Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                backButtonMouseReleased(evt);
+            }
+        });
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         nameLabel.setText("VIDEOGAME NAME");
@@ -196,6 +202,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             Logger.getLogger(JPanelVideogameCard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_deleteButtomActionPerformed
+
+    private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
+    }//GEN-LAST:event_backButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

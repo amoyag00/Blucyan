@@ -8,6 +8,7 @@ package GUI;
 import Logic.Comic;
 import Logic.Element;
 import Logic.UserController;
+import java.awt.CardLayout;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
     public JPanelComicCard(Element ele, JPanel mainPanel, JPanelSearchResults search) {
         this.ele=ele;
         this.search=search;
+        this.mainPanel=mainPanel;
         initComponents();
         fillCard();
     }
@@ -78,6 +80,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
         readChapters = new javax.swing.JTextField();
 
         backButton.setText("< Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                backButtonMouseReleased(evt);
+            }
+        });
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         nameLabel.setText("COMIC NAME");
@@ -246,6 +253,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
             params[2]=String.valueOf(valoration);
             params[3]=String.valueOf(readChapters.getText());
             params[4]=comic.getStatusComic();
+            addButton.setVisible(false);
         }
         
         try {
@@ -260,6 +268,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addButtonMouseReleased
 
+    private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Search");
+    }//GEN-LAST:event_backButtonMouseReleased
+    private JPanel mainPanel;
     private Element ele;
     private JPanelSearchResults search;
     // Variables declaration - do not modify//GEN-BEGIN:variables
