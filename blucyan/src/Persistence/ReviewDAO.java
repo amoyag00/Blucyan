@@ -157,13 +157,14 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
         Connection cn;
         this.openConnection();
         cn = this.getConnection();
-       
-        PreparedStatement st = this.getConnection().prepareStatement("UPDATE Reviews SET review_text=? WHERE review_id = ?" );
+      
+        PreparedStatement st = this.getConnection().prepareStatement("UPDATE Reviews SET review_text=? WHERE element_id = ? AND nickname=?" );
         st.setString(1, rev.getText());
-        st.setString(2, rev.getReviewID());
+        st.setString(2, rev.getElementID());
+        st.setString(3, rev.getUserName());
         st.executeUpdate();
         
-        st.executeUpdate();
+        
         this.closeConnection();
     }
     

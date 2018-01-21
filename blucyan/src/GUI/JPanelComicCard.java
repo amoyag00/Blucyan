@@ -323,7 +323,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
     private void publishMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishMouseReleased
         // TODO add your handling code here:
-        Review rev = null;
+        Review rev =new Review();
         rev.setElementID(ele.getId());
         rev.setText(reviewWrite.getText());
         UserController.getInstance().addReview(rev);
