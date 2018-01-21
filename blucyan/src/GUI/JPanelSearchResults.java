@@ -50,10 +50,10 @@ public class JPanelSearchResults extends javax.swing.JPanel {
     /**
      * Creates new form JPanelSearchResults
      */
-    public JPanelSearchResults(JFrame mainFrame) {
+    public JPanelSearchResults(JPanel mainPanel) {
      
         initComponents();
-       this.mainFrame=mainFrame;
+       this.mainPanel=mainPanel;
         this.scroll.setPreferredSize(new Dimension(1000,550));
         this.scroll.getVerticalScrollBar().setUnitIncrement(16);
         
@@ -236,7 +236,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                 String type=proxy.getType();
                                 if(type.equalsIgnoreCase("Videogame")){
                                     try {
-                                        JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"videogame");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "videogame");
@@ -245,7 +245,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                     }
                                 }else if(type.equalsIgnoreCase("Show")){
                                     try {
-                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"show");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "show");
@@ -254,7 +254,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                     }
                                 }else if(type.equalsIgnoreCase("Comic")){
                                     try {
-                                        JPanelComicCard card=new JPanelComicCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        JPanelComicCard card=new JPanelComicCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"comic");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "comic");
@@ -316,7 +316,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         }
     
     }
-    private JFrame mainFrame;
+    private JPanel mainPanel;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

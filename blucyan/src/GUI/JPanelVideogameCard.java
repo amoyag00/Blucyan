@@ -10,6 +10,7 @@ import Logic.UserController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,10 +21,10 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelElementCard
      */
-    public JPanelVideogameCard(Element ele,JFrame mainFrame,JPanelSearchResults search) {
+    public JPanelVideogameCard(Element ele,JPanel mainPanel,JPanelSearchResults search) {
         initComponents();
         element=ele;
-        mF=mainFrame;
+        this.mainPanel=mainPanel;
         this.search=search;
         
     }
@@ -217,6 +218,6 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JLabel writeReview;
     // End of variables declaration//GEN-END:variables
     private Element element;
-    private JFrame mF;
+    private JPanel mainPanel;
     private JPanelSearchResults search;
 }

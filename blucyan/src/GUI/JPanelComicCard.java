@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,7 +24,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelComicCard
      */
-    public JPanelComicCard(Element ele, JFrame mainFrame, JPanelSearchResults search) {
+    public JPanelComicCard(Element ele, JPanel mainPanel, JPanelSearchResults search) {
         this.ele=ele;
         this.search=search;
         initComponents();

@@ -7,6 +7,7 @@ package GUI;
 
 import Logic.Element;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,7 +18,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelShowCard
      */
-    public JPanelShowCard(Element ele,JFrame mainFrame,JPanelSearchResults search) {
+    public JPanelShowCard(Element ele,JPanel mainPanel,JPanelSearchResults search) {
+        this.mainPanel=mainPanel;
         initComponents();
     }
 
@@ -211,7 +213,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+private JPanel mainPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel actorsLabel;
     private javax.swing.JButton addButton;
