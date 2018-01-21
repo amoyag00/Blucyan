@@ -26,7 +26,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelElementCard
      */
-    public JPanelVideogameCard(Element ele,JPanel mainPanel,JPanelSearchResults search) {
+    public JPanelVideogameCard(Element ele,JPanel mainPanel,JPanelSearchResults search, JPanelHome homePanel) {
         this.homePanel=homePanel;
 
         element=(Videogame)ele;
@@ -48,9 +48,9 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             }
             Videogame game=(Videogame)this.element;
             this.nameLabel.setText(game.getName());
-            this.platformLabel.setText(platformLabel.getText() +Arrays.toString(game.getPlatforms()));
-            this.developerLabel.setText(developerLabel.getText() + element.getDeveloper());
-            this.releaseDate_label.setText(releaseDate_label.getText()+ game.getReleaseDate()); 
+            this.platformLabel.setText(this.platformLabel.getText() +Arrays.toString(game.getPlatforms()));
+            this.developerLabel.setText(this.developerLabel.getText() + element.getDeveloper());
+            this.releaseDate_label.setText(this.releaseDate_label.getText()+ game.getReleaseDate()); 
             
             this.imageLabel.setText(element.getCover());
             this.descriptionLabel.setText(element.getDescritpion());
@@ -243,6 +243,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
     }//GEN-LAST:event_backButtonMouseReleased
 
+    private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
+    }
+    
     private void addButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseReleased
         try {
             // TODO add your handling code here:

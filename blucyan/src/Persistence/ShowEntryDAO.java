@@ -60,6 +60,28 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         return exists;
 
     }
+    
+    public boolean isAdded(String element_id, String list_id) throws Exception{
+        boolean isAdded = false;
+        try {
+            this.openConnection();
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(entry_id) FROM ShowEntries WHERE show_id=? AND showList_id=?");
+            st.setString(1, element_id);
+            st.setString(2,list_id);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            isAdded = rs.getBoolean(1);
+        } catch (Exception e) {
+            throw new Exception("Method isAdded ShowList " + e.getMessage());
+        } finally {
+            try {
+                this.closeConnection();
+            } catch (Exception e) {
+                throw new Exception("Method isAdded ShowList " + e.getMessage());
+            }
+        }
+        return isAdded;
+    }
 
     public ShowEntry get(String id) throws Exception {
         ShowEntry sE = new ShowEntry();
@@ -125,7 +147,8 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowEntries VALUES (?,?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowEntries(showList_id,show_id,valoration,status_in_list,number_watched_episodes)"
+                    + " VALUES (?,?,?,?,?)");
             st.setString(1, sE.getListID());
             st.setString(2, sE.getShowID());
             st.setByte(3, (byte) sE.getValoration());

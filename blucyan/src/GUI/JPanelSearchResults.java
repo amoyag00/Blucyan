@@ -156,6 +156,9 @@ public class JPanelSearchResults extends javax.swing.JPanel {
       search();
         
     }
+    public String getSearchField(){
+        return this.searchField.getText();
+    }
     
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         search();
@@ -165,7 +168,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxActionPerformed
 
-    private void search(){
+    public void search(){
      try {
             // TODO add your handling code here:
             UserController controller = UserController.getInstance();
@@ -240,7 +243,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                 String type=proxy.getType();
                                 if(type.equalsIgnoreCase("Videogame")){
                                     try {
-                                        JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
+                                        JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this, JPanelSearchResults.this.homePanel);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"videogame");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "videogame");
@@ -249,7 +252,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                     }
                                 }else if(type.equalsIgnoreCase("Show")){
                                     try {
-                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
+                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this, JPanelSearchResults.this.homePanel);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"show");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "show");

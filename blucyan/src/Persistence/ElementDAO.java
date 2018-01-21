@@ -236,7 +236,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         st.executeUpdate();
 
         for (int i = 0; i < element.getPlatforms().length; i++) {
-            st = cn.prepareStatement("INSERT INTO platforms VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Platforms VALUES (?,?)");
             st.setInt(1, Integer.parseInt(element.getId()));
             st.setString(2, element.getPlatforms()[i]);
             st.executeUpdate();
@@ -252,7 +252,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.openConnection();
 
         cn = this.getConnection();
-        st = cn.prepareStatement("INSERT INTO shows VALUES (?,?,?,?,?)");
+        st = cn.prepareStatement("INSERT INTO Shows VALUES (?,?,?,?,?)");
         st.setInt(1,  Integer.parseInt(element.getId()));
         st.setInt(2, element.getNumberEpisodes());
         st.setInt(3, element.getNumberSeasons());
@@ -261,19 +261,19 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         st.executeUpdate();
         
         for (int i = 0; i < element.getActors().length; i++) {
-            st = cn.prepareStatement("INSERT INTO actors VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Actors VALUES (?,?)");
             st.setInt(1,  Integer.parseInt(element.getId()));
             st.setString(2, element.getActors()[i]);
             st.executeUpdate();
         }
         for (int i = 0; i < element.getDirectors().length; i++) {
-            st = cn.prepareStatement("INSERT INTO director VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Director VALUES (?,?)");
             st.setInt(1,  Integer.parseInt(element.getId()));
             st.setString(2, element.getDirectors()[i]);
             st.executeUpdate();
         }
         for (int i = 0; i < element.getProducers().length; i++) {
-            st = cn.prepareStatement("INSERT INTO producers VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Producers VALUES (?,?)");
             st.setInt(1,  Integer.parseInt(element.getId()));
             st.setString(2, element.getProducers()[i]);
             st.executeUpdate();

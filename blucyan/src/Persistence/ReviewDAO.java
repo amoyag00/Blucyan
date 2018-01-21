@@ -137,18 +137,22 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
     }
    public Review getReview(String element_id, String nickname) throws Exception{
        this.openConnection();
-       
+       Review rev=null;
+       if(exists(element_id, nickname)){
        PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM Reviews WHERE element_id=? AND nickname=?");
        st.setString(1, element_id);
        st.setString(2,nickname);
        ResultSet rs = st.executeQuery();
        rs.next();
-       Review rev=new Review();
+       rev=new Review();
        rev.setReviewID(rs.getString("review_id"));
        rev.setUserName(rs.getString("nickname"));
        rev.setElementID(rs.getString("element_id"));
        rev.setText(rs.getString("review_text"));
-       
+       }else{
+           rev=new Review();
+           rev.setText("");
+       }
        
        return rev;
    } 
