@@ -6,7 +6,13 @@
 package GUI;
 
 import Logic.Element;
+import Logic.ElementList;
+import Logic.Show;
+import Logic.UserController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,9 +24,31 @@ public class JPanelShowCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelShowCard
      */
-    public JPanelShowCard(Element ele,JPanel mainPanel,JPanelSearchResults search) {
+    public JPanelShowCard(Element ele,JPanel mainPanel,JPanelSearchResults search, JPanelHome homePanel) throws Exception {
         this.mainPanel=mainPanel;
+        this.search = search;
+        this.ele = ele;
+        this.home = homePanel;
         initComponents();
+        fillCard();
+    }
+    
+    private void fillCard() throws Exception {
+        UserController u = UserController.getInstance();
+        Show show = (Show) this.ele;
+        
+        if(u.isEntryAdded(show.getId(), show.getType())){
+            this.addButton.setVisible(false);
+        }
+        
+        this.seasonsLabel.setText(this.seasonsLabel.getText()+show.getNumberSeasons());
+        this.episodesLabel.setText(this.episodesLabel.getText()+show.getNumberEpisodes());
+        this.chaptersLabel.setText(this.chaptersLabel.getText()+show.getDuration());
+        this.dateLabel.setText(this.dateLabel.getText()+show.getReleaseDate());
+        this.actorsLabel.setText(this.actorsLabel.getText()+show.getActors());
+        this.directorsProducersLabel.setText(this.directorsProducersLabel.getText()+show.getDirectors().toString()+show.getProducers().toString());
+        this.statusLabel2.setText(this.statusLabel2+show.getStatus());
+        this.genreLabel.setText(this.genreLabel.getText()+show.getGenre());
     }
 
     /**
@@ -44,7 +72,6 @@ public class JPanelShowCard extends javax.swing.JPanel {
         valorationLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         valorationUser = new javax.swing.JTextField();
-        state = new javax.swing.JComboBox<>();
         addButton = new javax.swing.JButton();
         writeReview = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,6 +79,13 @@ public class JPanelShowCard extends javax.swing.JPanel {
         reviewText = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         directorsProducersLabel = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
+        statusText = new javax.swing.JTextField();
+        statusLabel = new javax.swing.JLabel();
+        statusLabel2 = new javax.swing.JLabel();
+        genreLabel = new javax.swing.JLabel();
+        watchedLabel = new javax.swing.JLabel();
+        wathedText = new javax.swing.JTextField();
 
         backButton.setText("< Back");
 
@@ -70,15 +104,16 @@ public class JPanelShowCard extends javax.swing.JPanel {
 
         episodesLabel.setText("Number episodes: ");
 
-        valorationLabel.setText("NOTA");
+        valorationLabel.setText("Valoration: ");
 
         descriptionLabel.setText("Descripcion");
 
-        valorationUser.setText("NotaUser");
-
-        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         addButton.setText("ADD");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addButtonMouseReleased(evt);
+            }
+        });
 
         writeReview.setText("Write review");
 
@@ -91,6 +126,21 @@ public class JPanelShowCard extends javax.swing.JPanel {
         dateLabel.setText("Release date: ");
 
         directorsProducersLabel.setText("Director and producers: ");
+
+        deleteButton.setText("DELETE");
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseReleased(evt);
+            }
+        });
+
+        statusLabel.setText("Status");
+
+        statusLabel2.setText("Status: ");
+
+        genreLabel.setText("Genre: ");
+
+        watchedLabel.setText("Watched episodes: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,34 +162,45 @@ public class JPanelShowCard extends javax.swing.JPanel {
                             .addComponent(jScrollPane1)
                             .addComponent(reviewText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                        .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(seasonsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                                .addComponent(episodesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(chaptersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                                                .addGap(116, 116, 116))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(valorationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(34, 34, 34)
-                                                .addComponent(valorationUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(state, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                                                .addComponent(valorationUser, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(seasonsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(episodesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(chaptersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(directorsProducersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(actorsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(statusLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 12, Short.MAX_VALUE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                            .addComponent(statusText)
+                                            .addComponent(statusLabel)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(watchedLabel)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(wathedText)))
                                         .addGap(53, 53, 53))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(directorsProducersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(actorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(53, 53, 53))))
         );
@@ -152,37 +213,51 @@ public class JPanelShowCard extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valorationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(valorationUser, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(valorationUser)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statusLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(watchedLabel)
+                                    .addComponent(wathedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(seasonsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(episodesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chaptersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(actorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(directorsProducersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(statusLabel2)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addButton))
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(actorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(directorsProducersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                        .addGap(28, 28, 28)
+                        .addComponent(genreLabel)))
+                .addGap(73, 73, 73)
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,13 +273,13 @@ public class JPanelShowCard extends javax.swing.JPanel {
             .addGap(0, 1119, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 10, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 10, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 933, Short.MAX_VALUE)
+            .addGap(0, 1046, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -213,16 +288,62 @@ public class JPanelShowCard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-private JPanel mainPanel;
+    private void addButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseReleased
+        // TODO add your handling code here:
+        String[] params;
+        Show show = (Show) this.ele;
+        int valoration = Integer.parseInt(this.valorationUser.getText());
+        
+        if(valoration < 0 || valoration > 100){
+            JOptionPane.showMessageDialog(null,"Valoration must be between 0 and 100");
+        }
+        else{
+            params = new String[5];
+            
+            params[0] = show.getId();
+            params[1] = String.valueOf(valoration);
+            params[2] = this.wathedText.getText();
+            params[3] = this.statusText.getText();
+            
+            this.addButton.setVisible(false);
+            
+            UserController u = UserController.getInstance();
+            try {
+                 u.addEntry(params, show.getType());
+                 ElementList[] lists = u.getLists();
+                 
+                 this.home.setLists(lists);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              }
+    }//GEN-LAST:event_addButtonMouseReleased
+
+    private void deleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonMouseReleased
+
+    private JPanel mainPanel;
+    private Element ele;
+    private JPanelSearchResults search;
+    private JPanelHome home;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel actorsLabel;
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel chaptersLabel;
     private javax.swing.JLabel dateLabel;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel directorsProducersLabel;
     private javax.swing.JLabel episodesLabel;
+    private javax.swing.JLabel genreLabel;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel jPanel1;
@@ -231,9 +352,13 @@ private JPanel mainPanel;
     private javax.swing.JLabel reviewText;
     private javax.swing.JTextArea reviewWrite;
     private javax.swing.JLabel seasonsLabel;
-    private javax.swing.JComboBox<String> state;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JLabel statusLabel2;
+    private javax.swing.JTextField statusText;
     private javax.swing.JLabel valorationLabel;
     private javax.swing.JTextField valorationUser;
+    private javax.swing.JLabel watchedLabel;
+    private javax.swing.JTextField wathedText;
     private javax.swing.JLabel writeReview;
     // End of variables declaration//GEN-END:variables
 }

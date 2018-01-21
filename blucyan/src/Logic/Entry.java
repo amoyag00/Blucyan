@@ -14,7 +14,7 @@ public class Entry {
         this.entryID = entryID;
     }
     
-    public float getValoration() {
+    public int getValoration() {
         return valoration;
     }
 

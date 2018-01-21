@@ -249,7 +249,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                     }
                                 }else if(type.equalsIgnoreCase("Show")){
                                     try {
-                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
+                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this, JPanelSearchResults.this.homePanel);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"show");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "show");

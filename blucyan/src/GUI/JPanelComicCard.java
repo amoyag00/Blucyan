@@ -285,7 +285,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
             params[1]=comic.getName();
             params[2]=String.valueOf(valoration);
             params[3]=String.valueOf(readChapters.getText());
-            params[4]=comic.getStatusComic();
+            params[4]=this.statusField.getText();
             addButton.setVisible(false);
             try {
                 
