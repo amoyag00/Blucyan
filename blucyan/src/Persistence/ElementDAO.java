@@ -278,7 +278,11 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
 
         }
         st = cn.prepareStatement("INSERT INTO shows VALUES ");
-        
+            st.setInt(1,element.getNumberEpisodes());
+            st.setInt(1,element.getNumberSeasons());
+            st.setInt(1,element.getDuration());
+            st.setString(1,element.getStatus());
+
          this.closeConnection();
     }
     public void putComic(Comic element) throws Exception{

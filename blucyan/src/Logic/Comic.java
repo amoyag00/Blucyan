@@ -5,7 +5,7 @@ public class Comic extends Element {
 	private String[] illustrators;
 	private String[] writers;
         private int numberChapters;
-        private String statusShow;
+        private String statusComic;
 
     public String[] getIllustrators() {
         return illustrators;
@@ -31,12 +31,12 @@ public class Comic extends Element {
         this.numberChapters = number_chapters;
     }
 
-    public String getStatusShow() {
-        return statusShow;
+    public String getStatusComic() {
+        return statusComic;
     }
 
-    public void setStatusShow(String statusShow) {
-        this.statusShow = statusShow;
+    public void setStatusComic(String statusComic) {
+        this.statusComic = statusComic;
     }
         
 }
