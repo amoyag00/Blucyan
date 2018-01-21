@@ -142,7 +142,7 @@ public class UserController {
             videogameElement.setCover(params[2]);
             videogameElement.setReleaseDate(params[3]);           
             videogameElement.setPlatforms(params[4].split(","));
-            videogameElement.setDevelopers(params[5].split(","));
+            videogameElement.setDeveloper(params[5]);
             videogameElement.setGenre(params[6].split(","));
             //facade.put(entry, VideogameEntryDAO.class);
         } else if (params[1].equalsIgnoreCase("comic")) {

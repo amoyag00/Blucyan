@@ -84,7 +84,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         st.setString(1, id);
         rs = st.executeQuery();
         rs.first();
-        videogame.setDevelopers(rs.getString("developer").split(","));
+        videogame.setDeveloper(rs.getString("developer"));
            
         st = cn.prepareStatement("SELECT * FROM Platforms WHERE videogame_id = ?");
         st.setString(1, id);
@@ -149,7 +149,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         rs = st.executeQuery();
         rs.first();
         comic.setNumberChapters(rs.getInt("number_chapters"));
-        comic.setStatusShow(rs.getString("status_comic"));
+        comic.setStatusComic(rs.getString("status_comic"));
            
        //Writers 
         st = cn.prepareStatement("SELECT * FROM Writers WHERE comic = ?");
@@ -217,24 +217,97 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         }
         String type=element.getType();
         if(type.equalsIgnoreCase("Videogame")){
-           putVideogame();
+           putVideogame((Videogame) element);
        }else if(type.equalsIgnoreCase("Show")){
-           putShow();
+           putShow((Show) element);
        }else if(type.equalsIgnoreCase("Comic")){
-           putComic();
+           putComic((Comic) element);
        }
         
         this.closeConnection();
     }
     
-    public void putVideogame(){
+    public void putVideogame(Videogame element) throws Exception{
+        Connection cn;
+        ResultSet rs;
+        PreparedStatement st;
+        this.openConnection();
         
+        cn = this.getConnection();
+        
+        for(int i=0; i<element.getPlatforms().length;i++){
+        st = cn.prepareStatement("INSERT INTO platforms VALUES (?,?)");
+        st.setString(1,element.getId());
+        st.setString(2, element.getPlatforms()[i]);
+        st.executeUpdate();
+        } 
+        
+        st = cn.prepareStatement("INSERT INTO Videogames VALUE ?, ?");
+        st.setString(1, element.getId());
+        st.setString(2, element.getDeveloper());
+        
+         this.closeConnection();
     }
-    public void putShow(){
+    public void putShow(Show element) throws Exception{
+          Connection cn;
+        ResultSet rs;
+        PreparedStatement st;
+        this.openConnection();
         
+        cn = this.getConnection();
+        
+        for(int i=0; i<element.getActors().length;i++){
+            st = cn.prepareStatement("INSERT INTO actors VALUES (?,?)");
+            st.setString(1,element.getId());
+            st.setString(2, element.getActors()[i]);
+                    st.executeUpdate();
+
+        }
+        for(int i=0; i<element.getDirectors().length;i++){
+            st = cn.prepareStatement("INSERT INTO director VALUES (?,?)");
+            st.setString(1,element.getId());
+            st.setString(2, element.getDirectors()[i]);
+                    st.executeUpdate();
+
+        }
+        for(int i=0; i<element.getProducers().length;i++){
+            st = cn.prepareStatement("INSERT INTO producers VALUES (?,?)");
+            st.setString(1,element.getId());
+            st.setString(2, element.getProducers()[i]);
+                    st.executeUpdate();
+
+        }
+        st = cn.prepareStatement("INSERT INTO shows VALUES ");
+        
+         this.closeConnection();
     }
-    public void putComic(){
+    public void putComic(Comic element) throws Exception{
         
+        Connection cn;
+        ResultSet rs;
+        PreparedStatement st;
+        this.openConnection();
+        
+        cn = this.getConnection();
+        
+        for(int i=0; i<element.getIllustrators().length;i++){
+            st = cn.prepareStatement("INSERT INTO illustrators VALUES (?,?)");
+            st.setString(1,element.getId());
+            st.setString(2, element.getIllustrators()[i]);
+            st.executeUpdate();
+        }
+        for(int i=0; i<element.getWriters().length;i++){
+            st = cn.prepareStatement("INSERT INTO writers VALUES (?,?)");
+            st.setString(1,element.getId());
+            st.setString(2, element.getWriters()[i]);
+            st.executeUpdate();
+        }
+         st = cn.prepareStatement("INSERT INTO comics VALUES (?,?,?)");
+         st.setString(1, element.getId());
+         st.setInt(2, element.getNumberChapters());
+         st.setString(3, element.getStatusComic());
+        
+         this.closeConnection();
     }
     
     public boolean exists(String id) throws Exception {
