@@ -6,7 +6,7 @@ public interface IAdapter {
 	 * 
 	 * @param params
 	 */
-	public Entry createEntry(String[] params);
+	public Entry createEntry(String[] params, String listID);
 
 	/**
 	 * 

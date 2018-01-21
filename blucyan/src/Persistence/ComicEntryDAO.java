@@ -124,7 +124,8 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ComicEntries VALUES (?,?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ComicEntries(comicList_id,comic_id,valoration,status_in_list,number_read_chapters)"
+                    + " VALUES (?,?,?,?,?)");
          
             st.setString(1, cE.getListID());
             st.setString(2, cE.getComicID());

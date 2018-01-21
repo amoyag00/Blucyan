@@ -7,8 +7,12 @@ package GUI;
 
 import Logic.Comic;
 import Logic.Element;
+import Logic.UserController;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +31,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
     }
     
     private void fillCard(){
+        
         Comic comic=(Comic)this.ele;
         this.nameLabel.setText(comic.getName());
         this.chapterLabel.setText(chapterLabel.getText()+comic.getNumberChapters());
@@ -65,6 +70,8 @@ public class JPanelComicCard extends javax.swing.JPanel {
         ilustratorsLabel = new javax.swing.JLabel();
         statusField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        readChapters = new javax.swing.JTextField();
 
         backButton.setText("< Back");
 
@@ -79,7 +86,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
         authorsLabel.setText("Writers:");
 
-        valorationLabel.setText("NOTA");
+        valorationLabel.setText("Valoration:");
 
         descriptionLabel.setText("Descripcion");
 
@@ -103,6 +110,8 @@ public class JPanelComicCard extends javax.swing.JPanel {
         ilustratorsLabel.setText("Ilustrators: ");
 
         jLabel1.setText("Status");
+
+        jLabel2.setText("Read chapters");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,9 +153,17 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                     .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ilustratorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(authorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                                        .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(53, 53, 53))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(122, 122, 122)
+                                        .addComponent(jLabel2)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(readChapters, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(53, 53, 53))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -164,10 +181,14 @@ public class JPanelComicCard extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valorationUser)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(valorationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(valorationUser))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(valorationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(readChapters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,6 +229,30 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
     private void addButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseReleased
         // TODO add your handling code here:
+        String [] params=null;
+        Comic comic=(Comic)ele;
+        int valoration=Integer.valueOf(this.valorationUser.getText());
+         if(valoration<0 || valoration> 100){
+            JOptionPane.showMessageDialog(null,"Valoration must be between 0 and 100");
+        }else{
+           params = new String[5];
+           
+            params[0]=comic.getId();
+            params[1]=comic.getName();
+            params[2]=String.valueOf(valoration);
+            params[3]=String.valueOf(readChapters.getText());
+            params[4]=comic.getStatusComic();
+        }
+        
+        try {
+            UserController.getInstance().addEntry(params,"comic");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_addButtonMouseReleased
 
@@ -224,9 +269,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
     private javax.swing.JLabel ilustratorsLabel;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField readChapters;
     private javax.swing.JLabel reviewText;
     private javax.swing.JTextArea reviewWrite;
     private javax.swing.JTextField statusField;

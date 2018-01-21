@@ -6,17 +6,16 @@ import static java.lang.Integer.parseInt;
 public class ShowAdapter extends ShowEntry implements IAdapter {
     
       @Override
-    public Entry createEntry(String[] params){
+    public Entry createEntry(String[] params, String listID){
 
-        ShowEntry showEntry = new ShowEntry();
-        
+       ShowEntry showEntry = new ShowEntry();
+
+        showEntry.setListID(listID);
         showEntry.setShowID(params[0]);
-        showEntry.setValoration(parseInt(params[1]));
-        showEntry.setNumWatchedEpisodes(parseInt(params[2]));
-        showEntry.setStatus(params[3]);
-        showEntry.setName(params[4]);
-        showEntry.setListID(params[5]);
-
+        showEntry.setName(params[1]);
+        showEntry.setValoration(parseInt(params[2]));
+        showEntry.setNumWatchedEpisodes(parseInt(params[3]));
+        showEntry.setStatus(params[4]);
         return showEntry;
     }
     

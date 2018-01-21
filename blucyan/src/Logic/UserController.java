@@ -13,6 +13,7 @@ public class UserController {
     private Facade facade = Facade.getInstance();
     private User actualUser;
     private static UserController instance;
+    private ElementList vList,cList,sList;
     
     public User getActualUser() {
         return actualUser;
@@ -87,6 +88,9 @@ public class UserController {
         lists[0].setEntryList(videogameList);
         lists[1].setEntryList(comicList);
         lists[2].setEntryList(showList);
+        vList=lists[0];
+        cList=lists[1];
+        sList=lists[2];
         
         return sort(lists);
     }
@@ -116,14 +120,14 @@ public class UserController {
         AdapterFactory adapter = AdapterFactory.getInstance();
         IAdapter adap = adapter.getAdapter(elementType);
         
-        Entry entry = adap.createEntry(params);
+        Entry entry = adap.createEntry(params, cList.getListID());
         
         if (elementType.equalsIgnoreCase("videogame")) {
-            facade.put(entry, VideogameEntryDAO.class);
+            facade.put(entry, VideogameEntry.class);
         } else if (elementType.equalsIgnoreCase("comic")) {
-            facade.put(entry, ComicEntryDAO.class);
+            facade.put(entry, ComicEntry.class);
         } else if (elementType.equalsIgnoreCase("show")) {
-            facade.put(entry, ShowEntryDAO.class);
+            facade.put(entry, ShowEntry.class);
         }
         
     }

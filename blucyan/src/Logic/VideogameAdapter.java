@@ -6,16 +6,16 @@ import static java.lang.Integer.parseInt;
 public class VideogameAdapter extends VideogameEntry implements IAdapter {
     
     @Override
-    public Entry createEntry(String[] params){
+    public Entry createEntry(String[] params, String listID){
 
-        VideogameEntry videogameEntry = new VideogameEntry();
-        
+       VideogameEntry videogameEntry = new VideogameEntry();
+
+        videogameEntry.setListID(listID);
         videogameEntry.setVideogameID(params[0]);
-        videogameEntry.setValoration(parseInt(params[1]));
-        videogameEntry.setStatus(params[2]);
-        videogameEntry.setName(params[3]);
-        videogameEntry.setListID(params[4]);
-
+        videogameEntry.setName(params[1]);
+        videogameEntry.setValoration(parseInt(params[2]));
+  
+        videogameEntry.setStatus(params[3]);
         return videogameEntry;
     }
     
