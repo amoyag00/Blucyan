@@ -120,13 +120,16 @@ public class UserController {
         AdapterFactory adapter = AdapterFactory.getInstance();
         IAdapter adap = adapter.getAdapter(elementType);
         
-        Entry entry = adap.createEntry(params, cList.getListID());
+        Entry entry;
         
         if (elementType.equalsIgnoreCase("videogame")) {
+            entry = adap.createEntry(params, vList.getListID());
             facade.put(entry, VideogameEntry.class);
         } else if (elementType.equalsIgnoreCase("comic")) {
+            entry = adap.createEntry(params, cList.getListID());
             facade.put(entry, ComicEntry.class);
         } else if (elementType.equalsIgnoreCase("show")) {
+            entry = adap.createEntry(params, sList.getListID());
             facade.put(entry, ShowEntry.class);
         }
         

@@ -94,6 +94,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
         readChapters = new javax.swing.JTextField();
         publish = new javax.swing.JButton();
         statusLabel = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,6 +153,13 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
         statusLabel.setText("Status: ");
 
+        deleteButton.setText("DELETE");
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,7 +180,14 @@ public class JPanelComicCard extends javax.swing.JPanel {
                         .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(publish, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
                         .addGap(29, 29, 29)
@@ -200,13 +215,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                         .addGap(0, 206, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(statusLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(publish, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,12 +258,14 @@ public class JPanelComicCard extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteButton)
+                .addGap(46, 46, 46)
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(publish)
-                .addGap(157, 157, 157))
+                .addGap(82, 82, 82))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -331,6 +342,16 @@ public class JPanelComicCard extends javax.swing.JPanel {
       
         
     }//GEN-LAST:event_publishMouseReleased
+
+    private void deleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseReleased
+        // TODO add your handling code here:
+        UserController u = UserController.getInstance();
+        try {
+            u.delete(ele.getId(), Element.class);
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deleteButtonMouseReleased
     private JPanel mainPanel;
     private JPanelHome homePanel;
     private Element ele;
@@ -341,6 +362,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel chapterLabel;
     private javax.swing.JLabel dateLabel;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel ilustratorsLabel;
