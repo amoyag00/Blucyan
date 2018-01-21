@@ -236,7 +236,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         st.executeUpdate();
 
         for (int i = 0; i < element.getPlatforms().length; i++) {
-            st = cn.prepareStatement("INSERT INTO platforms VALUES (?,?)");
+            st = cn.prepareStatement("INSERT INTO Platforms VALUES (?,?)");
             st.setInt(1, Integer.parseInt(element.getId()));
             st.setString(2, element.getPlatforms()[i]);
             st.executeUpdate();
