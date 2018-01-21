@@ -237,15 +237,30 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                 if(type.equalsIgnoreCase("Videogame")){
                                     try {
                                         JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
-                                        mainFrame.getContentPane().add(card,"videogame");
-                                        ((CardLayout)mainFrame.getLayout()).show(card, "videogame");
+                                        JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
+                                        mainPanel.add(card,"videogame");
+                                        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "videogame");
                                     } catch (Exception ex) {
                                         Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                 }else if(type.equalsIgnoreCase("Show")){
-                                    
+                                    try {
+                                        JPanelShowCard card=new JPanelShowCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
+                                        mainPanel.add(card,"show");
+                                        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "show");
+                                    } catch (Exception ex) {
+                                        Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }else if(type.equalsIgnoreCase("Comic")){
-                                    
+                                    try {
+                                        JPanelComicCard card=new JPanelComicCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
+                                        mainPanel.add(card,"comic");
+                                        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "comic");
+                                    } catch (Exception ex) {
+                                        Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }
 
                           }  }); 
