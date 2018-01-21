@@ -22,8 +22,8 @@ VALUES ( 'videogame', 'Altair');
 INSERT INTO Lists(typeList, nickname)
 VALUES ( 'comic', 'Altair');
 
-INSERT INTO Elements(name,type_element,release_date)
-VALUES ('Dark Souls', 'videogame','2011-10-04');
+INSERT INTO Elements(name,type_element,release_date, description)
+VALUES ('Dark Souls', 'videogame','2011-10-04','Dark Souls is an action role-playing video game developed by FromSoftware and published by Namco Bandai Games for PlayStation 3, Xbox 360, and Microsoft Windows. A spiritual successor to FromSoftwares Demon Souls, it is the second installment in the Souls series of games. The game was self-published and released in Japan in September 2011, and worldwide by Namco Bandai Games the following month.');
 
 INSERT INTO Videogames
 VALUES(1,'From Software');

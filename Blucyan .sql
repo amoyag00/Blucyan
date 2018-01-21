@@ -20,6 +20,7 @@ name VARCHAR(50) NOT NULL,
 type_element VARCHAR(15) NOT NULL,
 cover VARCHAR(50),
 release_date VARCHAR(15),
+description VARCHAR(500),
 PRIMARY KEY(element_id)
 );
 
