@@ -200,20 +200,10 @@ public class UserController {
         int nChars = 0;
         int nNum = 0;
         boolean achieved = false;
+        if(pass.length()>=5 && pass.matches(".*[0-9].*")){
+            achieved =true;
+        }
         
-        for (int i = 0; i < pass.length(); i++) {
-            char aux = pass.charAt(i);
-            if (aux > 47 && aux < 58) {
-                nNum++;
-            } else {
-                nChars++;
-            }
-        }
-
-        // Requirements 5 characters + 1 number
-        if (nChars >= 5 && nNum >= 1) {
-            achieved = true;
-        }
         
         return achieved;
     }
