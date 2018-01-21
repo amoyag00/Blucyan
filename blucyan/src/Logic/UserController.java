@@ -131,6 +131,18 @@ public class UserController {
         }
         
     }
+    public boolean isEntryAdded(String element_id, String typeElement){
+        boolean isAdded=false;
+          if(typeElement.equalsIgnoreCase("Videogame")){
+                
+            }else if(typeElement.equalsIgnoreCase("Show")){
+                
+            }else if(typeElement.equalsIgnoreCase("Comic")){
+                isAdded=facade.isComicEntryAdded(element_id,this.cList.getListID());
+            }
+        return isAdded;
+        
+    }
     
     public void addElement(String[] params) {
         

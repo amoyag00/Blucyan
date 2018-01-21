@@ -20,7 +20,28 @@ import java.util.logging.Logger;
  * @author alex
  */
 public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry, ComicEntry> {
-
+    
+    public boolean isAdded(String element_id, String list_id) throws Exception{
+        boolean isAdded = false;
+        try {
+            this.openConnection();
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(entry_id) FROM ComicEntries WHERE comic_id=? AND comicList_id=?");
+            st.setString(1, element_id);
+            st.setString(2,list_id);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            isAdded = rs.getBoolean(1);
+        } catch (Exception e) {
+            throw new Exception("Method isAdded ComicList " + e.getMessage());
+        } finally {
+            try {
+                this.closeConnection();
+            } catch (Exception e) {
+                throw new Exception("Method isAdded ComicList " + e.getMessage());
+            }
+        }
+        return isAdded;
+    }
     public void delete(String id) throws Exception {
         try {
             this.openConnection();

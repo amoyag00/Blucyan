@@ -31,7 +31,10 @@ public class JPanelComicCard extends javax.swing.JPanel {
     }
     
     private void fillCard(){
-        
+        UserController u=UserController.getInstance();
+        if(u.isEntryAdded(ele.getId(), "Comic")){
+            this.addButton.setVisible(false);
+        }
         Comic comic=(Comic)this.ele;
         this.nameLabel.setText(comic.getName());
         this.chapterLabel.setText(chapterLabel.getText()+comic.getNumberChapters());

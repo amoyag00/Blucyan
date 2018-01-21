@@ -40,6 +40,12 @@ public class Facade {
             return mapaDAO.get(classType).get(id);
 	}
         
+        
+        public boolean isComicEntryAdded(String element_id, String list_id){
+            boolean isAdded=false;
+              ComicEntryDAO comicEntryDAO= (ComicEntryDAO) mapaDAO.get(ComicEntry.class);
+            return comicEntryDAO.isAdded(element_id, list_id);
+        }
         public ElementList[] getLists(String id, Class classType) throws Exception{
             ElementListDAO elList = (ElementListDAO) mapaDAO.get(classType);
             
