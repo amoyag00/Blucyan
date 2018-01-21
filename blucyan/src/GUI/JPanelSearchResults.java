@@ -11,6 +11,7 @@ import Logic.UserController;
 import Logic.UserProxy;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -21,8 +22,10 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,18 +34,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.lang.String;
 import java.text.AttributedCharacterIterator;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 /**
  *
  * @author alex
  */
 public class JPanelSearchResults extends javax.swing.JPanel {
-
+    private final int magicNumber =3;
     /**
      * Creates new form JPanelSearchResults
      */
     public JPanelSearchResults() {
+     
         initComponents();
+       
+        this.scroll.setPreferredSize(new Dimension(1000,550));
+        this.scroll.getVerticalScrollBar().setUnitIncrement(16);
+        
     }
 
     /**
@@ -58,6 +70,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         searchButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
+        scroll = new javax.swing.JScrollPane();
         bigPanel = new javax.swing.JPanel();
 
         searchField.setText("Search");
@@ -76,54 +89,50 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows/ Videogames/Comics", "Users" }));
-        comboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxActionPerformed(evt);
-            }
-        });
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+
+        scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         bigPanel.setLayout(new java.awt.GridBagLayout());
+        scroll.setViewportView(bigPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchButton)
-                .addContainerGap(156, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 999, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(searchButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(searchButton)
-                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(593, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(bigPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(31, 31, 31)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        bigPanel.getAccessibleContext().setAccessibleParent(this);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
@@ -179,7 +188,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     JLabel nameLabel = new JLabel(results.get(i).getName());
                     bigPanel.add(nameLabel,gbc);
                     
-                    if(column<2){
+                    if(column<magicNumber){
                         column++;
                     }else{
                         column=0;
@@ -204,10 +213,11 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                 
                 int row=0;
                 int column=0;
-                ImageIcon img;
+
+                Image image;
                 
-                Insets insetsImage = new Insets(100, 100, 10, 100);
-                Insets insetsTitles = new Insets(5,100,100,100);
+                Insets insetsImage = new Insets(75, 50, 0, 100);
+                Insets insetsTitles = new Insets(5,50,50,25);
                 
                 for(int i=0;i<((int)results.size());i++){
                     gbc.insets=insetsImage;
@@ -215,11 +225,12 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    
-                    ImageIcon image = new ImageIcon("C:/Users/Usuario/Desktop/Imagenes Samu/Rayman 6.png") {};
-                    JLabel cover = new JLabel(); 
+                    image=ImageIO.read(new File("C:/Users/Usuario/Desktop/Imagenes Samu/Araragi.jpg"));
+                    Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
+        
+                    JLabel cover = new JLabel(new ImageIcon(scaledImage)); 
                     //cover.setSize(720, 576); 
-                    cover.setIcon(image);
+                    
                     cover.doLayout();
                    
                    
@@ -232,11 +243,11 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.insets=insetsTitles;
                     gbc.gridy=row+1;
                     
-                    img = new ImageIcon();
+                    //img = new ImageIcon();
                     JLabel nameLabel = new JLabel(results.get(i).getName());
                     bigPanel.add(nameLabel,gbc);
                     
-                    if(column<2){
+                    if(column<magicNumber){
                         column++;
                     }else{
                         column=0;
@@ -275,6 +286,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JPanel bigPanel;
     private javax.swing.JComboBox<String> comboBox;
+    private javax.swing.JScrollPane scroll;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
