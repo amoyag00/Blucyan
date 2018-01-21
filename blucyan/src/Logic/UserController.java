@@ -120,26 +120,33 @@ public class UserController {
         AdapterFactory adapter = AdapterFactory.getInstance();
         IAdapter adap = adapter.getAdapter(elementType);
         
-        Entry entry = adap.createEntry(params, cList.getListID());
+        Entry entry;
         
         if (elementType.equalsIgnoreCase("videogame")) {
+            entry = adap.createEntry(params, vList.getListID());
             facade.put(entry, VideogameEntry.class);
         } else if (elementType.equalsIgnoreCase("comic")) {
+            entry = adap.createEntry(params, cList.getListID());
             facade.put(entry, ComicEntry.class);
         } else if (elementType.equalsIgnoreCase("show")) {
+            entry = adap.createEntry(params, sList.getListID());
             facade.put(entry, ShowEntry.class);
         }
         
     }
     public boolean isEntryAdded(String element_id, String typeElement) throws Exception{
         boolean isAdded=false;
-          if(typeElement.equalsIgnoreCase("Videogame")){
+        if(!actualUser.getIsAdmin()){ 
+        if(typeElement.equalsIgnoreCase("Videogame")){
                 isAdded=facade.isComicEntryAdded(element_id,this.vList.getListID());
             }else if(typeElement.equalsIgnoreCase("Show")){
                 isAdded=facade.isComicEntryAdded(element_id,this.sList.getListID());
             }else if(typeElement.equalsIgnoreCase("Comic")){
                 isAdded=facade.isComicEntryAdded(element_id,this.cList.getListID());
             }
+        }else{
+            isAdded=true;
+        }
         return isAdded;
         
     }
