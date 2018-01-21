@@ -6,6 +6,9 @@
 package GUI;
 
 import Logic.Element;
+import Logic.UserController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -19,6 +22,10 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
      */
     public JPanelVideogameCard(Element ele,JFrame mainFrame,JPanelSearchResults search) {
         initComponents();
+        element=ele;
+        mF=mainFrame;
+        this.search=search;
+        
     }
 
     /**
@@ -46,6 +53,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewWrite = new javax.swing.JTextArea();
         reviewText = new javax.swing.JLabel();
+        deleteButtom = new javax.swing.JButton();
 
         backButton.setText("< Back");
 
@@ -80,6 +88,13 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
 
         reviewText.setText("Review");
 
+        deleteButtom.setText("DELETE");
+        deleteButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,6 +102,9 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backButton)
                         .addContainerGap())
@@ -157,7 +175,9 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                     .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addButton)
-                .addGap(30, 30, 30)
+                .addGap(1, 1, 1)
+                .addComponent(deleteButtom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,10 +187,20 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtomActionPerformed
+        try {
+            UserController controller = UserController.getInstance();
+            controller.delete(element.getId(), Element.class);
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelVideogameCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deleteButtomActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton deleteButtom;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel developerLabel;
     private javax.swing.JButton homeButton;
@@ -186,4 +216,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JTextField valorationUser;
     private javax.swing.JLabel writeReview;
     // End of variables declaration//GEN-END:variables
+    private Element element;
+    private JFrame mF;
+    private JPanelSearchResults search;
 }

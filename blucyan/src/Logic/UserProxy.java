@@ -20,12 +20,19 @@ public class UserProxy extends User{
     public void setRealUser(User realUser) {
         this.realUser = realUser;
     }
-
+    
+    public String getImage(){
+        return image;
+    }
+    
+    public void setImage(String path){
+        image = path;
+    }
         Facade facade = Facade.getInstance();
         User realInstance;
         
         private String name;
-        
+        private String image;
 	public User getRealInstance( ) throws Exception{
             
             if(realInstance==null){

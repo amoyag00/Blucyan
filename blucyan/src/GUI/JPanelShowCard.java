@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Logic.Element;
+import javax.swing.JFrame;
+
 /**
  *
  * @author cloud
@@ -14,7 +17,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelShowCard
      */
-    public JPanelShowCard() {
+    public JPanelShowCard(Element ele,JFrame mainFrame,JPanelSearchResults search) {
         initComponents();
     }
 
