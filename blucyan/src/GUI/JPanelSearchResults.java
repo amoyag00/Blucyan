@@ -156,6 +156,9 @@ public class JPanelSearchResults extends javax.swing.JPanel {
       search();
         
     }
+    public String getSearchField(){
+        return this.searchField.getText();
+    }
     
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         search();
@@ -165,7 +168,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxActionPerformed
 
-    private void search(){
+    public void search(){
      try {
             // TODO add your handling code here:
             UserController controller = UserController.getInstance();
@@ -231,7 +234,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File("/home/cloud/avengersCover.jpg"/*results.get(i).getCover()*/));
+                    image=ImageIO.read(new File("/home/alex/Escritorio/sherlock.jpg"/*results.get(i).getCover()*/));
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);
                     JLabel cover = new JLabel(new ImageIcon(scaledImage));

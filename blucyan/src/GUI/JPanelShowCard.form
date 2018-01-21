@@ -135,7 +135,6 @@
                           <Component id="seasonsLabel" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="episodesLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -179,7 +178,6 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="descriptionLabel" min="-2" pref="237" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -200,6 +198,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt; Back"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backButtonMouseReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="nameLabel">
           <Properties>
@@ -213,6 +214,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="HOME"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="homeButtonMouseReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="imageLabel">
           <Properties>

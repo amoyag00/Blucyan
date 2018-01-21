@@ -9,6 +9,7 @@ import Logic.Element;
 import Logic.ElementList;
 import Logic.Show;
 import Logic.UserController;
+import java.awt.CardLayout;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,11 +98,21 @@ public class JPanelShowCard extends javax.swing.JPanel {
         producersLabel = new javax.swing.JLabel();
 
         backButton.setText("< Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                backButtonMouseReleased(evt);
+            }
+        });
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         nameLabel.setText("SHOW NAME");
 
         homeButton.setText("HOME");
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                homeButtonMouseReleased(evt);
+            }
+        });
 
         imageLabel.setText("IMAGEN");
 
@@ -231,8 +242,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(seasonsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(episodesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(episodesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,8 +278,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
                                     .addComponent(watchedLabel)
                                     .addComponent(wathedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -309,15 +318,16 @@ public class JPanelShowCard extends javax.swing.JPanel {
             params = new String[5];
             
             params[0] = show.getId();
-            params[1] = String.valueOf(valoration);
-            params[2] = this.wathedText.getText();
-            params[3] = this.statusText.getText();
+            params[1]=show.getName();
+            params[2] = String.valueOf(valoration);
+            params[3] = this.wathedText.getText();
+            params[4] = this.statusText.getText();
             
             this.addButton.setVisible(false);
             
             UserController u = UserController.getInstance();
             try {
-                 u.addEntry(params, show.getType());
+                 u.addEntry(params, "Show");
                  ElementList[] lists = u.getLists();
                  
                  this.home.setLists(lists);
@@ -338,10 +348,21 @@ public class JPanelShowCard extends javax.swing.JPanel {
         UserController u = UserController.getInstance();
         try {
             u.delete(ele.getId(), Element.class);
+            search.search();
         } catch (Exception ex) {
             Logger.getLogger(JPanelShowCard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_deleteButtonMouseReleased
+
+    private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Search");
+    }//GEN-LAST:event_backButtonMouseReleased
+
+    private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
+    }//GEN-LAST:event_homeButtonMouseReleased
 
     private JPanel mainPanel;
     private Element ele;

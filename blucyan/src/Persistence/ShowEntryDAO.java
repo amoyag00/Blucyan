@@ -125,7 +125,8 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowEntries VALUES (?,?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO ShowEntries(showList_id,show_id,valoration,status_in_list,number_watched_episodes)"
+                    + " VALUES (?,?,?,?,?)");
             st.setString(1, sE.getListID());
             st.setString(2, sE.getShowID());
             st.setByte(3, (byte) sE.getValoration());
