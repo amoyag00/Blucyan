@@ -131,6 +131,9 @@ public class Login extends javax.swing.JFrame {
 
     private void signInButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseReleased
         // TODO add your handling code here:
+        JFrameCreatteAccount frame= new JFrameCreatteAccount();
+        frame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_signInButtonMouseReleased
 
     /**
