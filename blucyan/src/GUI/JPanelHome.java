@@ -290,7 +290,7 @@ public class JPanelHome extends javax.swing.JPanel {
            
     }
     
-    private void setLists(ElementList[] lists){
+    public void setLists(ElementList[] lists){
         for(int i=0;i<lists.length;i++){
             if(lists[i].getTypeList().equalsIgnoreCase("Videogame")){
                 videogameList= lists[i];
@@ -400,10 +400,11 @@ public class JPanelHome extends javax.swing.JPanel {
       panel.add(filler,c);
       panel.repaint();
       panel.revalidate();
+      
     }
     
     private void printVideogameList(){
-         panel.removeAll();
+      panel.removeAll();
       panel.repaint();
       panel.revalidate();
       Insets ins=new Insets(0, 150, 5, 5);
@@ -603,7 +604,7 @@ public class JPanelHome extends javax.swing.JPanel {
     ElementList<VideogameEntry> videogameList;
     ElementList<ComicEntry> comicList;
     ElementList<ShowEntry> showList;
-    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton comicButton;

@@ -7,6 +7,7 @@ package GUI;
 
 import Logic.Comic;
 import Logic.Element;
+import Logic.ElementList;
 import Logic.UserController;
 import java.awt.CardLayout;
 import java.util.Arrays;
@@ -25,7 +26,8 @@ public class JPanelComicCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelComicCard
      */
-    public JPanelComicCard(Element ele, JPanel mainPanel, JPanelSearchResults search) {
+    public JPanelComicCard(Element ele, JPanel mainPanel, JPanelSearchResults search, JPanelHome homePanel) {
+        this.homePanel=homePanel;
         this.ele=ele;
         this.search=search;
         this.mainPanel=mainPanel;
@@ -90,6 +92,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
         nameLabel.setText("COMIC NAME");
 
         homeButton.setText("HOME");
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                homeButtonMouseReleased(evt);
+            }
+        });
 
         imageLabel.setText("IMAGEN");
 
@@ -254,15 +261,25 @@ public class JPanelComicCard extends javax.swing.JPanel {
             params[3]=String.valueOf(readChapters.getText());
             params[4]=comic.getStatusComic();
             addButton.setVisible(false);
+            try {
+                
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         try {
             UserController.getInstance().addEntry(params,"comic");
+            ElementList [] lists=UserController.getInstance().getLists();
+                
+            homePanel.setLists(lists);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -272,7 +289,13 @@ public class JPanelComicCard extends javax.swing.JPanel {
         // TODO add your handling code here:
         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Search");
     }//GEN-LAST:event_backButtonMouseReleased
+
+    private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(homePanel, "Home");
+    }//GEN-LAST:event_homeButtonMouseReleased
     private JPanel mainPanel;
+    private JPanelHome homePanel;
     private Element ele;
     private JPanelSearchResults search;
     // Variables declaration - do not modify//GEN-BEGIN:variables

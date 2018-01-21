@@ -21,7 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         JPanelSearchResults search = new JPanelSearchResults(mainPanel);
-        JPanelHome home;
+        JPanelHome home=null;
         JPanelHomeAdmin admin = new JPanelHomeAdmin(search);
         
         if(range){
@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
             home = new JPanelHome(this, search);
             mainPanel.add(home, "Home");
         }
+        search.setHomePanel(home);
         //mainPanel.add(home, "Home");
         mainPanel.add(search,"Search");
         /*index = new JPanelHelpIndex();

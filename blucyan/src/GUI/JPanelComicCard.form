@@ -177,6 +177,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="HOME"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="homeButtonMouseReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="imageLabel">
           <Properties>

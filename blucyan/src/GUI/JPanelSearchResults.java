@@ -50,13 +50,17 @@ public class JPanelSearchResults extends javax.swing.JPanel {
     /**
      * Creates new form JPanelSearchResults
      */
-    public JPanelSearchResults(JPanel mainPanel) {
-     
+    public JPanelSearchResults(JPanel mainPanel ) {
+        
         initComponents();
        this.mainPanel=mainPanel;
         this.scroll.setPreferredSize(new Dimension(1000,550));
         this.scroll.getVerticalScrollBar().setUnitIncrement(16);
         
+    }
+    
+    public void setHomePanel(JPanelHome homePanel){
+        this.homePanel=homePanel;
     }
 
     /**
@@ -254,7 +258,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                                     }
                                 }else if(type.equalsIgnoreCase("Comic")){
                                     try {
-                                        JPanelComicCard card=new JPanelComicCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this);
+                                        JPanelComicCard card=new JPanelComicCard(proxy.getRealInstance(),JPanelSearchResults.this.mainPanel, JPanelSearchResults.this,JPanelSearchResults.this.homePanel);
                                         JPanel mainPanel=(JPanel)JPanelSearchResults.this.getParent();
                                         mainPanel.add(card,"comic");
                                         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "comic");
@@ -317,7 +321,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
     
     }
     private JPanel mainPanel;
-    
+    private JPanelHome homePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JPanel bigPanel;
