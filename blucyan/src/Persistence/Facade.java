@@ -40,8 +40,11 @@ public class Facade {
             return mapaDAO.get(classType).get(id);
 	}
         
+        public Review getReview(String element_id, String nickname) throws Exception{
+            return ((ReviewDAO)mapaDAO.get(Review.class)).getReview(element_id, nickname);
+        }
         
-        public boolean isComicEntryAdded(String element_id, String list_id){
+        public boolean isComicEntryAdded(String element_id, String list_id) throws Exception{
             boolean isAdded=false;
               ComicEntryDAO comicEntryDAO= (ComicEntryDAO) mapaDAO.get(ComicEntry.class);
             return comicEntryDAO.isAdded(element_id, list_id);

@@ -131,7 +131,7 @@ public class UserController {
         }
         
     }
-    public boolean isEntryAdded(String element_id, String typeElement){
+    public boolean isEntryAdded(String element_id, String typeElement) throws Exception{
         boolean isAdded=false;
           if(typeElement.equalsIgnoreCase("Videogame")){
                 
@@ -260,12 +260,16 @@ public class UserController {
      * @param text
      * @param elementID
      */
-    public void addReview(String text, String elementID) {
+    public void addReview(Review rev) {
         // TODO - implement UserController.addReview
-        Review newReview = new Review(actualUser.getUserName(), elementID, text);
+       rev.setUserName(this.actualUser.getUserName());
+      
+        facade.put(rev, Review.class);
         
-        facade.put(newReview, Review.class);
-        
+    }
+    
+    public Review  getReview(String element_id) throws Exception{
+        return facade.getReview(element_id, this.actualUser.getUserName());
     }
     
     public void backup() {

@@ -52,19 +52,13 @@
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="addButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="imageLabel" alignment="0" pref="223" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="reviewText" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="writeReview" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="addButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="imageLabel" alignment="0" pref="223" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="chapterLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -80,19 +74,30 @@
                                       <Group type="102" attributes="0">
                                           <EmptySpace pref="148" max="32767" attributes="0"/>
                                           <Component id="descriptionLabel" min="-2" pref="259" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                           <Component id="readChapters" min="-2" pref="57" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="writeReview" min="-2" pref="122" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="971" max="-2" attributes="0"/>
+                              <Component id="publish" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -139,19 +144,21 @@
                                   <Component id="ilustratorsLabel" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                       <Component id="imageLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="addButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="writeReview" min="-2" pref="27" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="reviewText" min="-2" pref="146" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="168" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="publish" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -218,7 +225,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="writeReview">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Write review"/>
+            <Property name="text" type="java.lang.String" value="Your review:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -236,11 +243,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="reviewText">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Review"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="dateLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Release date: "/>
@@ -264,6 +266,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="readChapters">
+        </Component>
+        <Component class="javax.swing.JButton" name="publish">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save reveiw"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="publishMouseReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="statusLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Status: "/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

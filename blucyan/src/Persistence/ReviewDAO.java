@@ -55,6 +55,30 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
         
     }
     
+    private boolean exists(String element_id, String nickname) throws Exception{
+        boolean exists=false;
+        try{
+            this.openConnection();
+            PreparedStatement st = this.getConnection().prepareStatement("SELECT COUNT(review_id) FROM Reviews WHERE element_id=? AND  nickname=?");
+            st.setString(1, element_id);
+            st.setString(2,nickname);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            exists=rs.getBoolean(1);
+        }catch (Exception e){
+            throw new Exception("Method Delete review " + e.getMessage());
+        }
+        
+        finally{
+            try{
+                this.closeConnection();
+            }catch (Exception e){
+                throw new Exception("Method delete review " + e.getMessage());
+            }
+        }
+        return exists;
+        
+    }
     
      public Review get(String id) throws Exception{
          Review rev=new Review();
@@ -83,14 +107,18 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
     
     public void put(Review rev) throws Exception{
         try {
-            Connection cn;
-            this.openConnection();
-            cn=this.getConnection();
-            PreparedStatement st = this.getConnection().prepareStatement("INSERT INTO Reviews (nickname,element_id,review_text) VALUES (?,?,?)");
-            st.setString(1, rev.getUserName());
-            st.setString(2, rev.getElementID());
-            st.setString(3, rev.getText());
-            st.executeUpdate();
+            if(exists(rev.getElementID(),rev.getUserName())){
+                modify(rev);
+            }else{
+                Connection cn;
+                this.openConnection();
+                cn=this.getConnection();
+                PreparedStatement st = this.getConnection().prepareStatement("INSERT INTO Reviews (nickname,element_id,review_text) VALUES (?,?,?)");
+                st.setString(1, rev.getUserName());
+                st.setString(2, rev.getElementID());
+                st.setString(3, rev.getText());
+                st.executeUpdate();
+            }
         }catch(Exception e){
             throw new Exception("Inserting review " + e.getMessage());
         }
@@ -107,7 +135,23 @@ public class ReviewDAO extends DBConnection implements IConversor<Review,Review>
    public List<Review> search(String name) throws UnsupportedOperationException{
        throw new UnsupportedOperationException("Method not implmented");
     }
-    
+   public Review getReview(String element_id, String nickname) throws Exception{
+       this.openConnection();
+       
+       PreparedStatement st = this.getConnection().prepareStatement("SELECT * FROM Reviews WHERE element_id=? AND nickname=?");
+       st.setString(1, element_id);
+       st.setString(2,nickname);
+       ResultSet rs = st.executeQuery();
+       rs.next();
+       Review rev=new Review();
+       rev.setReviewID(rs.getString("review_id"));
+       rev.setUserName(rs.getString("nickname"));
+       rev.setElementID(rs.getString("element_id"));
+       rev.setText(rs.getString("review_text"));
+       
+       
+       return rev;
+   } 
    public void modify(Review rev) throws Exception {
        
         Connection cn;

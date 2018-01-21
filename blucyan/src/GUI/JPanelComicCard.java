@@ -8,6 +8,7 @@ package GUI;
 import Logic.Comic;
 import Logic.Element;
 import Logic.ElementList;
+import Logic.Review;
 import Logic.UserController;
 import java.awt.CardLayout;
 import java.util.Arrays;
@@ -36,19 +37,31 @@ public class JPanelComicCard extends javax.swing.JPanel {
     }
     
     private void fillCard(){
-        UserController u=UserController.getInstance();
-        if(u.isEntryAdded(ele.getId(), "Comic")){
-            this.addButton.setVisible(false);
+        try {
+            UserController u=UserController.getInstance();
+            try {
+                if(u.isEntryAdded(ele.getId(), "Comic")){
+                    this.addButton.setVisible(false);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Comic comic=(Comic)this.ele;
+            this.statusLabel.setText(statusLabel.getText()+comic.getStatusComic());
+            this.nameLabel.setText(comic.getName());
+            this.chapterLabel.setText(chapterLabel.getText()+comic.getNumberChapters());
+            this.dateLabel.setText(dateLabel.getText()+comic.getReleaseDate());
+            this.authorsLabel.setText(authorsLabel.getText()+
+                    Arrays.toString(comic.getWriters()));
+            this.ilustratorsLabel.setText(ilustratorsLabel.getText()+Arrays.toString(comic.getIllustrators()));
+            this.descriptionLabel.setText(comic.getDescritpion());
+            this.reviewWrite.setText(UserController.getInstance().getReview(comic.getId()).getText());
+        } catch (Exception ex) {
+            Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Comic comic=(Comic)this.ele;
-        this.nameLabel.setText(comic.getName());
-        this.chapterLabel.setText(chapterLabel.getText()+comic.getNumberChapters());
-        this.dateLabel.setText(dateLabel.getText()+comic.getReleaseDate());
-        this.authorsLabel.setText(authorsLabel.getText()+
-                Arrays.toString(comic.getWriters()));
-        this.ilustratorsLabel.setText(ilustratorsLabel.getText()+Arrays.toString(comic.getIllustrators()));
-        this.descriptionLabel.setText(comic.getDescritpion());
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,13 +86,14 @@ public class JPanelComicCard extends javax.swing.JPanel {
         writeReview = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewWrite = new javax.swing.JTextArea();
-        reviewText = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         ilustratorsLabel = new javax.swing.JLabel();
         statusField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         readChapters = new javax.swing.JTextField();
+        publish = new javax.swing.JButton();
+        statusLabel = new javax.swing.JLabel();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,13 +129,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
             }
         });
 
-        writeReview.setText("Write review");
+        writeReview.setText("Your review:");
 
         reviewWrite.setColumns(20);
         reviewWrite.setRows(5);
         jScrollPane1.setViewportView(reviewWrite);
-
-        reviewText.setText("Review");
 
         dateLabel.setText("Release date: ");
 
@@ -130,6 +142,15 @@ public class JPanelComicCard extends javax.swing.JPanel {
         jLabel1.setText("Status");
 
         jLabel2.setText("Read chapters");
+
+        publish.setText("Save reveiw");
+        publish.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                publishMouseReleased(evt);
+            }
+        });
+
+        statusLabel.setText("Status: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,7 +161,7 @@ public class JPanelComicCard extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(backButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,17 +172,12 @@ public class JPanelComicCard extends javax.swing.JPanel {
                         .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(reviewText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-                                .addGap(29, 29, 29)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chapterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -175,14 +191,22 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                                         .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(53, 53, 53))
+                                        .addGap(106, 106, 106))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(122, 122, 122)
                                         .addComponent(jLabel2)
                                         .addGap(29, 29, 29)
                                         .addComponent(readChapters, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(53, 53, 53))))
+                                        .addGap(0, 206, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(statusLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(publish, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,17 +242,19 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                 .addComponent(authorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(ilustratorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(46, 46, 46))
+                        .addGap(13, 13, 13)
+                        .addComponent(statusLabel)
+                        .addGap(15, 15, 15))
                     .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addButton)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(reviewText, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(publish)
+                .addGap(157, 157, 157))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -292,8 +318,19 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
     private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseReleased
         // TODO add your handling code here:
-        ((CardLayout)mainPanel.getLayout()).show(homePanel, "Home");
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
     }//GEN-LAST:event_homeButtonMouseReleased
+
+    private void publishMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishMouseReleased
+        // TODO add your handling code here:
+        Review rev = null;
+        rev.setElementID(ele.getId());
+        rev.setText(reviewWrite.getText());
+        UserController.getInstance().addReview(rev);
+        
+      
+        
+    }//GEN-LAST:event_publishMouseReleased
     private JPanel mainPanel;
     private JPanelHome homePanel;
     private Element ele;
@@ -313,10 +350,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JButton publish;
     private javax.swing.JTextField readChapters;
-    private javax.swing.JLabel reviewText;
     private javax.swing.JTextArea reviewWrite;
     private javax.swing.JTextField statusField;
+    private javax.swing.JLabel statusLabel;
     private javax.swing.JLabel valorationLabel;
     private javax.swing.JTextField valorationUser;
     private javax.swing.JLabel writeReview;
