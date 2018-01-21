@@ -22,6 +22,8 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
@@ -48,10 +50,10 @@ public class JPanelSearchResults extends javax.swing.JPanel {
     /**
      * Creates new form JPanelSearchResults
      */
-    public JPanelSearchResults() {
+    public JPanelSearchResults(JFrame mainFrame) {
      
         initComponents();
-       
+       this.mainFrame=mainFrame;
         this.scroll.setPreferredSize(new Dimension(1000,550));
         this.scroll.getVerticalScrollBar().setUnitIncrement(16);
         
@@ -225,10 +227,28 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File(results.get(i).getCover()));
+                    image=ImageIO.read(new File("/home/alex/Escritorio/sherlock.jpg"/*results.get(i).getCover()*/));
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
-        
-                    JLabel cover = new JLabel(new ImageIcon(scaledImage)); 
+                    ElementProxy proxy=results.get(i);
+                    JLabel cover = new JLabel(new ImageIcon(scaledImage));
+                    cover.addMouseListener(new MouseAdapter()  {  
+                         public void mouseClicked(MouseEvent e)  {  
+                                String type=proxy.getType();
+                                if(type.equalsIgnoreCase("Videogame")){
+                                    try {
+                                        JPanelVideogameCard card=new JPanelVideogameCard(proxy.getRealInstance(),JPanelSearchResults.this.mainFrame, JPanelSearchResults.this);
+                                        mainFrame.getContentPane().add(card,"videogame");
+                                        ((CardLayout)mainFrame.getLayout()).show(card, "videogame");
+                                    } catch (Exception ex) {
+                                        Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }else if(type.equalsIgnoreCase("Show")){
+                                    
+                                }else if(type.equalsIgnoreCase("Comic")){
+                                    
+                                }
+
+                          }  }); 
                     //cover.setSize(720, 576); 
                     
                     cover.doLayout();
@@ -281,7 +301,8 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         }
     
     }
-
+    private JFrame mainFrame;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JPanel bigPanel;

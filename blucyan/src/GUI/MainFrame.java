@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(boolean range) {
         initComponents();
         
-        JPanelSearchResults search = new JPanelSearchResults();
+        JPanelSearchResults search = new JPanelSearchResults(this);
         JPanelHome home;
         JPanelHomeAdmin admin = new JPanelHomeAdmin(search);
         

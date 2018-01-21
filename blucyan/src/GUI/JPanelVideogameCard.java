@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Logic.Element;
+import javax.swing.JFrame;
+
 /**
  *
  * @author cloud
@@ -14,7 +17,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     /**
      * Creates new form JPanelElementCard
      */
-    public JPanelVideogameCard() {
+    public JPanelVideogameCard(Element ele,JFrame mainFrame,JPanelSearchResults search) {
         initComponents();
     }
 

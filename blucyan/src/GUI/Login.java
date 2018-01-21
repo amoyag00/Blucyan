@@ -1,6 +1,8 @@
 package GUI;
 
 import Logic.UserController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,6 +25,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         tries=0;
+        
     }
 
     /**
