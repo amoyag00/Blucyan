@@ -27,6 +27,9 @@ public class MainFrame extends javax.swing.JFrame {
         
         if(range){
             mainPanel.add(admin, "Home");
+            other = new JPanelOtherHome(this,search, home, mainPanel);
+            search.setOther(other);
+            mainPanel.add(other,"Other");
         }
         else {
             home = new JPanelHome(this, search);
