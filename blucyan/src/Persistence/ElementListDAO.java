@@ -9,8 +9,19 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class that interacts with the database
+ *
+ * @author Aleandro, Carlos, Samuel
+ */
 public class ElementListDAO extends DBConnection implements IConversor<ElementList, ElementList[]> {
 
+    /**
+     * Deletes the list whose list_id equals to id
+     *
+     * @param id
+     * @throws Exception
+     */
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
@@ -28,6 +39,13 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
         }
     }
 
+    /**
+     * Checks if a list exists
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public boolean exists(String id) throws Exception {
         boolean exists = false;
         try {
@@ -50,6 +68,13 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
 
     }
 
+    /**
+     * Gets the list that corresponds to id
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public ElementList get(String id) throws Exception {
         ElementList eList = new ElementList();
         try {
@@ -74,6 +99,13 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
         return eList;
     }
 
+    /**
+     * Gets the lists of an user
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public ElementList[] getLists(String id) throws Exception {
         ElementList[] lists = new ElementList[3];
         Connection cn;
@@ -85,8 +117,8 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
         st = cn.prepareStatement("Select * FROM Lists WHERE nickname = ?");
         st.setString(1, id);
         rs = st.executeQuery();
-        for(int i=0;i<lists.length;i++){
-            lists[i]=new ElementList();
+        for (int i = 0; i < lists.length; i++) {
+            lists[i] = new ElementList();
         }
         for (int i = 0; i < lists.length; i++) {
             rs.next();
@@ -98,22 +130,36 @@ public class ElementListDAO extends DBConnection implements IConversor<ElementLi
         this.closeConnection();
 
         return sort(lists);
-        
+
     }
-private ElementList[] sort(ElementList[] unsortedLists){
-    ElementList[] sortedLists=new ElementList[unsortedLists.length];
-    for(int i=0;i<unsortedLists.length;i++){
-        if(unsortedLists[i].getTypeList().equalsIgnoreCase("Videogame")){
-            sortedLists[0]=unsortedLists[i];
-        }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Comic")){
-            sortedLists[1]=unsortedLists[i];
-        }else if(unsortedLists[i].getTypeList().equalsIgnoreCase("Show")){
-            sortedLists[2]=unsortedLists[i];
+
+    /**
+     * Sorts the three lists
+     * 
+     * @param unsortedLists
+     * @return 
+     */
+    private ElementList[] sort(ElementList[] unsortedLists) {
+        ElementList[] sortedLists = new ElementList[unsortedLists.length];
+        for (int i = 0; i < unsortedLists.length; i++) {
+            if (unsortedLists[i].getTypeList().equalsIgnoreCase("Videogame")) {
+                sortedLists[0] = unsortedLists[i];
+            } else if (unsortedLists[i].getTypeList().equalsIgnoreCase("Comic")) {
+                sortedLists[1] = unsortedLists[i];
+            } else if (unsortedLists[i].getTypeList().equalsIgnoreCase("Show")) {
+                sortedLists[2] = unsortedLists[i];
+            }
+
         }
-        
+        return sortedLists;
     }
-    return sortedLists;
-}
+
+    /**
+     * Puts a list into the database
+     * 
+     * @param eList
+     * @throws Exception 
+     */
     public void put(ElementList eList) throws Exception {
         try {
             Connection cn;
@@ -136,22 +182,23 @@ private ElementList[] sort(ElementList[] unsortedLists){
         }
     }
 
+    /**
+     * Unsupported operation
+     * 
+     * @param name
+     * @return Nothing
+     * @throws UnsupportedOperationException 
+     */
     public List<ElementList[]> search(String name) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Method not implmented");
     }
 
-    public static void main(String args[]) {
-        ElementList l = new ElementList();
-        l.setNickname("Altair");
-        l.setTypeList("Videogame");
-        try {
-            new ElementListDAO().put(l);
-        } catch (Exception ex) {
-            Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
+    /**
+     * Unsupported operation
+     * 
+     * @param element
+     * @throws Exception 
+     */
     @Override
     public void modify(ElementList element) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

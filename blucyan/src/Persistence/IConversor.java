@@ -2,6 +2,12 @@ package Persistence;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Alejandro, Carlos, Samuel
+ * @param <T>
+ * @param <D> 
+ */
 public interface IConversor<T,D> {
 
 	/**

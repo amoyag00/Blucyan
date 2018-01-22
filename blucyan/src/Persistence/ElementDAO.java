@@ -19,8 +19,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 
+/**
+ * Class that interacts with the database
+ * 
+ * @author cloud
+ */
 public class ElementDAO extends DBConnection implements IConversor<Element, ElementProxy> {
 
+    /**
+     * Gets the element that corresponds to id
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public Element get(String id) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -53,13 +65,6 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         element.setType(type);
         element.setReleaseDate(rs.getString("release_date"));
         element.setCover(rs.getString("cover"));
-        
-        /*byte[] img = rs.getBytes("cover");
-       ImageIcon image = new ImageIcon(img);
-       Image im = image.getImage();
-       Image dbImage = im.getScaledInstance(label.getWidth(), label.getHeight, Image.SCALE_SMOOTH);
-       ImageIcon cover = new ImageIcon(dbImage);
-       label.setIcon(cover);*/
 
         st = cn.prepareStatement("SELECT genre FROM Genres WHERE element_id = ? ");
         st.setString(1, element.getId());
@@ -76,6 +81,15 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return element;
     }
 
+    /**
+     * Gets the data of a videogame element
+     * 
+     * @param videogame
+     * @param id
+     * @param cn
+     * @return
+     * @throws SQLException 
+     */
     private Videogame fillVideogame(Videogame videogame, String id, Connection cn) throws SQLException {
         ArrayList<String> platforms = new ArrayList<String>();
         ResultSet rs;
@@ -96,6 +110,15 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return videogame;
     }
 
+    /**
+     * Gets the data of a show element
+     * 
+     * @param show
+     * @param id
+     * @param cn
+     * @return
+     * @throws SQLException 
+     */
     private Show fillShow(Show show, String id, Connection cn) throws SQLException {
         ArrayList<String> actors = new ArrayList<String>();
         ArrayList<String> producers = new ArrayList<String>();
@@ -138,6 +161,15 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return show;
     }
 
+    /**
+     * Gets the data of a comic element
+     * 
+     * @param comic
+     * @param id
+     * @param cn
+     * @return
+     * @throws SQLException 
+     */
     private Comic fillComic(Comic comic, String id, Connection cn) throws SQLException {
         ArrayList<String> writers = new ArrayList<String>();
         ArrayList<String> illustrators = new ArrayList<String>();
@@ -172,6 +204,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return comic;
     }
 
+    /**
+     * Deletes the element whose element_id equals id
+     * 
+     * @param id
+     * @throws Exception 
+     */
     public void delete(String id) throws Exception {
         Connection cn;
         ResultSet rs;
