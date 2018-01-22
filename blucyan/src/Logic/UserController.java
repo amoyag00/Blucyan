@@ -198,15 +198,16 @@ public class UserController {
         boolean isAdded=false;
         if(!actualUser.getIsAdmin()){ 
         if(typeElement.equalsIgnoreCase("Videogame")){
-                isAdded=facade.isComicEntryAdded(element_id,this.vList.getListID());
+                isAdded=facade.isVideogameEntryAdded(element_id,this.vList.getListID());
             }else if(typeElement.equalsIgnoreCase("Show")){
-                isAdded=facade.isComicEntryAdded(element_id,this.sList.getListID());
+                isAdded=facade.isShowEntryAdded(element_id,this.sList.getListID());
             }else if(typeElement.equalsIgnoreCase("Comic")){
                 isAdded=facade.isComicEntryAdded(element_id,this.cList.getListID());
             }
         }else{
             isAdded=true;
         }
+        System.out.println(isAdded);
         return isAdded;
         
     }

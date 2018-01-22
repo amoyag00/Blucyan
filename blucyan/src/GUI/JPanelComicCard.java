@@ -142,6 +142,8 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
         valorationLabel.setText("Valoration:");
 
+        valorationUser.setText("0");
+
         addButton.setText("ADD");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -159,9 +161,13 @@ public class JPanelComicCard extends javax.swing.JPanel {
 
         ilustratorsLabel.setText("Ilustrators: ");
 
+        statusField.setText("State");
+
         jLabel1.setText("Status");
 
         jLabel2.setText("Read chapters");
+
+        readChapters.setText("0");
 
         publish.setText("Save reveiw");
         publish.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,11 +335,11 @@ public class JPanelComicCard extends javax.swing.JPanel {
             }
         }
         
-        try {
-            UserController.getInstance().addEntry(params,"comic");
-            ElementList [] lists=UserController.getInstance().getLists();
-                
-            homePanel.setLists(lists);
+        try {        
+                UserController.getInstance().addEntry(params,"comic");
+                ElementList [] lists=UserController.getInstance().getLists();
+
+                homePanel.setLists(lists);          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

@@ -224,7 +224,6 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         st.setByte(1, (byte) vE.getValoration());
         st.setString(2, vE.getStatus());
         st.setString(3, vE.getEntryID());
-        st.setString(4, vE.getEntryID());
         
         st.executeUpdate();
         this.closeConnection();

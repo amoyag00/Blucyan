@@ -560,11 +560,14 @@ public class JPanelHome extends javax.swing.JPanel {
           panel.add(t1,c);
           c.gridx=2;
           CustomTextField t2=new CustomTextField(entry.getStatus());
+          t2.setPreferredSize(new Dimension(30,20));
           panel.add(t2,c); 
+          t2.setPreferredSize(new Dimension(30,20));
           params.add(t2);
           c.gridx=3;
            CustomTextField t3=new CustomTextField(String.valueOf(entry.getNumWatchedEpisodes()));
-          panel.add(t3,c); 
+          t3.setPreferredSize(new Dimension(60,20));
+           panel.add(t3,c); 
           params.add(t3);
           c.gridx=4;
           CustomButton applyButton=new CustomButton("Apply changes",c.gridy,params.toArray(new CustomTextField[params.size()]),entry);

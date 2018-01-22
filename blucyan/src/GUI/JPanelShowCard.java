@@ -53,7 +53,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         UserController u = UserController.getInstance();
         Show show = (Show) this.ele;
         
-        if(u.isEntryAdded(show.getId(), show.getType())){
+        if(u.isEntryAdded(show.getId(), "Show")){
             this.addButton.setVisible(false);
         }
         this.nameLabel.setText(show.getName());
@@ -144,6 +144,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
 
         valorationLabel.setText("Valoration: ");
 
+        valorationUser.setText("0");
+
         addButton.setText("ADD");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -168,6 +170,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
             }
         });
 
+        statusText.setText("State");
+
         statusLabel.setText("Status");
 
         statusLabel2.setText("Status: ");
@@ -175,6 +179,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
         genreLabel.setText("Genre: ");
 
         watchedLabel.setText("Watched episodes: ");
+
+        wathedText.setText("0");
 
         saveButton.setText("Save changes");
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -361,6 +367,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
             params[4] = this.statusText.getText();
             
             this.addButton.setVisible(false);
+            
+            
             
             UserController u = UserController.getInstance();
             try {

@@ -68,7 +68,6 @@ public class Facade {
      * @throws Exception
      */
     public boolean isComicEntryAdded(String element_id, String list_id) throws Exception {
-        boolean isAdded = false;
         ComicEntryDAO comicEntryDAO = (ComicEntryDAO) mapaDAO.get(ComicEntry.class);
         return comicEntryDAO.isAdded(element_id, list_id);
     }
@@ -82,7 +81,6 @@ public class Facade {
      * @throws Exception 
      */
     public boolean isVideogameEntryAdded(String element_id, String list_id) throws Exception {
-        boolean isAdded = false;
         VideogameEntryDAO vEntryDAO = (VideogameEntryDAO) mapaDAO.get(VideogameEntry.class);
         return vEntryDAO.isAdded(element_id, list_id);
     }
@@ -98,7 +96,8 @@ public class Facade {
     public boolean isShowEntryAdded(String element_id, String list_id) throws Exception {
         boolean isAdded = false;
         ShowEntryDAO sEntryDAO = (ShowEntryDAO) mapaDAO.get(ShowEntry.class);
-        return sEntryDAO.isAdded(element_id, list_id);
+        isAdded = sEntryDAO.isAdded(element_id, list_id);
+        return isAdded;
     }
 
     /**
