@@ -128,6 +128,9 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Nickname and password does not match, try again");
                 }
             }
+            if(tries==3){
+                System.exit(0);
+            }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
