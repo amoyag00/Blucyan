@@ -11,11 +11,16 @@ import Logic.ElementList;
 import Logic.Review;
 import Logic.Show;
 import Logic.UserController;
+import Persistence.ImageDownloader;
 import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -35,7 +40,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
         this.home = homePanel;
         initComponents();
         fillCard();
-        
+        this.repaint();
+        this.revalidate();
         UserController u = UserController.getInstance();
         
         if(!u.getActualUser().getIsAdmin()){
@@ -50,7 +56,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         if(u.isEntryAdded(show.getId(), show.getType())){
             this.addButton.setVisible(false);
         }
-        
+        this.nameLabel.setText(show.getName());
         this.seasonsLabel.setText(this.seasonsLabel.getText()+show.getNumberSeasons());
         this.episodesLabel.setText(this.episodesLabel.getText()+show.getNumberEpisodes());
         this.chaptersLabel.setText(this.chaptersLabel.getText()+show.getDuration());
@@ -61,6 +67,17 @@ public class JPanelShowCard extends javax.swing.JPanel {
         this.statusLabel2.setText(this.statusLabel2.getText()+show.getStatus());
         this.genreLabel.setText(this.genreLabel.getText()+Arrays.toString(show.getGenre()));
         this.reviewWrite.setText(UserController.getInstance().getReview(show.getId()).getText());
+        Image image=ImageDownloader.getImage(this.ele.getCover());
+        Image scaledImage = image.getScaledInstance(200, 290, Image.SCALE_SMOOTH);
+        JLabel lab= new JLabel(new ImageIcon(scaledImage));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy=0;
+        gbc.gridx=0;
+        gbc.fill=GridBagConstraints.BOTH;
+        gbc.anchor=GridBagConstraints.CENTER;
+        this.imagePanel.add(lab,gbc);
+                imagePanel.repaint();
+                imagePanel.revalidate();
     }
 
     /**
@@ -76,7 +93,6 @@ public class JPanelShowCard extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
-        imageLabel = new javax.swing.JLabel();
         seasonsLabel = new javax.swing.JLabel();
         chaptersLabel = new javax.swing.JLabel();
         actorsLabel = new javax.swing.JLabel();
@@ -99,6 +115,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         saveButton = new javax.swing.JButton();
         producersLabel = new javax.swing.JLabel();
         helpButton = new javax.swing.JButton();
+        imagePanel = new javax.swing.JPanel();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,8 +133,6 @@ public class JPanelShowCard extends javax.swing.JPanel {
                 homeButtonMouseReleased(evt);
             }
         });
-
-        imageLabel.setText("IMAGEN");
 
         seasonsLabel.setText("Number seasons: ");
 
@@ -177,6 +192,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
             }
         });
 
+        imagePanel.setLayout(new java.awt.GridBagLayout());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -202,11 +219,14 @@ public class JPanelShowCard extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(29, 29, 29)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,14 +274,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(statusLabel)
@@ -280,12 +294,19 @@ public class JPanelShowCard extends javax.swing.JPanel {
                                         .addComponent(directorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(producersLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(statusLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(genreLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chaptersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(statusLabel2))
+                            .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(genreLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chaptersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(addButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteButton)))
                         .addGap(15, 15, 15))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -317,7 +338,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(0, 51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -414,7 +435,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
     private javax.swing.JLabel genreLabel;
     private javax.swing.JButton helpButton;
     private javax.swing.JButton homeButton;
-    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
