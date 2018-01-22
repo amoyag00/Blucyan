@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.Help.HelpFrame;
 import Logic.Element;
 import Logic.ElementList;
 import Logic.Review;
@@ -98,6 +99,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         wathedText = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         producersLabel = new javax.swing.JLabel();
+        helpButton = new javax.swing.JButton();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,6 +173,13 @@ public class JPanelShowCard extends javax.swing.JPanel {
 
         producersLabel.setText("Producers: ");
 
+        helpButton.setText("HELP");
+        helpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                helpButtonMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,6 +193,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(183, 183, 183)
+                        .addComponent(helpButton)
                         .addGap(18, 18, 18)
                         .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
@@ -240,7 +251,8 @@ public class JPanelShowCard extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -379,6 +391,16 @@ public class JPanelShowCard extends javax.swing.JPanel {
         UserController.getInstance().addReview(review);
     }//GEN-LAST:event_saveButtonMouseReleased
 
+    private void helpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpButtonMouseReleased
+        // TODO add your handling code here:
+        HelpFrame h = new HelpFrame();
+        h.setVisible(true);
+        h.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = h.getMainPanel();
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "elementCard");
+    }//GEN-LAST:event_helpButtonMouseReleased
+
     private JPanel mainPanel;
     private Element ele;
     private JPanelSearchResults search;
@@ -394,6 +416,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
     private javax.swing.JLabel directorsLabel;
     private javax.swing.JLabel episodesLabel;
     private javax.swing.JLabel genreLabel;
+    private javax.swing.JButton helpButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel jPanel1;

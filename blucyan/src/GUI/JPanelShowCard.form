@@ -48,6 +48,8 @@
                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="nameLabel" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="helpButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="homeButton" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -124,6 +126,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="nameLabel" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="homeButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="helpButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -337,6 +340,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Producers: "/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="helpButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HELP"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="helpButtonMouseReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

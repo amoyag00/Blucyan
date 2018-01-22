@@ -102,6 +102,10 @@ public class HelpFrame extends javax.swing.JFrame {
         });
     }
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
     private JPanelHelpIndex index;
     private JPanelHomeHelp home;
     private JPanelHelpSearch search;
