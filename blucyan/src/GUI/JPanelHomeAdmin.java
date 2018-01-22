@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Logic.UserController;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -35,6 +36,7 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
         browser = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
+        backupButton = new javax.swing.JButton();
 
         state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
 
@@ -59,6 +61,13 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
             }
         });
 
+        backupButton.setText("Backup");
+        backupButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                backupButtonMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,7 +75,10 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addButton)
+                        .addGap(52, 52, 52)
+                        .addComponent(backupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -84,7 +96,9 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
                     .addComponent(browser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton)
+                    .addComponent(backupButton))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -110,9 +124,15 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
         window.setVisible(true);
     }//GEN-LAST:event_addButtonMouseReleased
 
+    private void backupButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupButtonMouseReleased
+        // TODO add your handling code here:
+        UserController.getInstance().backup();
+    }//GEN-LAST:event_backupButtonMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JButton backupButton;
     private javax.swing.JTextField browser;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> state;
