@@ -1,5 +1,6 @@
 package Persistence;
 
+import GUI.JDialogBackup;
 import Logic.ComicEntry;
 import Logic.Element;
 import Logic.ElementList;
@@ -232,7 +233,9 @@ public class Facade {
      * Creates a backup of the database
      */
     public void backup() {
-        Backup.backup();
+        JDialogBackup b = new JDialogBackup(new javax.swing.JDialog(), true);
+        b.setVisible(true);
+        b.dispose();
     }
 
     /**

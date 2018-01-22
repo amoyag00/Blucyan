@@ -11,12 +11,14 @@ public class Backup {
      * Performs the backup of the database
      * 
      */
-    public static void backup() {
+    public static void backup(String dump, String save) {
 
         Process p = null;
         try {
             Runtime runtime = Runtime.getRuntime();
-            p = runtime.exec("C:/Program Files/MySQL/MySQL Server 5.7/bin/mysqldump.exe -u"root  */  "-p"/*password*/ "--add-drop-database -B blucyan -r"+"C:/Users/Usuario/Desktop/patata-backup.sql");
+            //p = runtime.exec("C:/Program Files/MySQL/MySQL Server 5.7/bin/mysqldump.exe -u"root  */  "-p"/*password*/ "--add-drop-database -B blucyan -r"+"C:/Users/Usuario/Desktop/patata-backup.sql");
+           p = runtime.exec(dump+" -u root -proot --add-drop-database -B blucyan -r "+save);
+
             
             int processComplete = p.waitFor();
             if (processComplete == 0) {
