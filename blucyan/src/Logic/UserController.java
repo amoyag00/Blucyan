@@ -174,6 +174,7 @@ public class UserController {
             videogameElement.setPlatforms(params[4].split(","));
             videogameElement.setDeveloper(params[5]);
             videogameElement.setGenre(params[6].split(","));
+            videogameElement.setCover(params[7]);
             
             facade.put(videogameElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("comic")) {
@@ -188,6 +189,7 @@ public class UserController {
             comicElement.setIllustrators(params[6].split(","));
             comicElement.setGenre(params[7].split(","));
             comicElement.setStatusComic(params[8]);
+            comicElement.setCover(params[9]);
             
             facade.put(comicElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("show")) {
@@ -204,7 +206,9 @@ public class UserController {
             showElement.setActors(params[8].split(","));
             showElement.setProducers(params[9].split(","));
             showElement.setGenre(params[10].split(","));
-            showElement.setStatus(params[11]);
+            showElement.setStatus(params[11]);     
+            showElement.setCover(params[12]);
+            
             
             facade.put(showElement, Element.class);
         }

@@ -11,6 +11,7 @@ import Logic.ElementList;
 import Logic.ElementProxy;
 import Logic.UserController;
 import Logic.UserProxy;
+import Persistence.ImageDownloader;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -269,7 +270,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File("/home/cloud/avengersCover.jpg"/*results.get(i).getCover()*/));
+                    image=ImageDownloader.getImage(results.get(i).getCover());
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);
                     JLabel cover = new JLabel(new ImageIcon(scaledImage));

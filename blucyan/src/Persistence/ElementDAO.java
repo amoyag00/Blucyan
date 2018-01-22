@@ -53,7 +53,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         element.setType(type);
         element.setReleaseDate(rs.getString("release_date"));
         element.setCover(rs.getString("cover"));
-        element.setDescritpion(rs.getString("description"));
+        
         /*byte[] img = rs.getBytes("cover");
        ImageIcon image = new ImageIcon(img);
        Image im = image.getImage();
@@ -193,12 +193,13 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
 
         this.openConnection();
         cn = this.getConnection();
-        st = cn.prepareStatement("INSERT INTO Elements (name,type_element,release_date) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        st = cn.prepareStatement("INSERT INTO Elements (name,type_element,release_date, cover) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         st.setString(1, element.getName());
         st.setString(2, element.getType());
 
         //TODO introducir la imagen de la portada
         st.setString(3, element.getReleaseDate());
+        st.setString(4, element.getCover());
         st.executeUpdate();
 
         rs = st.getGeneratedKeys();
@@ -347,6 +348,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
             elem.setName(rs.getString("name"));
             elem.setType(rs.getString("type_element"));
             elem.setId(String.valueOf(rs.getInt("element_id")));
+            elem.setCover(rs.getString("cover"));
             //TODO añadir imagen portada
             searched.add(elem);
         }
