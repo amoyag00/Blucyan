@@ -73,6 +73,11 @@ public class Element {
     public void setId(String id) {
         this.id = id;
     }
-        
+
+    @Override
+    public String toString() {
+        return "Element{" + "name=" + name + ", type=" + type + ", genre=" + genre + ", releaseDate=" + releaseDate + ", id=" + id + ", cover=" + cover + ", descritpion=" + descritpion + '}';
+    }
+       
         
 }

@@ -28,12 +28,12 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
      */
     public JPanelVideogameCard(Element ele,JPanel mainPanel,JPanelSearchResults search, JPanelHome homePanel) {
         this.homePanel=homePanel;
-
-        element=(Videogame)ele;
+        element=ele;
+        
         this.mainPanel=mainPanel;
         this.search=search;
-        fillCard();
         initComponents();
+        fillCard();
     }
 
     private void fillCard(){
@@ -41,19 +41,20 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             UserController u=UserController.getInstance();
             Videogame game=(Videogame)this.element;
             
+            
             try {
                 if(u.isEntryAdded(element.getId(), "Videogame")){
                     this.addButton.setVisible(false);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JPanelVideogameCard.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             this.nameLabel.setText(game.getName());
             this.platformLabel.setText(this.platformLabel.getText() +game.getPlatforms()[0]);
-            this.developerLabel.setText(this.developerLabel.getText() + element.getDeveloper());
-            this.imageLabel.setText(element.getCover());
-            this.descriptionLabel.setText(element.getDescritpion());
+            this.developerLabel.setText(this.developerLabel.getText() + game.getDeveloper());
+            this.imageLabel.setText(game.getCover());
+           
             this.releaseDate_label.setText(this.releaseDate_label.getText()+ game.getReleaseDate());
             this.reviewWrite.setText(UserController.getInstance().getReview(game.getId()).getText());    
             
@@ -312,7 +313,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JTextField valorationUser;
     private javax.swing.JLabel writeReview;
     // End of variables declaration//GEN-END:variables
-    private Videogame element;
+    private Element element;
     private JPanel mainPanel;
     private JPanelSearchResults search;
     private JPanelHome homePanel;
