@@ -20,6 +20,7 @@ public class JFrameCreatteAccount extends javax.swing.JFrame {
      * Creates new form JFrameCreatteAccount
      */
     public JFrameCreatteAccount() {
+        this.setResizable(false);
         initComponents();
     }
 

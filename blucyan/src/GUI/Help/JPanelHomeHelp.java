@@ -45,6 +45,7 @@ public class JPanelHomeHelp extends javax.swing.JPanel {
             }
         });
 
+        helpText.setEditable(false);
         helpText.setColumns(20);
         helpText.setRows(5);
         jScrollPane1.setViewportView(helpText);

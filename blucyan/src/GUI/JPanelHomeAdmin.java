@@ -38,7 +38,7 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
         addButton = new javax.swing.JButton();
         backupButton = new javax.swing.JButton();
 
-        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fun", "Users" }));
 
         browser.setText("Search");
         browser.addMouseListener(new java.awt.event.MouseAdapter() {

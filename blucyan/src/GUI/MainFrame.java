@@ -18,6 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame(boolean range) {
+        this.setResizable(false);
         initComponents();
         JPanelOtherHome other;
         JPanelSearchResults search = new JPanelSearchResults(mainPanel);
