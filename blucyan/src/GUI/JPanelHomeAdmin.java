@@ -54,7 +54,7 @@ public class JPanelHomeAdmin extends javax.swing.JPanel {
             }
         });
 
-        addButton.setText("Añadir elemento");
+        addButton.setText("Add Element");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addButtonMouseReleased(evt);

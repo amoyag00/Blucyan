@@ -5,15 +5,22 @@
  */
 package GUI;
 
+import GUI.Help.HelpFrame;
 import Logic.Element;
 import Logic.ElementList;
+import Logic.Review;
 import Logic.UserController;
 import Logic.Videogame;
+import Persistence.ImageDownloader;
 import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -53,10 +60,19 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             this.nameLabel.setText(game.getName());
             this.platformLabel.setText(this.platformLabel.getText() +game.getPlatforms()[0]);
             this.developerLabel.setText(this.developerLabel.getText() + game.getDeveloper());
-            this.imageLabel.setText(game.getCover());
-           
             this.releaseDate_label.setText(this.releaseDate_label.getText()+ game.getReleaseDate());
-            this.reviewWrite.setText(UserController.getInstance().getReview(game.getId()).getText());    
+            this.reviewWrite.setText(UserController.getInstance().getReview(game.getId()).getText());
+            this.descriptionLabel.setText(game.getDescritpion());
+            Image image=ImageDownloader.getImage(this.element.getCover());
+            Image scaledImage = image.getScaledInstance(200, 290, Image.SCALE_SMOOTH);
+            JLabel lab= new JLabel(new ImageIcon(scaledImage));
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridy=0;
+            gbc.gridx=0;
+            gbc.fill=GridBagConstraints.BOTH;
+            gbc.anchor=GridBagConstraints.CENTER;
+            this.imagePanel.add(lab,gbc);
+                imagePanel.repaint();
             
         } catch (Exception ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,20 +90,22 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         homeButton = new javax.swing.JButton();
-        imageLabel = new javax.swing.JLabel();
         platformLabel = new javax.swing.JLabel();
         releaseDate_label = new javax.swing.JLabel();
         developerLabel = new javax.swing.JLabel();
         valorationLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         valorationUser = new javax.swing.JTextField();
-        state = new javax.swing.JComboBox<>();
         addButton = new javax.swing.JButton();
         writeReview = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewWrite = new javax.swing.JTextArea();
         reviewText = new javax.swing.JLabel();
         deleteButtom = new javax.swing.JButton();
+        imagePanel = new javax.swing.JPanel();
+        state = new javax.swing.JTextField();
+        publishReview = new javax.swing.JButton();
+        helpButton = new javax.swing.JButton();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,8 +124,6 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
 
         homeButton.setText("HOME");
 
-        imageLabel.setText("IMAGEN");
-
         platformLabel.setText("Platform: ");
 
         releaseDate_label.setText("Release date: ");
@@ -119,8 +135,6 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         descriptionLabel.setText("Descripcion");
 
         valorationUser.setText("NotaUser");
-
-        state.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         addButton.setText("ADD");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,6 +158,33 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 301, Short.MAX_VALUE)
+        );
+
+        state.setText("State");
+
+        publishReview.setText("Save Review");
+        publishReview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                publishReviewMouseReleased(evt);
+            }
+        });
+
+        helpButton.setText("HELP");
+        helpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                helpButtonMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,42 +195,49 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(deleteButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 567, Short.MAX_VALUE)
-                        .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(releaseDate_label, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(platformLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(developerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(valorationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(valorationUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(state, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
-                                .addGap(53, 53, 53))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(reviewText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(releaseDate_label, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(platformLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                                .addComponent(developerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(valorationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(valorationUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(state, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(53, 53, 53))))
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(backButton)
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(homeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                    .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(17, 17, 17)))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(publishReview, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(reviewText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(53, 53, 53))))
@@ -197,21 +245,25 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(backButton)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(backButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valorationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(valorationUser, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(valorationUser, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -221,8 +273,9 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                                 .addGap(27, 27, 27)
                                 .addComponent(releaseDate_label, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(addButton)
                 .addGap(1, 1, 1)
                 .addComponent(deleteButtom)
@@ -230,8 +283,13 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                 .addComponent(writeReview, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(reviewText, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(reviewText, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(publishReview)))
                 .addGap(48, 48, 48))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -269,6 +327,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             params[0]=game.getId();
             params[1]=game.getName();
             params[2]=String.valueOf(valoration);
+            params[3]=this.state.getText();
             addButton.setVisible(false);
             try {
                 
@@ -293,6 +352,24 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void publishReviewMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishReviewMouseReleased
+        Review rev =new Review();
+        rev.setElementID(element.getId());
+        rev.setText(reviewWrite.getText());
+        UserController.getInstance().addReview(rev);
+        
+    }//GEN-LAST:event_publishReviewMouseReleased
+
+    private void helpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpButtonMouseReleased
+        // TODO add your handling code here:
+        HelpFrame h = new HelpFrame();
+        h.setVisible(true);
+        h.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = h.getMainPanel();
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "elementCard");
+    }//GEN-LAST:event_helpButtonMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -300,15 +377,17 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private javax.swing.JButton deleteButtom;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel developerLabel;
+    private javax.swing.JButton helpButton;
     private javax.swing.JButton homeButton;
-    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel platformLabel;
+    private javax.swing.JButton publishReview;
     private javax.swing.JLabel releaseDate_label;
     private javax.swing.JLabel reviewText;
     private javax.swing.JTextArea reviewWrite;
-    private javax.swing.JComboBox<String> state;
+    private javax.swing.JTextField state;
     private javax.swing.JLabel valorationLabel;
     private javax.swing.JTextField valorationUser;
     private javax.swing.JLabel writeReview;

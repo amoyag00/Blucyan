@@ -14,7 +14,7 @@ public class VideogameAdapter extends VideogameEntry implements IAdapter {
         videogameEntry.setVideogameID(params[0]);
         videogameEntry.setName(params[1]);
         videogameEntry.setValoration(parseInt(params[2]));
-  
+        videogameEntry.setStatus(params[3]);
         return videogameEntry;
     }
     

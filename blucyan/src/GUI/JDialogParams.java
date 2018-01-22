@@ -8,6 +8,7 @@ package GUI;
 import Logic.UserController;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -43,6 +44,8 @@ public class JDialogParams extends javax.swing.JDialog {
 
         videogameFields.add(developerText);
         videogameFields.add(platformText);
+        
+        statusText.setEnabled(false);
     }
 
     /**
@@ -196,7 +199,7 @@ public class JDialogParams extends javax.swing.JDialog {
                                 .addGap(151, 151, 151)
                                 .addComponent(developerLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(developerText, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(developerText, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -353,6 +356,7 @@ public class JDialogParams extends javax.swing.JDialog {
 
         for (int i = 0; i < comicFields.size(); i++) {
             comicFields.get(i).setEnabled(true);
+            statusText.setEnabled(true);
         }
     }//GEN-LAST:event_comicCheckItemStateChanged
 
@@ -369,6 +373,7 @@ public class JDialogParams extends javax.swing.JDialog {
 
         for (int i = 0; i < showFields.size(); i++) {
             showFields.get(i).setEnabled(true);
+            statusText.setEnabled(true);
         }
     }//GEN-LAST:event_showCheckItemStateChanged
 
@@ -377,14 +382,17 @@ public class JDialogParams extends javax.swing.JDialog {
 
         for (int i = 0; i < comicFields.size(); i++) {
             comicFields.get(i).setEnabled(false);
+
         }
 
         for (int i = 0; i < showFields.size(); i++) {
             showFields.get(i).setEnabled(false);
+
         }
 
         for (int i = 0; i < videogameFields.size(); i++) {
             videogameFields.get(i).setEnabled(true);
+            statusText.setEnabled(false);
         }
     }//GEN-LAST:event_videogameCheckItemStateChanged
 
@@ -404,7 +412,21 @@ public class JDialogParams extends javax.swing.JDialog {
             params[8] = statusText.getText();
             params[9]= coverTextField.getText();
             
-            UserController.getInstance().addElement(params);
+            boolean allFieldsComplete=true;
+            
+            for(int j=0;j<params.length;j++){
+                if(params[j].isEmpty()){
+                    allFieldsComplete=false;
+                }
+            }
+            
+            if(allFieldsComplete){
+                UserController.getInstance().addElement(params);
+                cleanFields(comicFields);
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Missing field");
+            }
         }
         else if(showCheck.isSelected()){
             String[] params = new String[13];
@@ -423,7 +445,21 @@ public class JDialogParams extends javax.swing.JDialog {
             params[11] = statusText.getText();
             params[12]= coverTextField.getText();
             
-            UserController.getInstance().addElement(params);
+            boolean allFieldsComplete=true;
+            
+            for(int j=0;j<params.length;j++){
+                if(params[j].isEmpty()){
+                    allFieldsComplete=false;
+                }
+            }
+            
+            if(allFieldsComplete){
+                UserController.getInstance().addElement(params);
+                cleanFields(showFields);
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Missing field");
+            }
         }
         else if(videogameCheck.isSelected()){
             String[] params = new String[9];
@@ -437,11 +473,43 @@ public class JDialogParams extends javax.swing.JDialog {
             params[6] = genresText.getText();
             params[7] = statusText.getText();
             params[8]= coverTextField.getText();
+
+            boolean allFieldsComplete=true;
             
-            UserController.getInstance().addElement(params);
+            for(int j=0;j<params.length;j++){
+                if(params[j].isEmpty()){
+                    allFieldsComplete=false;
+                }
+            }
+            
+            if(allFieldsComplete){
+                UserController.getInstance().addElement(params);
+                cleanFields(videogameFields);
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "Missing field");
+            }
+        } else{
+               JOptionPane.showMessageDialog(null, "Please select an element type");              
         }
     }//GEN-LAST:event_addButtonMouseReleased
 
+    private void cleanFields(ArrayList<JTextField> list){
+    
+        for(int i=0;i<list.size();i++){
+        
+            list.get(i).setText("");
+        
+        }
+        
+        nameText.setText("");
+        dateText.setText("");
+        genresText.setText("");
+        coverTextField.setText("");
+        statusText.setText("");
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -483,7 +551,7 @@ public class JDialogParams extends javax.swing.JDialog {
             }
         });
     }*/
-    private String name;
+    private String name="empty";
     private JFileChooser selecter;
     private ArrayList<JTextField> comicFields;
     private ArrayList<JTextField> showFields;
