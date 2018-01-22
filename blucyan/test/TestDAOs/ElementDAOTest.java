@@ -7,6 +7,7 @@ package TestDAOs;
 
 import Logic.Comic;
 import Logic.Element;
+import Logic.ElementProxy;
 import Logic.Show;
 import Logic.Videogame;
 import Persistence.ElementDAO;
@@ -16,12 +17,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 /**
  *
  * @author Usuario
  */
 public class ElementDAOTest {
+    
+    private final String idVideogame="30";
     
     public ElementDAOTest() {
     }
@@ -68,7 +70,7 @@ public class ElementDAOTest {
         videogame.setName("videojuego");
         ((Videogame) videogame).setDeveloper("develop");
         ((Videogame) videogame).setPlatforms(p1);
-        videogame.setReleaseDate("1/02/2003");
+        videogame.setReleaseDate("01/02/2003");
         videogame.setGenre(gn2);
         videogame.setCover("ruta");
         videogame.setType("Videogame");
@@ -81,7 +83,7 @@ public class ElementDAOTest {
         ((Show) show).setDuration(43);
         ((Show) show).setStatus("finished");
         ((Show) show).setProducers(pr2);
-        show.setReleaseDate("1/02/2003");
+        show.setReleaseDate("01/02/2003");
         show.setGenre(g1);
         show.setCover("ruta");
         show.setType("Show");
@@ -91,22 +93,59 @@ public class ElementDAOTest {
         ((Comic) comic).setNumberChapters(4);
         ((Comic) comic).setWriters(w3);
         ((Comic) comic).setIllustrators(i3);
-        comic.setReleaseDate("1/02/2003");
+        comic.setReleaseDate("01/02/2003");
         comic.setGenre(g3);
         comic.setCover("ruta");
         comic.setType("Comic");
         
-       /* dao.put(videogame);
+        /*dao.put(videogame);
         dao.put(comic);
         dao.put(show);*/
         
         Element vi = dao.get("30");
         Element co = dao.get("31");
         Element sh = dao.get("32");
-        System.out.println(videogame.toString());
-        System.out.println(vi.toString());
-        assertTrue((videogame.toString().compareTo(vi.toString())==0));
-       // assertEquals(comic.toString(),(co.toString()));
-       // assertEquals(show.toString(),(sh.toString()));
+        System.out.println(show.toString());
+        System.out.println(sh.toString());
+        
+        assertTrue((videogame.toString().compareTo(vi.toString())==0));    
+        assertTrue(comic.toString().compareTo(co.toString())==0);
+        assertTrue(show.toString().compareTo(sh.toString())==0);
+        
+        assertTrue(dao.exists("30"));
+        assertTrue(dao.exists("31"));
+        assertTrue(dao.exists("32"));
+        
+        assertTrue(dao.search("show").get(0).getName().compareTo(show.getName())==0);
+        
+        show.setName("show2");
+        dao.modify(show);
+        assertTrue(show.toString().compareTo(sh.toString())==0);
+        
+        show.setName("show");
+        dao.modify(show); 
+    }
+    
+    @Test(expected=Exception.class)
+    public void delteTest() throws Exception{
+        ElementDAO dao = new ElementDAO();
+        Element videogame = new Videogame();
+        String[] p1 = {"ps4","xbox one"};
+        String[] g1 = {"action","adventure"};
+        
+        videogame.setName("videogame");
+        ((Videogame) videogame).setDeveloper("develop");
+        ((Videogame) videogame).setPlatforms(p1);
+        videogame.setReleaseDate("1/02/2003");
+        videogame.setGenre(g1);
+        videogame.setCover("ruta");
+        videogame.setType("Videogame");
+        
+        dao.put(videogame);
+        ElementProxy e = dao.search("videogame").get(0);
+        
+        dao.delete(e.getId());
+        
+        dao.get(e.getId());
     }
 }

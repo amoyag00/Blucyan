@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelShowCard.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/VideogameAdapter.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/ComicEntry.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/VideogameEntryDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelComicCard.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ShowEntryDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Element.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ComicEntryDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelVideogameCard.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/test/TestDAOs/ElementDAOTest.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Login.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/Facade.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelVideogameCard.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/Backup.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/IAdapter.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/ShowEntry.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Videogame.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/IConversor.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelSearchResults.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JDialogParams.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelShowCard.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/VideogameEntry.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ShowEntryDAO.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/User.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementListDAO.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Element.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/test/TestDAOs/ElementDAOTest.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserProxy.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/ShowAdapter.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelComicCard.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/MainFrame.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/DBConnection.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ComicEntryDAO.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/VideogameAdapter.java</file>
         </group>
     </open-files>
 </project-private>

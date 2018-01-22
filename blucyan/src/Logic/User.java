@@ -42,6 +42,11 @@ public class User {
     public boolean getIsPrivate() {
         return isPrivate;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "userName=" + userName + ", pass=" + pass + ", isAdmin=" + isAdmin + ", isPrivate=" + isPrivate + '}';
+    }
 	
 
 }
