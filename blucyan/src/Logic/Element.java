@@ -76,7 +76,7 @@ public class Element {
 
     @Override
     public String toString() {
-        return "Element{" + "name=" + name + ", type=" + type + ", genre=" + genre + ", releaseDate=" + releaseDate + ", id=" + id + ", cover=" + cover + ", descritpion=" + descritpion + '}';
+        return "Element{" + "name=" + name + ", type=" + type + ", genre=" + genre + ", releaseDate=" + releaseDate + ", cover=" + cover + ", descritpion=" + descritpion + '}';
     }
        
         
