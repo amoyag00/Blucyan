@@ -8,9 +8,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Logic.*;
-//TO DO implements IConversor
+
+/**
+ * Class that interacts with the database
+ * 
+ * @author Alejandr, Carlos, Samuel
+ */
 public class UserDAO extends DBConnection implements IConversor<User,UserProxy> {
 
+    /**
+     * Gets the entry that corresponds to the name
+     * 
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public User get(String name) throws Exception {
         Connection cn;
         User user;
@@ -35,6 +47,12 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         return user;
     }
     
+    /**
+     * Deletes the user whose nickname corresponds to name
+     * 
+     * @param name
+     * @throws Exception 
+     */
     public void delete(String name) throws Exception {
         Connection cn;
         PreparedStatement st;
@@ -57,6 +75,12 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         }
     }
     
+    /**
+     * Puts a user into the database
+     * 
+     * @param user
+     * @throws Exception 
+     */
     public void put(User user) throws Exception{
         try {
             Connection cn;
@@ -99,6 +123,12 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         }
     }
     
+    /**
+     * Checks if an user exists
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public boolean exists(String id) throws Exception{
         Connection cn;
         ResultSet rs;
@@ -118,6 +148,16 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         
         return exist;
     }
+    
+    /**
+     * Checks if the username and the password corresponds
+     * to a registered user
+     * 
+     * @param username
+     * @param password
+     * @return
+     * @throws Exception 
+     */
     public boolean match(String username,String password) throws Exception{
         Connection cn;
         ResultSet rs;
@@ -140,6 +180,13 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         return match;
     }
     
+    /**
+     * Searches users that contains the name String
+     * 
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public List<UserProxy> search(String name) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -161,6 +208,11 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         return searched;
     }
     
+    /**
+     * Updates the modifications in an user
+     * @param user
+     * @throws Exception 
+     */
     public void modify(User user) throws Exception{
     
         Connection cn;
@@ -175,33 +227,5 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         this.closeConnection();
     
     
-    }
-    
-    public static void main(String[] args) throws Exception{
-        UserDAO u=new UserDAO();
-        System.out.println(u.exists("Notch"));
-       /* User user = new User();
-        User us;
-        
-        user.setUserName("Notch");
-        user.setIsAdmin(false);
-        user.setIsPrivate(false);
-        user.setPass("minecraft");
-            
-            u=new UserDAO();
-            u.exists("Al");
-            
-            u.put(user);
-            
-            
-            u.delete(user.getUserName());
-            us = u.get("Terminator");
-            System.out.println(us.getUserName());
-            
-            u=new UserDAO();
-            ArrayList<UserProxy> result = (ArrayList<UserProxy>) u.search("r");
-            for(int i=0;i<result.size();i++){
-               System.out.println(result.get(i).getUserName());
-            }*/
     }
 }

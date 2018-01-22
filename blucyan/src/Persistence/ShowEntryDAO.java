@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Persistence;
 
 import Logic.ElementList;
@@ -17,11 +12,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author alex
+ *Class that interacts with the database
+ * 
+ * @author Aleandro, Carlos, Samuel
  */
 public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, ShowEntry> {
 
+    /**
+     * Deletes the show entry whose entry_id equals to id
+     * 
+     * @param id
+     * @throws Exception 
+     */
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
@@ -39,6 +41,13 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         }
     }
 
+    /**
+     * Checks if an entry exists
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public boolean exists(String id) throws Exception {
         boolean exists = false;
         try {
@@ -61,6 +70,14 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
 
     }
     
+    /**
+     * Checks if an entry has been added
+     * 
+     * @param element_id
+     * @param list_id
+     * @return
+     * @throws Exception 
+     */
     public boolean isAdded(String element_id, String list_id) throws Exception{
         boolean isAdded = false;
         try {
@@ -83,6 +100,13 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         return isAdded;
     }
 
+    /**
+     * Gets the entry that corresponds to the id
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public ShowEntry get(String id) throws Exception {
         ShowEntry sE = new ShowEntry();
         try {
@@ -110,6 +134,13 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         return sE;
     }
     
+    /**
+     * Gets a list of entries that corresponds to the id
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public ArrayList<ShowEntry> getList(String id) throws Exception {
         ArrayList<ShowEntry> shows = new ArrayList<ShowEntry>();
         Connection cn;
@@ -142,6 +173,12 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
         return shows;
     }
 
+    /**
+     * Puts a videogame entry into the database
+     * 
+     * @param sE
+     * @throws Exception 
+     */
     public void put(ShowEntry sE) throws Exception {
         try {
             Connection cn;
@@ -163,10 +200,23 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
 
     }
 
+    /**
+     * Unsupported operation
+     * 
+     * @param name
+     * @return Nothing
+     * @throws Exception 
+     */
     public List<ShowEntry> search(String name) throws Exception {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
+    /**
+     * Updates the modifications in an entry
+     * 
+     * @param sE
+     * @throws Exception 
+     */
     public void modify(ShowEntry sE) throws Exception {
         Connection cn;
         this.openConnection();
@@ -179,18 +229,5 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
 
         st.executeUpdate();
         this.closeConnection();
-    }
-
-    public static void main(String args[]) {
-        ShowEntry vE = new ShowEntry();
-
-        try {
-            ShowEntryDAO vEDAO = new ShowEntryDAO();
-            vEDAO.delete("2");
-
-        } catch (Exception ex) {
-            Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 }

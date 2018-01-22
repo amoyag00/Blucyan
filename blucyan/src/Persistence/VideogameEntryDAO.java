@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Persistence;
 
 import Logic.ElementList;
@@ -16,11 +11,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author alex
+ * Class that interacts with the database
+ * 
+ * @author Alehandro, Carlos, Samuel
  */
 public class VideogameEntryDAO extends DBConnection implements IConversor<VideogameEntry, VideogameEntry> {
 
+    /**
+     * Deletes the videogame entry whose entry_id equals to id
+     * 
+     * @param id
+     * @throws Exception 
+     */
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
@@ -38,6 +40,14 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         }
     }
     
+    /**
+     * Checks if an entry has been added
+     * 
+     * @param element_id
+     * @param list_id
+     * @return true if is added false otherwise
+     * @throws Exception
+     */
     public boolean isAdded(String element_id, String list_id) throws Exception{
         boolean isAdded = false;
         try {
@@ -60,6 +70,13 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         return isAdded;
     }
 
+    /**
+     * Checks if an entry exists
+     * 
+     * @param id
+     * @return true if the entry exists,false otherwise
+     * @throws Exception
+     */
     public boolean exists(String id) throws Exception {
         boolean exists = false;
         try {
@@ -82,6 +99,13 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
 
     }
 
+    /**
+     * Gets the entry that corresponds to the id
+     * 
+     * @param id
+     * @return the entry applied for
+     * @throws Exception
+     */
     public VideogameEntry get(String id) throws Exception {
         VideogameEntry vE = new VideogameEntry();
         try {
@@ -108,6 +132,13 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         return vE;
     }
     
+    /**
+     * Gets a list of entries that corresponds to the id
+     * 
+     * @param id
+     * @return a list of entries
+     * @throws Exception 
+     */
     public ArrayList<VideogameEntry> getList(String id) throws Exception{
         ArrayList<VideogameEntry> videogames = new ArrayList<VideogameEntry>();
         Connection cn;
@@ -141,7 +172,13 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         return videogames;
     }
-     
+    
+    /**
+     * Puts a videogame entry into the database
+     * 
+     * @param vE
+     * @throws Exception
+     */
     public void put(VideogameEntry vE) throws Exception {
         try {
             Connection cn;
@@ -161,10 +198,23 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
 
     }
 
+    /**
+     * Unsupported operation
+     * 
+     * @param name
+     * @return Nothing
+     * @throws Exception 
+     */
     public List<VideogameEntry> search(String name) throws Exception {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
+    /**
+     * Updates the modifications in an entry
+     * 
+     * @param vE
+     * @throws Exception 
+     */
     public void modify(VideogameEntry vE) throws Exception {
         Connection cn;
         this.openConnection();
@@ -177,18 +227,5 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
         
         st.executeUpdate();
         this.closeConnection();
-    }
-    
-    public static void main(String args[]) {
-        VideogameEntry vE;
-
-        try {
-            VideogameEntryDAO vEDAO = new VideogameEntryDAO();
-            vEDAO.delete("1");
-
-        } catch (Exception ex) {
-            Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 }
