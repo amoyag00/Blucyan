@@ -2,7 +2,10 @@ package Logic;
 
 import Persistence.Facade;
 import static java.lang.Integer.parseInt;
-
+/**
+ * Adapter of ShowEntries. Its implemented according to the Adapter pattern
+ * @author Alejandro, Carlos, Samuel
+ */
 public class ShowAdapter extends ShowEntry implements IAdapter {
     
       @Override

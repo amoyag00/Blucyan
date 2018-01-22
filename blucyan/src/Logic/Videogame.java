@@ -1,7 +1,10 @@
 package Logic;
 
 public class Videogame extends Element {
-
+    /**
+     * Class representing a videogame. Inherits from Element
+     * @author Carlos, Samuel, Alejandro
+     */
     public String[] getPlatforms() {
         return platforms;
     }

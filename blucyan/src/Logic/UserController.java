@@ -9,26 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
-    
+    /**
+     * Controller class used for communicating the graphical interface and
+     * other logic classes
+     * @author Alejandro, Carlos, Samuel
+     */
     private Facade facade = Facade.getInstance();
     private User actualUser;
     private static UserController instance;
     private ElementList vList,cList,sList;
-    
+    /**
+     * Returns the User instance of the current logged user
+     * @return 
+     */
     public User getActualUser() {
         return actualUser;
     }
-    
+    /**
+     * Changes the current user
+     * @param actualUser 
+     */
     public void setActualUser(User actualUser) {
         this.actualUser = actualUser;
     }
 
     /**
-     *
+     * Creates a User and adds it to the database by calling the facade
      * @param userName
      * @param pass1
      * @param pass2
-     * @param private
+     * @param isPrivate
+     * @throws Exception 
      */
     public void createAccount(String userName, String pass1, String pass2, boolean isPrivate) throws Exception {
         
@@ -40,15 +51,22 @@ public class UserController {
         facade.put(newUser, User.class);
         
     }
-    
+    /**
+     * Asks the facade if a user of nikckname name exists
+     * @param name
+     * @return true if exists, false otherwise
+     * @throws Exception 
+     */
     public boolean UserExists(String name) throws Exception {
         return facade.exists(name, User.class);
     }
 
     /**
-     *
+     * Checks if the credentials introduced for the user exist in the database.
+     * 
      * @param userName
      * @param pass
+     * @return true if the credentials are correct, false otherwise
      */
     public boolean initiateSession(String userName, String pass) throws Exception {
         
@@ -67,14 +85,21 @@ public class UserController {
     }
 
     /**
-     *
+     * Checks that two passwords are equal
      * @param pass1
      * @param pass2
+     * @return true if they are equal, false otherwise
      */
     public boolean checkPass(String pass1, String pass2) {
-        // TODO - implement UserController.checkPass
+       
         return pass1.equals(pass2);
     }
+    /**
+     * Returns the lists of a user of nickname nickname
+     * @param nickname
+     * @return the three lists of that user.
+     * @throws Exception 
+     */
     public ElementList[] getOtherLists(String nickname) throws Exception{
         ElementList[] lists = facade.getLists(nickname, ElementList.class);
         
@@ -87,6 +112,11 @@ public class UserController {
         lists[2].setEntryList(showList);
         return sort(lists);
     }
+    /**
+     * returns the lists of the current user
+     * @return the three lists of the current user.
+     * @throws Exception 
+     */
     public ElementList[] getLists() throws Exception {
         // TODO - implement UserController.getLists
         //Videogame->0     Comic ->1     Show->2
@@ -106,6 +136,14 @@ public class UserController {
         return sort(lists);
     }
     
+    /**
+     * Sorts the three types of list passed as parameter in the following order:
+     * 1- VideogameList
+     * 2- ComicList
+     * 3- ShowList
+     * @param unsortedLists
+     * @return the lists ordered
+     */
     private ElementList[] sort(ElementList[] unsortedLists) {
         ElementList[] sortedLists = new ElementList[unsortedLists.length];
         for (int i = 0; i < unsortedLists.length; i++) {
@@ -122,7 +160,9 @@ public class UserController {
     }
 
     /**
-     *
+     * Calls the Factory of adapters and asks for an adapter according to type
+     * elementType. Delegates the responsability of create the entry on the 
+     * adapter
      * @param params
      * @param elementType
      */
@@ -145,6 +185,14 @@ public class UserController {
         }
         
     }
+    /**
+     * Checks if an entry is already added in the list of type typeElement of 
+     * the current user.
+     * @param element_id
+     * @param typeElement
+     * @return true if it is already addded, false otherwise
+     * @throws Exception 
+     */
     public boolean isEntryAdded(String element_id, String typeElement) throws Exception{
         boolean isAdded=false;
         if(!actualUser.getIsAdmin()){ 
@@ -162,6 +210,10 @@ public class UserController {
         
     }
     
+    /**
+     * Adds a new element to the database
+     * @param params 
+     */
     public void addElement(String[] params) {
         
         if (params[1].equalsIgnoreCase("Videogame")) {
@@ -216,16 +268,25 @@ public class UserController {
     }
 
     /**
-     *
+     * Deletes the object of class classType indetified by name 
      * @param name
+     * @param classType
+     * @throws Exception 
      */
     public void delete(String name, Class classType) throws Exception {
 
-        //TODO - implement UserController.delete
-        //facade.delete(name, classType??); How? Maybe an Object with a cast to User or Review depending the classType; or we could change the argument parameter and pass a reference to de realObject then we can take de classTyppe whenever we want
         facade.delete(name, classType);
     }
     
+    /**
+     * Modifies an entry of type elementType by delegating that responsability
+     * in the correspondant adapter
+     * @param entry
+     * @param elementType
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException 
+     */
     public void modify(Entry entry, String elementType) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         IAdapter adapter = AdapterFactory.getInstance().getAdapter(elementType);
         adapter.modEntry(entry);
@@ -233,7 +294,7 @@ public class UserController {
     }
 
     /**
-     *
+     * Checks that a password has at least 5 characters and one number
      * @param pass1
      */
     public boolean verifyRequirements(String pass) {
@@ -250,7 +311,9 @@ public class UserController {
     }
 
     /**
-     *
+     * returns the elements which contains in their name the pattern name
+     * It returns a proxy of that element, which contains less information than
+     * the real element, according to the Proxy pattern
      * @param name
      */
     public List<ElementProxy> searchElement(String name) throws Exception {
@@ -261,6 +324,14 @@ public class UserController {
         return facade.search(name, elementClass);
     }
     
+    /**
+     * returns the users which contains in their name the pattern name
+     * It returns a proxy of those, which contains less information than
+     * the real user, according to the Proxy pattern
+     * @param name
+     * @return the lists of user proxies
+     * @throws Exception 
+     */
     public List<UserProxy> searchUser(String name) throws Exception {
         // TODO - implement UserController.operation
 
@@ -270,8 +341,9 @@ public class UserController {
     }
 
     /**
-     *
+     * Returns the element identified by id
      * @param id
+     * @returns the element
      */
     public Element showChart(String id) throws Exception {
         // TODO - implement UserController.showChart
@@ -279,9 +351,8 @@ public class UserController {
     }
 
     /**
-     *
-     * @param text
-     * @param elementID
+     * Adds a review to the database 
+     * @param rev 
      */
     public void addReview(Review rev) {
         // TODO - implement UserController.addReview
@@ -291,19 +362,37 @@ public class UserController {
         
     }
     
+    /**
+     * Returns the review written by the current user of the element element_id
+     * @param element_id
+     * @return the review
+     * @throws Exception 
+     */
     public Review  getReview(String element_id) throws Exception{
         return facade.getReview(element_id, this.actualUser.getUserName());
     }
     
+    /**
+     * Performs a backup
+     */
     public void backup() {
         // TODO - implement UserController.backup
         facade.backup();
     }
     
+    /**
+     * Registers an element in the databse by delegating that responsability in
+     * the facade
+     * @param el 
+     */
     public void putElement(Element el) {
         facade.put(el, Element.class);
     }
     
+    /**
+     * Returns a unique instance of this class
+     * @return 
+     */
     public static UserController getInstance() {
         if (instance == null) {
             instance = new UserController();

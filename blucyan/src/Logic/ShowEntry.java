@@ -1,5 +1,8 @@
 package Logic;
-
+/**
+ * Class representation  of a show entry
+ * @author Alejandro, Carlos, Samuel
+ */
 public class ShowEntry extends Entry {
     private String listID;
     private String showID;

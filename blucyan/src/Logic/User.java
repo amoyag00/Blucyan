@@ -1,12 +1,16 @@
 package Logic;
 
 public class User {
-
+/**
+ * Class representing a user
+ * @author Alejandro, Carlos, Samuel
+ * 
+ */
 	private String userName;
 	private String pass;
         private boolean isAdmin;
 	private boolean isPrivate;
-
+        
     public String getUserName() {
         return userName;
     }

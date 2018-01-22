@@ -1,7 +1,10 @@
 package Logic;
 
 public class VideogameEntry extends Entry {
-
+    /**
+     * @author Alejandro, Carlos, Samuel
+     * Class representing a videogame entry
+     */
     private String listID;
     private String videogameID;
 

@@ -1,5 +1,8 @@
 package Logic;
-
+    /**
+     * Opinion of some element written by some user
+     * @author alex
+     */
 public class Review {
     
         private String reviewID;

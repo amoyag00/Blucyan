@@ -2,7 +2,10 @@ package Logic;
 
 import Persistence.Facade;
 import Persistence.UserDAO;
-
+/**
+ * Class representating a user. it does not contain the password of the user
+ * @author Alejandro, Carlos, Samuel
+ */
 public class UserProxy extends User{
 
     public String getName() {
@@ -33,6 +36,11 @@ public class UserProxy extends User{
         
         private String name;
         private String image;
+        /**
+         * Returns the real instance associated to this user.
+         * @return
+         * @throws Exception 
+         */
 	public User getRealInstance( ) throws Exception{
             
             if(realInstance==null){

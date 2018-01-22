@@ -1,5 +1,8 @@
 package Logic;
-
+/**
+ * 
+ * @author Alejandro, Carlos, Samuel
+ */
 public class Show extends Element {
 
 	private int numberEpisodes;
