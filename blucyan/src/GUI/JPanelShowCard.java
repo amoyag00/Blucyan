@@ -7,6 +7,7 @@ package GUI;
 
 import Logic.Element;
 import Logic.ElementList;
+import Logic.Review;
 import Logic.Show;
 import Logic.UserController;
 import java.awt.CardLayout;
@@ -58,6 +59,7 @@ public class JPanelShowCard extends javax.swing.JPanel {
         this.producersLabel.setText(this.producersLabel.getText()+Arrays.toString(show.getProducers()));
         this.statusLabel2.setText(this.statusLabel2.getText()+show.getStatus());
         this.genreLabel.setText(this.genreLabel.getText()+Arrays.toString(show.getGenre()));
+        this.reviewWrite.setText(UserController.getInstance().getReview(show.getId()).getText());
     }
 
     /**
@@ -161,6 +163,11 @@ public class JPanelShowCard extends javax.swing.JPanel {
         watchedLabel.setText("Watched episodes: ");
 
         saveButton.setText("Save changes");
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                saveButtonMouseReleased(evt);
+            }
+        });
 
         producersLabel.setText("Producers: ");
 
@@ -363,6 +370,14 @@ public class JPanelShowCard extends javax.swing.JPanel {
         // TODO add your handling code here:
         ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
     }//GEN-LAST:event_homeButtonMouseReleased
+
+    private void saveButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseReleased
+        // TODO add your handling code here:
+        Review review = new Review();
+        review.setElementID(ele.getId());
+        review.setText(this.reviewWrite.getText());
+        UserController.getInstance().addReview(review);
+    }//GEN-LAST:event_saveButtonMouseReleased
 
     private JPanel mainPanel;
     private Element ele;
