@@ -181,7 +181,7 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
     }
     
     /**
-     * Searches users that contains the name String
+     * Searches users that contains the name string
      * 
      * @param name
      * @return
@@ -210,6 +210,7 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
     
     /**
      * Updates the modifications in an user
+     * 
      * @param user
      * @throws Exception 
      */

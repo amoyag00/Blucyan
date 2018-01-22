@@ -224,6 +224,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.closeConnection();
     }
 
+    /**
+     * Puts an element into the database
+     * 
+     * @param element
+     * @throws Exception 
+     */
     public void put(Element element) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -261,6 +267,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.closeConnection();
     }
 
+    /**
+     * Puts a videogame into the database
+     * 
+     * @param element
+     * @throws Exception 
+     */
     public void putVideogame(Videogame element) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -284,6 +296,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.closeConnection();
     }
 
+    /**
+     * Puts a show into the database
+     * 
+     * @param element
+     * @throws Exception 
+     */
     public void putShow(Show element) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -321,6 +339,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.closeConnection();
     }
 
+    /**
+     * Puts a comic into the database
+     * 
+     * @param element
+     * @throws Exception 
+     */
     public void putComic(Comic element) throws Exception {
 
         Connection cn;
@@ -351,6 +375,13 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         this.closeConnection();
     }
 
+    /**
+     * Checks if an element exists
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public boolean exists(String id) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -370,6 +401,13 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return exist;
     }
 
+    /**
+     * Searches element that contains the name string
+     * 
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public List<ElementProxy> search(String name) throws Exception {
         Connection cn;
         ResultSet rs;
@@ -396,6 +434,12 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         return searched;
     }
 
+    /**
+     * Updates the modifications in an element
+     * 
+     * @param element
+     * @throws Exception 
+     */
     public void modify(Element element) throws Exception {
 
         Connection cn;
@@ -433,38 +477,6 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         }
 
         this.closeConnection();
-
-    }
-
-    public static void main(String[] args) throws Exception {
-        ElementDAO el = new ElementDAO();
-        Element e;
-
-        /*e = el.get("1");
-         
-         System.out.println(e.getName());
-         System.out.println(e.getId());
-         System.out.println(e.getType());
-         System.out.println(e.getReleaseDate());
-         
-         
-        
-         ArrayList<ElementProxy> p = (ArrayList<ElementProxy>) el.search("a");
-         
-         for(int i =0;i<p.size();i++){
-             System.out.println(p.get(i).getName());
-         }
-          
-         System.out.println(el.exists("1"));*/
-        e = new Element();
-        e.setId("1");
-        String[] s = {"Mecha", "Psychological", "Depresion"};
-        e.setGenre(s);
-        e.setName("Evangelion");
-        e.setReleaseDate("04-08-1995");
-        e.setType("Show");
-
-        el.modify(e);
 
     }
 }

@@ -42,7 +42,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
     }
 
     /**
-     * Checks if an entry exists
+     * Checks if a show entry exists
      * 
      * @param id
      * @return
@@ -71,7 +71,7 @@ public class ShowEntryDAO extends DBConnection implements IConversor<ShowEntry, 
     }
     
     /**
-     * Checks if an entry has been added
+     * Checks if a show entry has been added
      * 
      * @param element_id
      * @param list_id

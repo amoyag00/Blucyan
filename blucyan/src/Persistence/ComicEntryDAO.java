@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Persistence;
 
 import Logic.ComicEntry;
@@ -16,11 +11,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author alex
+ * Class that interacts with the database
+ * 
+ * @author Alejandro, Carlos, Samuel
  */
 public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry, ComicEntry> {
     
+    /**
+     * Checks if a comic entry has been added
+     * 
+     * @param element_id
+     * @param list_id
+     * @return
+     * @throws Exception 
+     */
     public boolean isAdded(String element_id, String list_id) throws Exception{
         boolean isAdded = false;
         try {
@@ -42,6 +46,13 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         }
         return isAdded;
     }
+    
+    /**
+     * Deletes the comic entry whose entry_id equals id
+     * 
+     * @param id
+     * @throws Exception 
+     */
     public void delete(String id) throws Exception {
         try {
             this.openConnection();
@@ -59,6 +70,13 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         }
     }
 
+    /**
+     * Checks if a comic entry exists
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public boolean exists(String id) throws Exception {
         boolean exists = false;
         try {
@@ -81,6 +99,13 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
 
     }
 
+    /**
+     * Gets the entry that corresponds to id
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public ComicEntry get(String id) throws Exception {
         ComicEntry cE = new ComicEntry();
         try {
@@ -108,6 +133,13 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         return cE;
     }
 
+    /**
+     * Gets a list of entries that corresponds to id
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
     public ArrayList<ComicEntry> getList(String id) throws Exception {
         ArrayList<ComicEntry> comics = new ArrayList<ComicEntry>();
         Connection cn;
@@ -140,6 +172,12 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
         return comics;
     }
 
+    /**
+     * Puts a comic entry into the database
+     * 
+     * @param cE
+     * @throws Exception 
+     */
     public void put(ComicEntry cE) throws Exception {
         try {
             Connection cn;
@@ -162,10 +200,23 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
 
     }
 
+    /**
+     * Unsupported operation
+     * 
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public List<ComicEntry> search(String name) throws Exception {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
+    /**
+     * Updates the modifications in an entry
+     * 
+     * @param cE
+     * @throws Exception 
+     */
     public void modify(ComicEntry cE) throws Exception {
         Connection cn;
         this.openConnection();
@@ -179,24 +230,5 @@ public class ComicEntryDAO extends DBConnection implements IConversor<ComicEntry
 
         st.executeUpdate();
         this.closeConnection();
-    }
-
-    public static void main(String args[]) {
-        ComicEntry vE = new ComicEntry();
-        vE.setValoration(75);
-        vE.setComicID("3");
-        vE.setListID("3");
-        vE.setStatus("Planned to read");
-        vE.setNumReadChapters(2);
-
-        try {
-            ComicEntryDAO vEDAO = new ComicEntryDAO();
-//vEDAO.put(vE);
-            vEDAO.delete("3");
-
-        } catch (Exception ex) {
-            Logger.getLogger(ElementListDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 }

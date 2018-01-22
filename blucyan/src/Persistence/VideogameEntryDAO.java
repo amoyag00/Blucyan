@@ -41,7 +41,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
     }
     
     /**
-     * Checks if an entry has been added
+     * Checks if a videogame entry has been added
      * 
      * @param element_id
      * @param list_id
@@ -71,7 +71,7 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
     }
 
     /**
-     * Checks if an entry exists
+     * Checks if a videogame entry exists
      * 
      * @param id
      * @return true if the entry exists,false otherwise
