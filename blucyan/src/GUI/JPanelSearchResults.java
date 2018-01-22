@@ -225,7 +225,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                          public void mouseClicked(MouseEvent e)  {
                              try {
                                  ElementList [] lists=UserController.getInstance().getOtherLists(name);
-                                 System.out.print(other);
+                                 
                                  other.setLists(lists);
                                  ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Other");
                              } catch (Exception ex) {

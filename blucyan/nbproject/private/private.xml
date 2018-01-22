@@ -8,7 +8,6 @@
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/IAdapter.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/ShowEntry.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Videogame.java</file>
-            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/IConversor.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelSearchResults.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JDialogParams.java</file>
@@ -22,10 +21,12 @@
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserProxy.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/ShowAdapter.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/test/TestDAOs/UserDAOTest.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelComicCard.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/MainFrame.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/DBConnection.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
+            <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/UserDAO.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ComicEntryDAO.java</file>
             <file>file:/home/alex/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/VideogameAdapter.java</file>
         </group>
