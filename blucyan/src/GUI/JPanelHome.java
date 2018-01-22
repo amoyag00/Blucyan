@@ -82,7 +82,7 @@ public class JPanelHome extends javax.swing.JPanel {
         searchButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fun", "Users" }));
 
         searchField.setText("Search");
         searchField.addMouseListener(new java.awt.event.MouseAdapter() {

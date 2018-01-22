@@ -98,7 +98,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fun", "Users" }));
 
         scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
