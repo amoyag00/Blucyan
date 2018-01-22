@@ -254,6 +254,7 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
             st = cn.prepareStatement("INSERT INTO Genres VALUES (?,?)");
             st.setInt(1, id);
             st.setString(2, element.getGenre()[i]);
+            st.executeUpdate();
         }
         String type = element.getType();
         if (type.equalsIgnoreCase("Videogame")) {
