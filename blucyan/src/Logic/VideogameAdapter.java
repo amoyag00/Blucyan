@@ -21,7 +21,6 @@ public class VideogameAdapter extends VideogameEntry implements IAdapter {
     @Override
     public void modEntry(Entry entry){
 
-        VideogameEntry videogameEntry =  (VideogameEntry) entry;
         Facade.getInstance().modify(entry, VideogameEntry.class);
         
        }

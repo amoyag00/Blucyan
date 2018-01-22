@@ -184,9 +184,10 @@ public class VideogameEntryDAO extends DBConnection implements IConversor<Videog
             Connection cn;
             this.openConnection();
             cn = this.getConnection();
-            PreparedStatement st = cn.prepareStatement("INSERT INTO VideogameEntries VALUES (?,?,?,?)");
+            PreparedStatement st = cn.prepareStatement("INSERT INTO VideogameEntries (videogameList_id, videogame_id, valoration, status_in_list) VALUES (?,?,?,?)");
             st.setString(1, vE.getListID());
             st.setString(2, vE.getVideogameID());
+            
             st.setByte(3, (byte) vE.getValoration());
             st.setString(4, vE.getStatus());
 

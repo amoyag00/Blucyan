@@ -330,8 +330,7 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
             } catch (Exception ex) {
                 Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-            
+        }    
             
             UserController.getInstance().addEntry(params,"videogame");
             ElementList [] lists=UserController.getInstance().getLists();
