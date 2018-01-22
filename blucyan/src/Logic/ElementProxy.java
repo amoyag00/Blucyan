@@ -2,7 +2,13 @@ package Logic;
 
 import Persistence.Facade;
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * Class representing an element. It takes some of the parameters of the real
+ * class , Element. When the real element is needed this class returns it. It
+ * implements the Proxy pattern
+ * @author Carlos, Alejandro, Samuel
+ */
 public class ElementProxy {
         private String cover;
         private String name;
@@ -43,7 +49,11 @@ public class ElementProxy {
     }
 
   
-    
+    /**
+     * Returns the real instance which is representing
+     * @return the real instance
+     * @throws Exception 
+     */
 	public Element getRealInstance() throws Exception {
             if (this.realElement== null){
                 realElement= (Element)Facade.getInstance().get(id,Element.class);

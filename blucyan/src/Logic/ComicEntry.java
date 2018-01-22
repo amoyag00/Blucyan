@@ -1,5 +1,8 @@
 package Logic;
-
+/**
+ * Class representing a comic Entry
+ * @author Carlos, Alejandro, Samuel
+ */
 public class ComicEntry extends Entry {
     private String listID;
     private String comicID;

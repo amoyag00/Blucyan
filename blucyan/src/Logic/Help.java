@@ -3,8 +3,9 @@ package Logic;
 public class Help {
 
 	/**
-	 * 
+	 * Returns the help of the view specified in view
 	 * @param view
+         * @author Carlos, Alejandro, Samuel
 	 */
         private static Help instance;
         String help;
@@ -33,7 +34,11 @@ public class Help {
             
             return help;
 	}
-        
+        /**
+         * return a unique instance of this class according to the singleton
+         * pattern
+         * @return 
+         */
         public static Help getInstance() {
             if(instance == null){
                 instance = new Help();

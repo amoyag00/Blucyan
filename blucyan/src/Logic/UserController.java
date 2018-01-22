@@ -174,7 +174,8 @@ public class UserController {
             videogameElement.setPlatforms(params[4].split(","));
             videogameElement.setDeveloper(params[5]);
             videogameElement.setGenre(params[6].split(","));
-            videogameElement.setCover(params[7]);
+            videogameElement.setCover(params[8]);
+           
             
             facade.put(videogameElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("comic")) {

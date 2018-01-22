@@ -270,6 +270,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
+                    
                     image=ImageDownloader.getImage(results.get(i).getCover());
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);

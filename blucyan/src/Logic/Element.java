@@ -1,7 +1,11 @@
 package Logic;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Class representing an element. Comics, videogames and shows extends from this
+ * class
+ * @author Carlos, Alejandro, Samuel
+ */
 public class Element {
 
 	private String name;

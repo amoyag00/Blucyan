@@ -1,12 +1,15 @@
 package Logic;
-
+/**
+ * Class representing a comic
+ * @author Carlos, Alejandro, Samuel
+ */
 public class Comic extends Element {
-
+        
 	private String[] illustrators;
 	private String[] writers;
         private int numberChapters;
         private String statusComic;
-
+       
     public String[] getIllustrators() {
         return illustrators;
     }

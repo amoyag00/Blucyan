@@ -1,7 +1,12 @@
 package Logic;
 
 import java.util.List;
-
+/**
+ * Class consisting in a list of entries of type T. T can be VideogameEntry,
+ * ShowEntry or ComicEntry
+ * @param <T> 
+ * @author Carlos, Alejandro, Samuel
+ */
 public class ElementList <T>{
     private String listID;
     private String typeList;

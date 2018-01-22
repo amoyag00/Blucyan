@@ -1,5 +1,8 @@
 package Logic;
-
+/**
+ * Class representing an entry
+ * @author Carlos, Alejandro, Samuel
+ */
 public class Entry {
     protected String entryID;
     protected int valoration;

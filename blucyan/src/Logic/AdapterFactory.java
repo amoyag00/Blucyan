@@ -1,14 +1,20 @@
 package Logic;
-
+/**
+ * 
+ *  This class follows the Factory pattern and it is used for create the
+ *  the necesary adapters.
+ * @author Carlos, Alejandro, Samuel
+ */
 public class AdapterFactory {
-
+    
     private ComicAdapter comicAdp;
     private ShowAdapter showAdp;
     private VideogameAdapter videogameAdp;
 
     /**
-     *
+     * Returns the correct adapter for the parameter type
      * @param type
+     * @return adapter which implements interface IAdapter
      */
     public IAdapter getAdapter(String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
@@ -41,7 +47,9 @@ public class AdapterFactory {
         }
         return null;
     }
-
+    /*
+    * Returns an instance of this class according to the singleton pattern
+    */
     public static AdapterFactory getInstance() {
         if (instance == null) {
             instance = new AdapterFactory();
