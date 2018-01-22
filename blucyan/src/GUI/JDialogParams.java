@@ -471,7 +471,7 @@ public class JDialogParams extends javax.swing.JDialog {
             params[4] = platformText.getText();
             params[5] = developerText.getText();
             params[6] = genresText.getText();
-            params[7] = statusText.getText();
+            params[7] = statusText.getText()+" ";
             params[8]= coverTextField.getText();
 
             boolean allFieldsComplete=true;

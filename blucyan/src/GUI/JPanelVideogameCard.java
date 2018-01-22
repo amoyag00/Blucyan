@@ -113,16 +113,16 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
                 backButtonMouseReleased(evt);
             }
         });
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         nameLabel.setText("VIDEOGAME NAME");
 
         homeButton.setText("HOME");
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                homeButtonMouseReleased(evt);
+            }
+        });
 
         platformLabel.setText("Platform: ");
 
@@ -305,14 +305,10 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
 
     private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
         // TODO add your handling code here:
-        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Search");
     }//GEN-LAST:event_backButtonMouseReleased
 
-    private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
-        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
-    }
-    
+ 
     private void addButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseReleased
         try {
             // TODO add your handling code here:
@@ -347,11 +343,6 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addButtonMouseReleased
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
-    }//GEN-LAST:event_backButtonActionPerformed
-
     private void publishReviewMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_publishReviewMouseReleased
         Review rev =new Review();
         rev.setElementID(element.getId());
@@ -369,6 +360,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         CardLayout card = (CardLayout) panel.getLayout();
         card.show(panel, "elementCard");
     }//GEN-LAST:event_helpButtonMouseReleased
+
+    private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseReleased
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Home");
+    }//GEN-LAST:event_homeButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
