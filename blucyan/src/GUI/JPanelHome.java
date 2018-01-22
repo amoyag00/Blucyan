@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.Help.HelpFrame;
 import Logic.ComicEntry;
 import Logic.ElementList;
 import Logic.ElementProxy;
@@ -79,6 +80,7 @@ public class JPanelHome extends javax.swing.JPanel {
         showButton = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
         searchButton = new javax.swing.JButton();
+        helpButton = new javax.swing.JButton();
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
 
@@ -149,6 +151,13 @@ public class JPanelHome extends javax.swing.JPanel {
             }
         });
 
+        helpButton.setText("HELP");
+        helpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                helpButtonMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,7 +173,9 @@ public class JPanelHome extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
+                        .addGap(63, 63, 63)
+                        .addComponent(helpButton)
+                        .addGap(175, 175, 175)
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +194,8 @@ public class JPanelHome extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton))
+                    .addComponent(searchButton)
+                    .addComponent(helpButton))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(videogameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,6 +265,16 @@ public class JPanelHome extends javax.swing.JPanel {
     private void searchFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFieldMouseClicked
         this.searchField.setText("");
     }//GEN-LAST:event_searchFieldMouseClicked
+
+    private void helpButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpButtonMouseReleased
+        // TODO add your handling code here:
+        HelpFrame h = new HelpFrame();
+        h.setVisible(true);
+        h.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = h.getMainPanel();
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "home");
+    }//GEN-LAST:event_helpButtonMouseReleased
 
     private void createHeaders(String type, Insets ins){
         GridBagConstraints c=new GridBagConstraints();
@@ -608,6 +630,7 @@ public class JPanelHome extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JButton comicButton;
+    private javax.swing.JButton helpButton;
     private javax.swing.JPanel panel;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
