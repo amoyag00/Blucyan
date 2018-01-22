@@ -39,21 +39,22 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
     private void fillCard(){
         try {
             UserController u=UserController.getInstance();
+            Videogame game=(Videogame)this.element;
+            
             try {
-                if(u.isEntryAdded(element.getId(), "Comic")){
+                if(u.isEntryAdded(element.getId(), "Videogame")){
                     this.addButton.setVisible(false);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Videogame game=(Videogame)this.element;
-            this.nameLabel.setText(game.getName());
-            this.platformLabel.setText(this.platformLabel.getText() +Arrays.toString(game.getPlatforms()));
-            this.developerLabel.setText(this.developerLabel.getText() + element.getDeveloper());
-            this.releaseDate_label.setText(this.releaseDate_label.getText()+ game.getReleaseDate()); 
             
+            this.nameLabel.setText(game.getName());
+            this.platformLabel.setText(this.platformLabel.getText() +game.getPlatforms()[0]);
+            this.developerLabel.setText(this.developerLabel.getText() + element.getDeveloper());
             this.imageLabel.setText(element.getCover());
             this.descriptionLabel.setText(element.getDescritpion());
+            this.releaseDate_label.setText(this.releaseDate_label.getText()+ game.getReleaseDate());
             this.reviewWrite.setText(UserController.getInstance().getReview(game.getId()).getText());    
             
         } catch (Exception ex) {
@@ -91,6 +92,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 backButtonMouseReleased(evt);
+            }
+        });
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -280,6 +286,11 @@ public class JPanelVideogameCard extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_addButtonMouseReleased
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        ((CardLayout)mainPanel.getLayout()).show(mainPanel, "search");
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
