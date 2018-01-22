@@ -235,7 +235,6 @@ public class Facade {
     public void backup() {
         JDialogBackup b = new JDialogBackup(new javax.swing.JDialog(), true);
         b.setVisible(true);
-        b.dispose();
     }
 
     /**

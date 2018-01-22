@@ -92,6 +92,7 @@ public class JDialogBackup extends javax.swing.JDialog {
         JFileChooser savePath = new JFileChooser();
         savePath.showSaveDialog(this);
         Backup.backup(this.pathText.getText(), savePath.getSelectedFile().getAbsolutePath());
+        this.dispose();
     }//GEN-LAST:event_saveButtonMouseReleased
 
     /**
