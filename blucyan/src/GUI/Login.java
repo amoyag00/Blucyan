@@ -23,6 +23,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+        this.setResizable(false);
         initComponents();
         tries=0;
         

@@ -5,10 +5,13 @@
  */
 package GUI;
 
+import GUI.Help.HelpFrame;
 import Logic.Element;
+import Logic.ElementList;
 import Logic.ElementProxy;
 import Logic.UserController;
 import Logic.UserProxy;
+import Persistence.ImageDownloader;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -78,6 +81,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         comboBox = new javax.swing.JComboBox<>();
         scroll = new javax.swing.JScrollPane();
         bigPanel = new javax.swing.JPanel();
+        help = new javax.swing.JButton();
 
         searchField.setText("Search");
 
@@ -95,7 +99,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shows", "Videogames", "Comics", "Users" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fun", "Users" }));
 
         scroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -103,32 +107,41 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         bigPanel.setLayout(new java.awt.GridBagLayout());
         scroll.setViewportView(bigPanel);
 
+        help.setText("HELP");
+        help.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                helpMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
+                        .addGap(62, 62, 62)
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(searchButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(searchButton)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(help, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(searchButton)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -168,6 +181,16 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxActionPerformed
 
+    private void helpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMouseReleased
+        // TODO add your handling code here:
+        HelpFrame h = new HelpFrame();
+        h.setVisible(true);
+        h.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel panel = h.getMainPanel();
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "search");
+    }//GEN-LAST:event_helpMouseReleased
+
     public void search(){
      try {
             // TODO add your handling code here:
@@ -179,30 +202,43 @@ public class JPanelSearchResults extends javax.swing.JPanel {
             bigPanel.repaint();
             bigPanel.revalidate();
             
-            if("User".compareTo((String) comboBox.getSelectedItem())==0){
+            if("Users".compareTo((String) comboBox.getSelectedItem())==0){
                 List<UserProxy> results = controller.searchUser(searchField.getText());
-                                
+                              
                 int row=0;
                 int column=0;
                 ImageIcon img;
                 
-                Insets insetsTitles = new Insets(5,100,100,100);
+                //Insets insetsTitles = new Insets(5,100,100,100);
                 
                 for(int i=0;i<((int)results.size());i++){
                     
-                    gbc.insets=insetsTitles;
+                    //gbc.insets=insetsTitles;
                     gbc.gridy=row+1;
                     
-                    img = new ImageIcon();
-                    JLabel nameLabel = new JLabel(results.get(i).getName());
+                    //img = new ImageIcon();
+                    String name=results.get(i).getName();
+                    if(!results.get(i).getIsPrivate()){
+                    JLabel nameLabel = new JLabel(name);
+                    nameLabel.setFont(new Font("Ubuntu",Font.PLAIN,15));
+                    nameLabel.addMouseListener(new MouseAdapter()  {  
+                         public void mouseClicked(MouseEvent e)  {
+                             try {
+                                 ElementList [] lists=UserController.getInstance().getOtherLists(name);
+                                 other.setLists(lists);
+                                 ((CardLayout)mainPanel.getLayout()).show(mainPanel, "Other");
+                             } catch (Exception ex) {
+                                 Logger.getLogger(JPanelSearchResults.class.getName()).log(Level.SEVERE, null, ex);
+                             }
+                         }});
                     bigPanel.add(nameLabel,gbc);
-                    
-                    if(column<magicNumber){
+                    }
+                    /*if(column<magicNumber){
                         column++;
                     }else{
                         column=0;
-                        row+=2;
-                    }
+                        row+=1;
+                    }*/
                     
                 
                 }
@@ -234,7 +270,7 @@ public class JPanelSearchResults extends javax.swing.JPanel {
                     gbc.gridx=column;
                     gbc.fill=GridBagConstraints.BOTH;
                     gbc.anchor=GridBagConstraints.CENTER;
-                    image=ImageIO.read(new File("D:\\Araragi.png"/*results.get(i).getCover()*/));
+                    image=ImageDownloader.getImage(results.get(i).getCover());
                     Image scaledImage = image.getScaledInstance(100, 175, Image.SCALE_SMOOTH);
                     ElementProxy proxy=results.get(i);
                     JLabel cover = new JLabel(new ImageIcon(scaledImage));
@@ -323,12 +359,18 @@ public class JPanelSearchResults extends javax.swing.JPanel {
         }
     
     }
+    
+    public void setOther(JPanelOtherHome other){
+        this.other=other;
+    }
+    private JPanelOtherHome other;
     private JPanel mainPanel;
     private JPanelHome homePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JPanel bigPanel;
     private javax.swing.JComboBox<String> comboBox;
+    private javax.swing.JButton help;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;

@@ -75,7 +75,18 @@ public class UserController {
         // TODO - implement UserController.checkPass
         return pass1.equals(pass2);
     }
-    
+    public ElementList[] getOtherLists(String nickname) throws Exception{
+        ElementList[] lists = facade.getLists(nickname, ElementList.class);
+        
+        ArrayList<VideogameEntry> videogameList = facade.getVideogameList(lists[0].getListID(), VideogameEntry.class);
+        ArrayList<ComicEntry> comicList = facade.getComicList(lists[1].getListID(), ComicEntry.class);
+        ArrayList<ShowEntry> showList = facade.getShowList(lists[2].getListID(), ShowEntry.class);
+        
+        lists[0].setEntryList(videogameList);
+        lists[1].setEntryList(comicList);
+        lists[2].setEntryList(showList);
+        return sort(lists);
+    }
     public ElementList[] getLists() throws Exception {
         // TODO - implement UserController.getLists
         //Videogame->0     Comic ->1     Show->2
@@ -163,6 +174,7 @@ public class UserController {
             videogameElement.setPlatforms(params[4].split(","));
             videogameElement.setDeveloper(params[5]);
             videogameElement.setGenre(params[6].split(","));
+            videogameElement.setCover(params[7]);
             
             facade.put(videogameElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("comic")) {
@@ -177,6 +189,7 @@ public class UserController {
             comicElement.setIllustrators(params[6].split(","));
             comicElement.setGenre(params[7].split(","));
             comicElement.setStatusComic(params[8]);
+            comicElement.setCover(params[9]);
             
             facade.put(comicElement, Element.class);            
         } else if (params[1].equalsIgnoreCase("show")) {
@@ -193,7 +206,9 @@ public class UserController {
             showElement.setActors(params[8].split(","));
             showElement.setProducers(params[9].split(","));
             showElement.setGenre(params[10].split(","));
-            showElement.setStatus(params[11]);
+            showElement.setStatus(params[11]);     
+            showElement.setCover(params[12]);
+            
             
             facade.put(showElement, Element.class);
         }

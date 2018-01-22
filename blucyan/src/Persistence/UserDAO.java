@@ -153,7 +153,7 @@ public class UserDAO extends DBConnection implements IConversor<User,UserProxy> 
         
             while(rs.next()){
                 UserProxy user = new UserProxy();
-                user.setUserName(rs.getString("nickname"));
+                user.setName(rs.getString("nickname"));
                 searched.add(user);
             }
             

@@ -19,6 +19,7 @@ public class HelpFrame extends javax.swing.JFrame {
      * Creates new form Help
      */
     public HelpFrame() {
+        this.setResizable(false);
         initComponents();
         index = new JPanelHelpIndex();
         home = new JPanelHomeHelp();
@@ -100,6 +101,10 @@ public class HelpFrame extends javax.swing.JFrame {
                 new HelpFrame().setVisible(true);
             }
         });
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
     private JPanelHelpIndex index;

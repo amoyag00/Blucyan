@@ -18,8 +18,9 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame(boolean range) {
+        this.setResizable(false);
         initComponents();
-        
+        JPanelOtherHome other;
         JPanelSearchResults search = new JPanelSearchResults(mainPanel);
         JPanelHome home=null;
         JPanelHomeAdmin admin = new JPanelHomeAdmin(search);
@@ -29,7 +30,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else {
             home = new JPanelHome(this, search);
+            other = new JPanelOtherHome(this,search, home, mainPanel);
+            search.setOther(other);
             mainPanel.add(home, "Home");
+            mainPanel.add(other,"Other");
+            
         }
         search.setHomePanel(home);
         //mainPanel.add(home, "Home");

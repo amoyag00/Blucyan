@@ -41,66 +41,60 @@
                           <Component id="backButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="nameLabel" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="statusField" min="-2" pref="129" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="homeButton" min="-2" pref="75" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="writeReview" min="-2" pref="122" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="971" max="-2" attributes="0"/>
                               <Component id="publish" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="151" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="deleteButton" alignment="0" pref="223" max="32767" attributes="0"/>
-                                  <Component id="addButton" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="imageLabel" min="-2" pref="210" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chapterLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="valorationLabel" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Component id="valorationUser" min="-2" pref="61" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="dateLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
-                                      <Component id="ilustratorsLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
-                                      <Component id="authorsLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="deleteButton" alignment="0" pref="223" max="32767" attributes="0"/>
+                                      <Component id="addButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="imagePanel" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace pref="148" max="32767" attributes="0"/>
-                                          <Component id="descriptionLabel" min="-2" pref="259" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="chapterLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="valorationLabel" min="-2" pref="81" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                                  <Component id="valorationUser" min="-2" pref="61" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="dateLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                              <Component id="ilustratorsLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                              <Component id="authorsLabel" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                           <Component id="readChapters" min="-2" pref="57" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="helpButton" min="-2" pref="75" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="nameLabel" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="statusField" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="homeButton" min="-2" pref="75" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -129,33 +123,29 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="readChapters" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="helpButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="descriptionLabel" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="chapterLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="dateLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Component id="authorsLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="ilustratorsLabel" min="-2" pref="35" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Component id="chapterLabel" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="dateLabel" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="authorsLabel" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="ilustratorsLabel" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="imageLabel" min="-2" pref="278" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="addButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="imagePanel" min="-2" pref="268" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="addButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
@@ -196,11 +186,6 @@
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="homeButtonMouseReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="imageLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="IMAGEN"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="chapterLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Number chapters: "/>
@@ -214,11 +199,6 @@
         <Component class="javax.swing.JLabel" name="valorationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Valoration:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="descriptionLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Descripcion"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="valorationUser">
@@ -296,6 +276,18 @@
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteButtonMouseReleased"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="helpButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HELP"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="helpButtonMouseReleased"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JPanel" name="imagePanel">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

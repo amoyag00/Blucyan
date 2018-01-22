@@ -21,7 +21,7 @@ public class JPanelHomeHelp extends javax.swing.JPanel {
     public JPanelHomeHelp() {
         initComponents();
         Help h = Help.getInstance();
-        String text = h.getHelp("ElementCard");
+        String text = h.getHelp("Home");
         helpText.setText(text);
     }
 
@@ -34,10 +34,9 @@ public class JPanelHomeHelp extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        helpText = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-
-        helpText.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        helpText = new javax.swing.JTextArea();
 
         backButton.setText("< Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -46,25 +45,30 @@ public class JPanelHomeHelp extends javax.swing.JPanel {
             }
         });
 
+        helpText.setEditable(false);
+        helpText.setColumns(20);
+        helpText.setRows(5);
+        jScrollPane1.setViewportView(helpText);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 343, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(helpText, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,6 +82,7 @@ public class JPanelHomeHelp extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JLabel helpText;
+    private javax.swing.JTextArea helpText;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
