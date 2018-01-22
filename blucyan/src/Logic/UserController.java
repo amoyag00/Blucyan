@@ -110,6 +110,7 @@ public class UserController {
         lists[0].setEntryList(videogameList);
         lists[1].setEntryList(comicList);
         lists[2].setEntryList(showList);
+
         return sort(lists);
     }
     /**
