@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelHome.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/HelpFrame.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/Help.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelShowCard.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelComicCard.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/UserController.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/VideogameEntryDAO.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ComicEntryDAO.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/Facade.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ElementDAO.java</file>
-            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Persistence/ShowEntryDAO.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/JPanelHelpElementCard.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/JPanelHomeHelp.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/Help/JPanelHelpSearch.java</file>
+            <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/Logic/HelpController.java</file>
             <file>file:/home/cloud/NetBeansProjects/Software-Engineering-I/blucyan/src/GUI/JPanelSearchResults.java</file>
         </group>
     </open-files>

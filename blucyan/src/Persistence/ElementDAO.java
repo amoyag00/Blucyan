@@ -52,8 +52,8 @@ public class ElementDAO extends DBConnection implements IConversor<Element, Elem
         element.setName(rs.getString("name"));
         element.setType(type);
         element.setReleaseDate(rs.getString("release_date"));
-        System.out.print(rs.getString("cover"));
         element.setCover(rs.getString("cover"));
+        element.setDescritpion(rs.getString("description"));
         /*byte[] img = rs.getBytes("cover");
        ImageIcon image = new ImageIcon(img);
        Image im = image.getImage();

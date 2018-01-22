@@ -61,7 +61,6 @@ public class JPanelComicCard extends javax.swing.JPanel {
             this.authorsLabel.setText(authorsLabel.getText()+
                     Arrays.toString(comic.getWriters()));
             this.ilustratorsLabel.setText(ilustratorsLabel.getText()+Arrays.toString(comic.getIllustrators()));
-            this.descriptionLabel.setText(comic.getDescritpion());
             this.reviewWrite.setText(UserController.getInstance().getReview(comic.getId()).getText());
         } catch (Exception ex) {
             Logger.getLogger(JPanelComicCard.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +86,6 @@ public class JPanelComicCard extends javax.swing.JPanel {
         chapterLabel = new javax.swing.JLabel();
         authorsLabel = new javax.swing.JLabel();
         valorationLabel = new javax.swing.JLabel();
-        descriptionLabel = new javax.swing.JLabel();
         valorationUser = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         writeReview = new javax.swing.JLabel();
@@ -128,8 +126,6 @@ public class JPanelComicCard extends javax.swing.JPanel {
         authorsLabel.setText("Writers:");
 
         valorationLabel.setText("Valoration:");
-
-        descriptionLabel.setText("Descripcion");
 
         addButton.setText("ADD");
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,18 +207,12 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                             .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(ilustratorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(authorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(106, 106, 106))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(122, 122, 122)
-                                                .addComponent(jLabel2)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(readChapters, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(122, 122, 122)
+                                        .addComponent(jLabel2)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(readChapters, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(statusLabel)
                                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -261,17 +251,14 @@ public class JPanelComicCard extends javax.swing.JPanel {
                                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(chapterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(authorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(ilustratorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(13, 13, 13))
+                        .addComponent(chapterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(authorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(ilustratorsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -395,7 +382,6 @@ public class JPanelComicCard extends javax.swing.JPanel {
     private javax.swing.JLabel chapterLabel;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JLabel descriptionLabel;
     private javax.swing.JButton helpButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel ilustratorsLabel;
